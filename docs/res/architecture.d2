@@ -1,27 +1,37 @@
 # Entities
 MealPlanEntity: Meal Plan Entity {
-  listofmeals: *MealEntity\[\]
+  listofmeals: *MealList
   startdate: Start date
   enddate: End date
   grocerylist: *GroceryListEntity
-}  
-
-MealPlanEntity.listofmeals -> MealEntity: 1:n
+}
+MealPlanEntity.listofmeals -> MealListEntity: 1:1
 MealPlanEntity.grocerylist -> GroceryListEntity: 1:1
 
+MealListEntity: Meal List Entity {
+  listofmeals: *MealEntity\[\]
+}
+MealListEntity.listofmeals -> MealEntity: 1:n
+
 MealEntity: Meal Entity {
+  recipe: *RecipeEntity
+  people: Adjuted number\nof people
+}  
+MealEntity.recipe -> RecipeEntity: 1:1
+
+RecipeEntity: Recipe Entity {
   name: Name
   recipesteps: *RecipeStepEntity\[\]
-  ingredients: *GroceryListEntryEntity\[\]
+  grocerylist: *GroceryListEntity
 }  
-MealEntity.recipesteps -> RecipeStepEntity: 1:n
-MealEntity.ingredients -> GroceryListEntryEntity: 1:n
+RecipeEntity.recipesteps -> RecipeStepEntity: 1:n
+RecipeEntity.grocerylist -> GroceryListEntity: 1:1
 
 GroceryListEntity: Grocery List Entity {
-  grocerylist: *GroceryListEntryEntity\[\]
+  list: *GroceryListEntryEntity\[\]
   mealplan: *MealPlanEntity
 }  
-GroceryListEntity.grocerylist -> GroceryListEntryEntity: 1:n
+GroceryListEntity.list -> GroceryListEntryEntity: 1:n
 
 RecipeStepEntity: Recipe Step Entity {
   step: Step Number
@@ -57,8 +67,7 @@ FilterService: Filter Service {
   shape: hexagon
   fill: "#ffdef1"
 }
-FilterService <-> MealEntity
-FilterService <-> GroceryListEntity
+FilterService <-> MealListEntity
 
 OutputService: Output Service {
   shape: hexagon

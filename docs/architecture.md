@@ -8,6 +8,10 @@ lassen zu können.
 - Speicherung von Gerichten, Rezepte und Zutaten
 - eventuelle Abfrage von APIs wie etwa Chefkoch.de
 
+<!-- add recipe grocery, step, ;  -->
+
+meal - personen, service anpassen, 
+
 
 # Entities
 - Meal / Recipe
@@ -44,7 +48,8 @@ lassen zu können.
   - Recipe
   - Recipe Step
 - Input / Add
-  - Item to list
+  - Item to list (independent from meal plan)
   - Meal / Recipe
 
-- 
+
+![Architecture diagram](./res/architecture.svg)
