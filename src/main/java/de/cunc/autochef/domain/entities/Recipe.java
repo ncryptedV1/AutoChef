@@ -6,11 +6,11 @@ public class Recipe {
 
     String name;
     List<RecipeStep> recipeStepList;
-    GroceryList groceryList;
+    GroceryList ingredients;
 
-    public Recipe(String name, List<RecipeStep> recipeStepList, GroceryList groceryList) {
+    public Recipe(String name, List<RecipeStep> recipeStepList, GroceryList ingredients) {
         this.name = name;
         this.recipeStepList = recipeStepList;
-        this.groceryList = groceryList;
+        this.ingredients = ingredients;
     }
 }

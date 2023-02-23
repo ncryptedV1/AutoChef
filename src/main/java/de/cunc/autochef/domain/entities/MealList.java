@@ -4,9 +4,9 @@ import java.util.List;
 
 public class MealList {
 
-    List<Meal> mealList;
+    List<Meal> meals;
 
-    public MealList(List<Meal> mealList) {
-        this.mealList = mealList;
+    public MealList(List<Meal> meals) {
+        this.meals = meals;
     }
 }
