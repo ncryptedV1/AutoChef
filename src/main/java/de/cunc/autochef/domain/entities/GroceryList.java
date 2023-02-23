@@ -5,13 +5,13 @@ import java.util.List;
 
 public class GroceryList {
 
-    List<GroceryListEntry> entries;
+    List<GroceryItem> entries;
 
     public GroceryList() {
-        this.entries = new ArrayList<GroceryListEntry>();
+        this.entries = new ArrayList<GroceryItem>();
     }
 
-    public void addItem(GroceryListEntry entry) {
+    public void addItem(GroceryItem entry) {
         this.entries.add(entry);
     }
 }

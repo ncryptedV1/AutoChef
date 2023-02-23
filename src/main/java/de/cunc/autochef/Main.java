@@ -1,6 +1,6 @@
 package de.cunc.autochef;
 
-import de.cunc.autochef.domain.entities.GroceryListEntry;
+import de.cunc.autochef.domain.entities.GroceryItem;
 import de.cunc.autochef.domain.entities.Meal;
 import de.cunc.autochef.domain.entities.MealList;
 import de.cunc.autochef.domain.entities.MealPlan;
@@ -19,11 +19,11 @@ public class Main {
     System.out.println("Hello world!");
 
     // setup groceries
-    GroceryListEntry item1 = new GroceryListEntry(new Ingredient("Banane"), new Quantity(1), Unit.GRAM);
-    GroceryListEntry item2 = new GroceryListEntry(new Ingredient("Pineapple"), new Quantity(0.2), Unit.KILOGRAM);
-    GroceryListEntry item3 = new GroceryListEntry(new Ingredient("Orange juice"), new Quantity(0.1), Unit.LITER);
-    GroceryListEntry item4 = new GroceryListEntry(new Ingredient("Apple"), new Quantity(1), Unit.PIECE);
-    GroceryListEntry item5 = new GroceryListEntry(new Ingredient("Nutella"), new Quantity(2), Unit.TABLESPOON);
+    GroceryItem item1 = new GroceryItem(new Ingredient("Banane"), new Quantity(1), Unit.GRAM);
+    GroceryItem item2 = new GroceryItem(new Ingredient("Pineapple"), new Quantity(0.2), Unit.KILOGRAM);
+    GroceryItem item3 = new GroceryItem(new Ingredient("Orange juice"), new Quantity(0.1), Unit.LITER);
+    GroceryItem item4 = new GroceryItem(new Ingredient("Apple"), new Quantity(1), Unit.PIECE);
+    GroceryItem item5 = new GroceryItem(new Ingredient("Nutella"), new Quantity(2), Unit.TABLESPOON);
 
     // setup recipe steps
     RecipeStep recipeStep1 = new RecipeStep(0,
