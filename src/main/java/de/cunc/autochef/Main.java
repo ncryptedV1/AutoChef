@@ -11,8 +11,6 @@ import de.cunc.autochef.domain.valueobjects.Quantity;
 import de.cunc.autochef.domain.valueobjects.Unit;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
   public static void main(String[] args) {

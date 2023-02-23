@@ -11,6 +11,13 @@ public class GroceryList {
         this.entries = new ArrayList<GroceryItem>();
     }
 
+    public GroceryList(GroceryItem... items) {
+        this.entries = new ArrayList<GroceryItem>();
+        for (GroceryItem item : items) {
+            this.entries.add(item);
+        }
+    }
+
     public void addItem(GroceryItem entry) {
         this.entries.add(entry);
     }
