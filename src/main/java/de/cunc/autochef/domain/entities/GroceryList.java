@@ -11,7 +11,7 @@ public class GroceryList {
         this.entries = new ArrayList<GroceryListEntry>();
     }
 
-    void addItem(GroceryListEntry entry) {
+    public void addItem(GroceryListEntry entry) {
         this.entries.add(entry);
     }
 }

@@ -7,6 +7,7 @@ public class RecipeStep {
   String description;
 
   public RecipeStep(int step, GroceryList ingredients, String description) {
+    // todo: check step > 0
     this.step = step;
     this.ingredients = ingredients;
     this.description = description;

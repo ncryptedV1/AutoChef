@@ -6,5 +6,8 @@ public enum Unit {
     MILLILITER,
     KILOGRAM,
     GRAM,
+    PIECE,
+    TABLESPOON,
+    TEESPOON
 
 }
