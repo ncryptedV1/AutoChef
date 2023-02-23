@@ -39,11 +39,8 @@ public class Main {
 
     // setup meal
     Meal meal1 = new Meal(recipe1, 2);
-    List<Meal> meals = new ArrayList<Meal>();
-    meals.add(meal1);
-
     // setup meal plan
-    MealList mealList = new MealList(meals);
+    MealList mealList = new MealList(meal1);
     LocalDate startDate = LocalDate.of(2023, 02, 20);
     LocalDate endDate = LocalDate.of(2023, 02, 26);
     MealPlan mealPlan = new MealPlan(mealList, startDate, endDate);

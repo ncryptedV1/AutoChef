@@ -6,7 +6,9 @@ public class MealList {
 
     List<Meal> meals;
 
-    public MealList(List<Meal> meals) {
-        this.meals = meals;
+    public MealList(Meal... meals) {
+        for (Meal meal : meals) {
+            this.meals.add(meal);
+        }
     }
 }
