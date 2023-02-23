@@ -1,6 +1,4 @@
-package de.cunc.autochef.domain.entities.recipestep;
-
-import de.cunc.autochef.domain.entities.grocerylist.GroceryList;
+package de.cunc.autochef.domain.entities;
 
 public class RecipeStep {
 

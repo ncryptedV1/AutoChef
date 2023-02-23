@@ -1,4 +1,4 @@
-package de.cunc.autochef.domain.entities.grocerylist;
+package de.cunc.autochef.domain.entities;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package de.cunc.autochef.domain.entities.grocerylist;
+package de.cunc.autochef.domain.entities;
 
 public class MealPlan {
 

@@ -1,4 +1,4 @@
-package de.cunc.autochef.domain.entities.grocerylist;
+package de.cunc.autochef.domain.entities;
 
 import de.cunc.autochef.domain.valueobjects.Ingredient;
 import de.cunc.autochef.domain.valueobjects.Quantity;
