@@ -8,10 +8,13 @@ public class Recipe {
     List<RecipeStep> recipeStepList;
     GroceryList ingredients;
 
-    public Recipe(String name, List<RecipeStep> recipeStepList) {
+    public Recipe(String name, RecipeStep... recipeStepList) {
         // todo: check if steps are unique in the recipeStepList
         this.name = name;
-        this.recipeStepList = recipeStepList;
+        for (RecipeStep step : recipeStepList) {
+            this.recipeStepList.add(step);
+        }
+
         this.aggregateIngredients();
     }
 

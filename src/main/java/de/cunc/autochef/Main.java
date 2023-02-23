@@ -1,6 +1,5 @@
 package de.cunc.autochef;
 
-import de.cunc.autochef.domain.entities.GroceryList;
 import de.cunc.autochef.domain.entities.GroceryListEntry;
 import de.cunc.autochef.domain.entities.Meal;
 import de.cunc.autochef.domain.entities.MealList;
@@ -26,32 +25,17 @@ public class Main {
     GroceryListEntry item4 = new GroceryListEntry(new Ingredient("Apple"), new Quantity(1), Unit.PIECE);
     GroceryListEntry item5 = new GroceryListEntry(new Ingredient("Nutella"), new Quantity(2), Unit.TABLESPOON);
 
-    // list of groceries for recipe steps
-    GroceryList recipeStep1Ingredients = new GroceryList();
-    recipeStep1Ingredients.addItem(item1);
-    recipeStep1Ingredients.addItem(item2);
-    recipeStep1Ingredients.addItem(item3);
-
-    GroceryList recipeStep2Ingredients = new GroceryList();
-    recipeStep2Ingredients.addItem(item4);
-
-    GroceryList recipeStep3Ingredients = new GroceryList();
-    recipeStep3Ingredients.addItem(item5);
-
     // setup recipe steps
-    RecipeStep recipeStep1 = new RecipeStep(0, recipeStep1Ingredients,
-        "Cut some banane, apple and pineapple as the basis for this salad.");
-    RecipeStep recipeStep2 = new RecipeStep(1, recipeStep2Ingredients,
-        "Add orange juice to make it more juicy.");
-    RecipeStep recipeStep3 = new RecipeStep(2, recipeStep3Ingredients,
-        "Add a bit of Nutella for making it look beautiful.");
+    RecipeStep recipeStep1 = new RecipeStep(0,
+        "Cut some banane, apple and pineapple as the basis for this salad.", item1, item2, item3);
+    RecipeStep recipeStep2 = new RecipeStep(1,
+        "Add orange juice to make it more juicy.", item4);
+    RecipeStep recipeStep3 = new RecipeStep(2,
+        "Add a bit of Nutella for making it look beautiful.", item5);
 
     // setup recipe for
-    List<RecipeStep> recipeStepList = new ArrayList<RecipeStep>();
-    recipeStepList.add(recipeStep1);
-    recipeStepList.add(recipeStep2);
-    recipeStepList.add(recipeStep3);
-    Recipe recipe1 = new Recipe("Sugar-free fruit salad", recipeStepList);
+    Recipe recipe1 = new Recipe("Sugar-free fruit salad", recipeStep1,
+        recipeStep2, recipeStep3);
 
     // setup meal
     Meal meal1 = new Meal(recipe1, 2);
