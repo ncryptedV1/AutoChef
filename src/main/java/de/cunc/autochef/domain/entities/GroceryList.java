@@ -14,4 +14,9 @@ public class GroceryList {
     public void addItem(GroceryItem entry) {
         this.entries.add(entry);
     }
+
+    public String toString() {
+        // todo: implement
+        return null;
+    }
 }

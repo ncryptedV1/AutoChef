@@ -23,4 +23,9 @@ public class Recipe {
         // this should get all ingredients from all recipesteps and summarize them in
         // `ingredients`
     }
+
+    public String toString() {
+        // todo: implement
+        return null;
+    }
 }

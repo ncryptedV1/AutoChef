@@ -15,4 +15,9 @@ public class GroceryItem {
     this.quantity = quantity;
     this.unit = unit;
   }
+
+  public String toString() {
+    // todo: implement
+    return null;
+  }
 }

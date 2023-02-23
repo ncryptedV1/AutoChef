@@ -9,4 +9,9 @@ public class Meal {
         this.recipe = recipe;
         this.adjustedNumberOfPeople = adjustedNumberOfPeople;
     }
+
+    public String toString() {
+        // todo: implement
+        return null;
+    }
 }

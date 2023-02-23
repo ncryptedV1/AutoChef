@@ -16,4 +16,9 @@ public class RecipeStep {
 
     this.description = description;
   }
+
+  public String toString() {
+    // todo: implement
+    return null;
+  }
 }
