@@ -2,7 +2,6 @@ package de.cunc.autochef;
 
 import de.cunc.autochef.domain.entities.GroceryItem;
 import de.cunc.autochef.domain.entities.Meal;
-import de.cunc.autochef.domain.entities.MealList;
 import de.cunc.autochef.domain.entities.MealPlan;
 import de.cunc.autochef.domain.entities.Recipe;
 import de.cunc.autochef.domain.entities.RecipeStep;
@@ -38,10 +37,9 @@ public class Main {
     // setup meal
     Meal meal1 = new Meal(recipe1, 2);
     // setup meal plan
-    MealList mealList = new MealList(meal1);
     LocalDate startDate = LocalDate.of(2023, 02, 20);
     LocalDate endDate = LocalDate.of(2023, 02, 26);
-    MealPlan mealPlan = new MealPlan(mealList, startDate, endDate);
+    MealPlan mealPlan = new MealPlan(startDate, endDate, meal1);
 
     System.out.println(mealPlan.toString());
   }
