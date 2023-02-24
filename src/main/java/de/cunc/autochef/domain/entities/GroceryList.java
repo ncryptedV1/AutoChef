@@ -23,7 +23,10 @@ public class GroceryList {
     }
 
     public String toString() {
-        // todo: implement
-        return null;
+        String res = "";
+        for (GroceryItem item : entries) {
+            res += item.toString() + System.lineSeparator();
+        }
+        return res;
     }
 }

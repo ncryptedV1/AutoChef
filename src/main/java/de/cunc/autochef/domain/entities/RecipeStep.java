@@ -17,7 +17,9 @@ public class RecipeStep {
   }
 
   public String toString() {
-    // todo: implement
-    return null;
+    String res = String.format("Step %d: %s", this.number, this.description);
+    res = res + System.lineSeparator() + "Ingredients:" + System.lineSeparator();
+    res = res + this.ingredients.toString();
+    return res;
   }
 }

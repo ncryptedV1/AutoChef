@@ -11,7 +11,7 @@ public class Meal {
     }
 
     public String toString() {
-        // todo: implement
-        return null;
+        String res = String.format("%s for %d people", this.recipe.name, this.adjustedNumberOfPeople);
+        return res;
     }
 }

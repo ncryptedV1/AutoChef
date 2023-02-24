@@ -17,7 +17,6 @@ public class GroceryItem {
   }
 
   public String toString() {
-    // todo: implement
-    return null;
+    return String.format("%s %s %s", this.quantity, this.unit, this.ingredient);
   }
 }

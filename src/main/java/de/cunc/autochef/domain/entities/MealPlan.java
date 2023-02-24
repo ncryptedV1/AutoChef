@@ -32,7 +32,12 @@ public class MealPlan {
     }
 
     public String toString() {
-        // todo: implement
-        return "this is a mealPlan stringified";
+        String res = "";
+
+        for (Meal meal : meals) {
+            res = meal.toString() + System.lineSeparator();
+        }
+
+        return res;
     }
 }

@@ -25,7 +25,10 @@ public class Recipe {
     }
 
     public String toString() {
-        // todo: implement
-        return null;
+        String res = String.format("Recipe: %s", this.name) + System.lineSeparator();
+        for (RecipeStep step : this.recipeStepList) {
+            res = res + step.toString() + System.lineSeparator();
+        }
+        return res;
     }
 }
