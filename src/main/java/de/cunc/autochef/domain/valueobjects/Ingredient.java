@@ -15,4 +15,23 @@ public class Ingredient {
     public String getValue() {
         return this.name;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Ingredient)) {
+            return false;
+        }
+        Ingredient compare = (Ingredient) obj;
+
+        String transformed1 = this.name.trim().toLowerCase();
+        String transformed2 = compare.name.trim().toLowerCase();
+
+        return transformed1.equals(transformed2);
+    }
+
+    @Override
+    public int hashCode() {
+        String transformed = this.name.trim().toLowerCase();
+        return transformed.hashCode();
+    }
 }
