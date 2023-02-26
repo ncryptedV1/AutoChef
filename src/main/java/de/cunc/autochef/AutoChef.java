@@ -9,19 +9,37 @@ import de.cunc.autochef.domain.entities.RecipeStep;
 import de.cunc.autochef.domain.valueobjects.Ingredient;
 import de.cunc.autochef.domain.valueobjects.Quantity;
 import de.cunc.autochef.domain.valueobjects.Unit;
-
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDate;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
-public class Main {
+public class AutoChef {
+
+  private static final Logger logger;
+
+  static {
+    try (InputStream inputStream = AutoChef.class.getResourceAsStream("/logging.properties")) {
+      LogManager.getLogManager().readConfiguration(inputStream);
+      logger = Logger.getLogger("AutoChef");
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   public static void main(String[] args) {
-    System.out.println("Hello world!");
+    logger.info("Starting...");
 
     // setup groceries
     GroceryItem item1 = new GroceryItem(new Ingredient("Banane"), new Quantity(1), Unit.GRAM);
-    GroceryItem item2 = new GroceryItem(new Ingredient("Pineapple"), new Quantity(0.2), Unit.KILOGRAM);
-    GroceryItem item3 = new GroceryItem(new Ingredient("Orange juice"), new Quantity(0.1), Unit.LITER);
+    GroceryItem item2 =
+        new GroceryItem(new Ingredient("Pineapple"), new Quantity(0.2), Unit.KILOGRAM);
+    GroceryItem item3 =
+        new GroceryItem(new Ingredient("Orange juice"), new Quantity(0.1), Unit.LITER);
     GroceryItem item4 = new GroceryItem(new Ingredient("Apple"), new Quantity(1), Unit.PIECE);
-    GroceryItem item5 = new GroceryItem(new Ingredient("Nutella"), new Quantity(2), Unit.TABLESPOON);
+    GroceryItem item5 =
+        new GroceryItem(new Ingredient("Nutella"), new Quantity(2), Unit.TABLESPOON);
 
     // setup recipe steps
     RecipeStep recipeStep1 = new RecipeStep(0,
@@ -43,6 +61,6 @@ public class Main {
     LocalDate endDate = LocalDate.of(2023, 02, 26);
     MealPlan mealPlan = new MealPlan(mealList, startDate, endDate);
 
-    System.out.println(mealPlan.toString());
+    logger.info(mealPlan.toString());
   }
 }
