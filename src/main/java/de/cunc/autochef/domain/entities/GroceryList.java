@@ -5,25 +5,25 @@ import java.util.List;
 
 public class GroceryList {
 
-    List<GroceryItem> entries;
+  List<GroceryItem> entries;
 
-    public GroceryList() {
-        this.entries = new ArrayList<GroceryItem>();
-    }
+  public GroceryList() {
+    this.entries = new ArrayList<GroceryItem>();
+  }
 
-    public GroceryList(GroceryItem... items) {
-        this.entries = new ArrayList<GroceryItem>();
-        for (GroceryItem item : items) {
-            this.entries.add(item);
-        }
+  public GroceryList(GroceryItem... items) {
+    this.entries = new ArrayList<GroceryItem>();
+    for (GroceryItem item : items) {
+      this.entries.add(item);
     }
+  }
 
-    public void addItem(GroceryItem entry) {
-        this.entries.add(entry);
-    }
+  public void addItem(GroceryItem entry) {
+    this.entries.add(entry);
+  }
 
-    public String toString() {
-        // todo: implement
-        return null;
-    }
+  public String toString() {
+    // todo: implement
+    return null;
+  }
 }

@@ -6,9 +6,9 @@ import java.util.List;
 
 public class MealList {
 
-    List<Meal> meals = new ArrayList<>();
+  List<Meal> meals = new ArrayList<>();
 
-    public MealList(Meal... meals) {
-        Collections.addAll(this.meals, meals);
-    }
+  public MealList(Meal... meals) {
+    Collections.addAll(this.meals, meals);
+  }
 }
