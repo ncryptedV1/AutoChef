@@ -19,8 +19,10 @@ public class GroceryList {
     this.entries.add(entry);
   }
 
+  @Override
   public String toString() {
-    // todo: implement
-    return null;
+    return "GroceryList{" +
+        "entries=" + entries +
+        '}';
   }
 }

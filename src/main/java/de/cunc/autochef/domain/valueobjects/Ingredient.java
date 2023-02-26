@@ -2,9 +2,10 @@ package de.cunc.autochef.domain.valueobjects;
 
 public class Ingredient {
 
-  final String name;
+  private final String name;
 
   public Ingredient(String name) {
+    name = name.strip();
     if (name.length() == 0) {
       throw new IllegalArgumentException("name must not be empty");
     }

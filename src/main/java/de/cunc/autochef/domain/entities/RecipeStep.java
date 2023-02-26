@@ -2,19 +2,26 @@ package de.cunc.autochef.domain.entities;
 
 public class RecipeStep {
 
-  int step;
-  GroceryList ingredients;
-  String description;
+  private int step;
+  private String description;
+  private GroceryList ingredients;
 
   public RecipeStep(int step, String description, GroceryItem... ingredients) {
-    // todo: check step > 0
+    if(step <= 0) {
+      throw new IllegalArgumentException("step must be greater than 0");
+    }
+
     this.step = step;
-    this.ingredients = new GroceryList(ingredients);
     this.description = description;
+    this.ingredients = new GroceryList(ingredients);
   }
 
+  @Override
   public String toString() {
-    // todo: implement
-    return null;
+    return "RecipeStep{" +
+        "step=" + step +
+        ", description='" + description + '\'' +
+        ", ingredients=" + ingredients +
+        '}';
   }
 }

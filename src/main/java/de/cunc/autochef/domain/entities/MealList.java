@@ -11,4 +11,11 @@ public class MealList {
   public MealList(Meal... meals) {
     Collections.addAll(this.meals, meals);
   }
+
+  @Override
+  public String toString() {
+    return "MealList{" +
+        "meals=" + meals +
+        '}';
+  }
 }

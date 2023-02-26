@@ -10,8 +10,11 @@ public class Meal {
     this.adjustedNumberOfPeople = adjustedNumberOfPeople;
   }
 
+  @Override
   public String toString() {
-    // todo: implement
-    return null;
+    return "Meal{" +
+        "recipe=" + recipe +
+        ", adjustedNumberOfPeople=" + adjustedNumberOfPeople +
+        '}';
   }
 }

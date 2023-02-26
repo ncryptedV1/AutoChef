@@ -24,8 +24,12 @@ public class Recipe {
     // `ingredients`
   }
 
+  @Override
   public String toString() {
-    // todo: implement
-    return null;
+    return "Recipe{" +
+        "name='" + name + '\'' +
+        ", recipeStepList=" + recipeStepList +
+        ", ingredients=" + ingredients +
+        '}';
   }
 }

@@ -16,8 +16,12 @@ public class GroceryItem {
     this.unit = unit;
   }
 
+  @Override
   public String toString() {
-    // todo: implement
-    return null;
+    return "GroceryItem{" +
+        "ingredient=" + ingredient +
+        ", quantity=" + quantity +
+        ", unit=" + unit +
+        '}';
   }
 }

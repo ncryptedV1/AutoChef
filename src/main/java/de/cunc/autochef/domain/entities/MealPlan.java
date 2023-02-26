@@ -22,8 +22,13 @@ public class MealPlan {
     // `groceryList`
   }
 
+  @Override
   public String toString() {
-    // todo: implement
-    return "this is a mealPlan stringified";
+    return "MealPlan{" +
+        "mealList=" + mealList +
+        ", groceryList=" + groceryList +
+        ", start=" + start +
+        ", end=" + end +
+        '}';
   }
 }
