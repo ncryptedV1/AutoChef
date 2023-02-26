@@ -57,8 +57,8 @@ public class AutoChef {
     Meal meal1 = new Meal(recipe1, 2);
     // setup meal plan
     MealList mealList = new MealList(meal1);
-    LocalDate startDate = LocalDate.of(2023, 02, 20);
-    LocalDate endDate = LocalDate.of(2023, 02, 26);
+    LocalDate startDate = LocalDate.of(2023, 2, 20);
+    LocalDate endDate = LocalDate.of(2023, 2, 26);
     MealPlan mealPlan = new MealPlan(mealList, startDate, endDate);
 
     logger.info(mealPlan.toString());
