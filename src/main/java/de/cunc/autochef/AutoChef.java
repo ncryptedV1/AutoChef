@@ -2,7 +2,6 @@ package de.cunc.autochef;
 
 import de.cunc.autochef.domain.entities.GroceryItem;
 import de.cunc.autochef.domain.entities.Meal;
-import de.cunc.autochef.domain.entities.MealList;
 import de.cunc.autochef.domain.entities.MealPlan;
 import de.cunc.autochef.domain.entities.Recipe;
 import de.cunc.autochef.domain.entities.RecipeStep;
@@ -12,6 +11,8 @@ import de.cunc.autochef.domain.valueobjects.Unit;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -55,7 +56,7 @@ public class AutoChef {
     // setup meal
     Meal meal1 = new Meal(recipe1, 2);
     // setup meal plan
-    MealList mealList = new MealList(meal1);
+    List<Meal> mealList = Arrays.asList(meal1);
     LocalDate startDate = LocalDate.of(2023, 2, 20);
     LocalDate endDate = LocalDate.of(2023, 2, 26);
     MealPlan mealPlan = new MealPlan(mealList, startDate, endDate);

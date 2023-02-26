@@ -1,15 +1,16 @@
 package de.cunc.autochef.domain.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class MealPlan {
 
-  MealList mealList;
+  List<Meal> mealList;
   GroceryList groceryList;
   LocalDate start;
   LocalDate end;
 
-  public MealPlan(MealList mealList, LocalDate start, LocalDate end) {
+  public MealPlan(List<Meal> mealList, LocalDate start, LocalDate end) {
     this.mealList = mealList;
     this.aggregateGroceryLists();
     this.start = start;
