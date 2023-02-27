@@ -10,19 +10,23 @@ public class Recipe {
   private List<RecipeStep> recipeStepList = new ArrayList<>();
   private GroceryList ingredients;
 
-  public Recipe(String name, RecipeStep... recipeStepList) {
-    this.recipeStepList = Arrays.asList(recipeStepList);
-    this.recipeStepList.sort((step1, step2) -> step1.getStep() > step2.getStep() ? 1 : -1);
-    for (int i = 0; i < recipeStepList.length; i++) {
-      if (recipeStepList[i].getStep() != i + 1) {
+  public Recipe(String name, List<RecipeStep> recipeStepList) {
+    recipeStepList.sort((step1, step2) -> step1.getStep() > step2.getStep() ? 1 : -1);
+    for (int i = 0; i < recipeStepList.size(); i++) {
+      if (recipeStepList.get(i).getStep() != i + 1) {
         throw new IllegalArgumentException(
             "recipe step " + (i + 1) + " is not included - no consecutive recipe supplied");
       }
     }
 
+    this.recipeStepList = recipeStepList;
     this.name = name;
 
     this.aggregateIngredients();
+  }
+
+  public Recipe(String name, RecipeStep... recipeStepList) {
+    this(name, Arrays.asList(recipeStepList));
   }
 
   private void aggregateIngredients() {
