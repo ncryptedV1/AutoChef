@@ -1,10 +1,12 @@
 package de.cunc.autochef.domain.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
-public class Recipe {
+public class Recipe implements Serializable {
 
   private String name;
   private List<RecipeStep> recipeStepList = new ArrayList<>();
@@ -51,5 +53,23 @@ public class Recipe {
   public String toString() {
     return "Recipe{" + "name='" + name + '\'' + ", recipeStepList=" + recipeStepList
         + ", ingredients=" + ingredients + '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Recipe recipe = (Recipe) o;
+    return Objects.equals(name, recipe.name) && Objects.equals(recipeStepList,
+        recipe.recipeStepList) && Objects.equals(ingredients, recipe.ingredients);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, recipeStepList, ingredients);
   }
 }
