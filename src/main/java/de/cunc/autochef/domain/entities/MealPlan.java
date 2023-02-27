@@ -5,10 +5,10 @@ import java.util.List;
 
 public class MealPlan {
 
-  List<Meal> mealList;
-  GroceryList groceryList;
-  LocalDate start;
-  LocalDate end;
+  private List<Meal> mealList;
+  private GroceryList groceryList;
+  private LocalDate start;
+  private LocalDate end;
 
   public MealPlan(List<Meal> mealList, LocalDate start, LocalDate end) {
     this.mealList = mealList;
@@ -18,18 +18,30 @@ public class MealPlan {
   }
 
   private void aggregateGroceryLists() {
-    // todo: implement
-    // this should get all ingredients from all meals and summarize them in
-    // `groceryList`
+    List<GroceryItem> groceryItems = this.mealList.stream()
+        .flatMap(meal -> meal.getRecipe().getIngredients().getItems().stream()).toList();
+    this.groceryList = new GroceryList(groceryItems);
+  }
+
+  public List<Meal> getMealList() {
+    return mealList;
+  }
+
+  public GroceryList getGroceryList() {
+    return groceryList;
+  }
+
+  public LocalDate getStart() {
+    return start;
+  }
+
+  public LocalDate getEnd() {
+    return end;
   }
 
   @Override
   public String toString() {
-    return "MealPlan{" +
-        "mealList=" + mealList +
-        ", groceryList=" + groceryList +
-        ", start=" + start +
-        ", end=" + end +
-        '}';
+    return "MealPlan{" + "mealList=" + mealList + ", groceryList=" + groceryList + ", start="
+        + start + ", end=" + end + '}';
   }
 }

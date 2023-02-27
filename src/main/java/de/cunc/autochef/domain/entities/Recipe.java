@@ -6,9 +6,9 @@ import java.util.List;
 
 public class Recipe {
 
-  String name;
-  List<RecipeStep> recipeStepList = new ArrayList<>();
-  GroceryList ingredients;
+  private String name;
+  private List<RecipeStep> recipeStepList = new ArrayList<>();
+  private GroceryList ingredients;
 
   public Recipe(String name, RecipeStep... recipeStepList) {
     // todo: check if steps are unique in the recipeStepList
@@ -19,17 +19,26 @@ public class Recipe {
   }
 
   private void aggregateIngredients() {
-    // todo: implement
-    // this should get all ingredients from all recipesteps and summarize them in
-    // `ingredients`
+    List<GroceryItem> groceryItems = this.recipeStepList.stream()
+        .flatMap(step -> step.getIngredients().getItems().stream()).toList();
+    this.ingredients = new GroceryList(groceryItems);
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public List<RecipeStep> getRecipeStepList() {
+    return recipeStepList;
+  }
+
+  public GroceryList getIngredients() {
+    return ingredients;
   }
 
   @Override
   public String toString() {
-    return "Recipe{" +
-        "name='" + name + '\'' +
-        ", recipeStepList=" + recipeStepList +
-        ", ingredients=" + ingredients +
-        '}';
+    return "Recipe{" + "name='" + name + '\'' + ", recipeStepList=" + recipeStepList
+        + ", ingredients=" + ingredients + '}';
   }
 }

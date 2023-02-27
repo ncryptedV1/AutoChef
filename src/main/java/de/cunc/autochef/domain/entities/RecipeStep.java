@@ -16,6 +16,18 @@ public class RecipeStep {
     this.ingredients = new GroceryList(ingredients);
   }
 
+  public int getStep() {
+    return step;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public GroceryList getIngredients() {
+    return ingredients;
+  }
+
   @Override
   public String toString() {
     return "RecipeStep{" +

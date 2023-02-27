@@ -6,23 +6,28 @@ import java.util.List;
 
 public class GroceryList {
 
-  List<GroceryItem> entries = new ArrayList<>();
+  private List<GroceryItem> items = new ArrayList<>();
 
-  public GroceryList() {
+  public GroceryList(List<GroceryItem> items) {
+    this.items = items;
   }
 
   public GroceryList(GroceryItem... items) {
-    Collections.addAll(this.entries, items);
+    Collections.addAll(this.items, items);
   }
 
   public void addItem(GroceryItem entry) {
-    this.entries.add(entry);
+    this.items.add(entry);
+  }
+
+  public List<GroceryItem> getItems() {
+    return items;
   }
 
   @Override
   public String toString() {
     return "GroceryList{" +
-        "entries=" + entries +
+        "entries=" + items +
         '}';
   }
 }

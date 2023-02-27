@@ -6,14 +6,26 @@ import de.cunc.autochef.domain.valueobjects.Unit;
 
 public class GroceryItem {
 
-  Ingredient ingredient;
-  Quantity quantity;
-  Unit unit;
+  private Ingredient ingredient;
+  private Quantity quantity;
+  private Unit unit;
 
   public GroceryItem(Ingredient ingredient, Quantity quantity, Unit unit) {
     this.ingredient = ingredient;
     this.quantity = quantity;
     this.unit = unit;
+  }
+
+  public Ingredient getIngredient() {
+    return ingredient;
+  }
+
+  public Quantity getQuantity() {
+    return quantity;
+  }
+
+  public Unit getUnit() {
+    return unit;
   }
 
   @Override
