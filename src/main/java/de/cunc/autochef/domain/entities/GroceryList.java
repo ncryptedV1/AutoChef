@@ -1,32 +1,33 @@
 package de.cunc.autochef.domain.entities;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GroceryList {
 
-    List<GroceryItem> entries;
+  private List<GroceryItem> items = new ArrayList<>();
 
-    public GroceryList() {
-        this.entries = new ArrayList<GroceryItem>();
-    }
+  public GroceryList(List<GroceryItem> items) {
+    this.items = items;
+  }
 
-    public GroceryList(GroceryItem... items) {
-        this.entries = new ArrayList<GroceryItem>();
-        for (GroceryItem item : items) {
-            this.entries.add(item);
-        }
-    }
+  public GroceryList(GroceryItem... items) {
+    Collections.addAll(this.items, items);
+  }
 
-    public void addItem(GroceryItem entry) {
-        this.entries.add(entry);
-    }
+  public void addItem(GroceryItem entry) {
+    this.items.add(entry);
+  }
 
-    public String toString() {
-        String res = "";
-        for (GroceryItem item : entries) {
-            res += item.toString() + System.lineSeparator();
-        }
-        return res;
-    }
+  public List<GroceryItem> getItems() {
+    return items;
+  }
+
+  @Override
+  public String toString() {
+    return "GroceryList{" +
+        "entries=" + items +
+        '}';
+  }
 }

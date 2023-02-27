@@ -1,43 +1,47 @@
 package de.cunc.autochef.domain.entities;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 public class MealPlan {
 
-    List<Meal> meals;
-    GroceryList groceryList;
-    LocalDate start;
-    LocalDate end;
+  private List<Meal> mealList;
+  private GroceryList groceryList;
+  private LocalDate start;
+  private LocalDate end;
 
-    public MealPlan(LocalDate start, LocalDate end, Meal... meals) {
-        this.meals = Arrays.stream(meals).toList();
-        this.aggregateGroceryLists();
-        this.start = start;
-        this.end = end;
-    }
+  public MealPlan(List<Meal> mealList, LocalDate start, LocalDate end) {
+    this.mealList = mealList;
+    this.aggregateGroceryLists();
+    this.start = start;
+    this.end = end;
+  }
 
-    public MealPlan(LocalDate start, LocalDate end, List<Meal> meals) {
-        this.meals = meals;
-        this.aggregateGroceryLists();
-        this.start = start;
-        this.end = end;
-    }
+  private void aggregateGroceryLists() {
+    List<GroceryItem> groceryItems = this.mealList.stream()
+        .flatMap(meal -> meal.getRecipe().getIngredients().getItems().stream()).toList();
+    this.groceryList = new GroceryList(groceryItems);
+  }
 
-    private void aggregateGroceryLists() {
-        // todo: implement
-        // this should get all ingredients from all meals and summarize them in
-        // `groceryList`
-    }
+  public List<Meal> getMealList() {
+    return mealList;
+  }
 
-    public String toString() {
-        String res = "";
+  public GroceryList getGroceryList() {
+    return groceryList;
+  }
 
-        for (Meal meal : meals) {
-            res = meal.toString() + System.lineSeparator();
-        }
+  public LocalDate getStart() {
+    return start;
+  }
 
-        return res;
-    }
+  public LocalDate getEnd() {
+    return end;
+  }
+
+  @Override
+  public String toString() {
+    return "MealPlan{" + "mealList=" + mealList + ", groceryList=" + groceryList + ", start="
+        + start + ", end=" + end + '}';
+  }
 }

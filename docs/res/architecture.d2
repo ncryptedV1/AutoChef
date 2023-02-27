@@ -1,21 +1,48 @@
+# Services
+GenerateListService: Generate List Service {
+  shape: hexagon
+  fill: "#ffdef1"
+}
+GenerateListService -> MealPlanEntity
+GenerateListService -> GroceryListEntity
+GenerateListService -> FilterService
+GenerateListService -> OutputService
+GenerateListService -> InputService
+
+FilterService: Filter Service {
+  shape: hexagon
+  fill: "#ffdef1"
+}
+
+OutputService: Output Service {
+  shape: hexagon
+  fill: "#ffdef1"
+}
+OutputService -> MealPlanEntity
+OutputService -> GroceryListEntity
+OutputService -> RecipeEntity
+
+InputService: Input Service {
+  shape: hexagon
+  fill: "#ffdef1"
+}
+InputService -> MealEntity
+InputService -> GroceryListEntity
+
 # Entities
 MealPlanEntity: Meal Plan Entity {
-  listofmeals: *MealList
+  listofmeals: *Meal\[\]
   startdate: Start date
   enddate: End date
   grocerylist: *GroceryListEntity
 }
-MealPlanEntity.listofmeals -> MealListEntity: 1:1
+MealPlanEntity.listofmeals -> MealEntity: 1:n
 MealPlanEntity.grocerylist -> GroceryListEntity: 1:1
-
-MealListEntity: Meal List Entity {
-  listofmeals: *MealEntity\[\]
-}
-MealListEntity.listofmeals -> MealEntity: 1:n
 
 MealEntity: Meal Entity {
   recipe: *RecipeEntity
-  people: Adjuted number\nof people
+  people: Adjusted number\nof people
+  near: MealPlanEntity
 }  
 MealEntity.recipe -> RecipeEntity: 1:1
 
@@ -27,22 +54,24 @@ RecipeEntity: Recipe Entity {
 RecipeEntity.recipesteps -> RecipeStepEntity: 1:n
 RecipeEntity.grocerylist -> GroceryListEntity: 1:1
 
+RecipeStepEntity: Recipe Step Entity {
+  step: Step Number
+  ingredients: *GroceryListEntryEntity\[\]
+  description: Description
+  near: RecipeEntity
+}
+
 GroceryListEntity: Grocery List Entity {
   list: *GroceryListEntryEntity\[\]
   mealplan: *MealPlanEntity
 }  
 GroceryListEntity.list -> GroceryListEntryEntity: 1:n
 
-RecipeStepEntity: Recipe Step Entity {
-  step: Step Number
-  ingredients: *GroceryListEntryEntity\[\]
-  description: Description
-}  
-
 GroceryListEntryEntity: Grocery List Entry Entity { # rename
   ingredient: *VO.Ingredient
   unit: *VO.Unit
   quantity: *VO.Quantity
+  near: GroceryListEntity
 }
 GroceryListEntryEntity.ingredient -> ValueObjects.ingredient
 GroceryListEntryEntity.unit -> ValueObjects.unit
@@ -55,31 +84,6 @@ ValueObjects: Value Objects {
   quantity: Quantity
 }
 
-# Services 
-GenerateListService: Generate List Service {
-  shape: hexagon
-  fill: "#ffdef1"
-}
-GenerateListService <-> MealPlanEntity
-GenerateListService <-> GroceryListEntity
-
-FilterService: Filter Service {
-  shape: hexagon
-  fill: "#ffdef1"
-}
-FilterService <-> MealListEntity
-
-OutputService: Output Service {
-  shape: hexagon
-  fill: "#ffdef1"
-}
-OutputService <-> MealEntity
-OutputService <-> GroceryListEntity
-OutputService <-> RecipeStepEntity
-
-InputService: Input Service {
-  shape: hexagon
-  fill: "#ffdef1"
-}
-InputService <-> MealEntity
-InputService <-> GroceryListEntity
+x: |latex
+\\cdot
+| {near: bottom-right}

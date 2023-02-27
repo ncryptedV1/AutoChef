@@ -8,7 +8,7 @@ public enum Unit {
     GRAM("Gram", "g"),
     PIECE("Piece", "piece(s)"),
     TABLESPOON("Tablespoon", "tbsp"),
-    TEESPOON("Teespoon", "tsp");
+    TEASPOON("Teaspoon", "tsp");
 
     private String name;
     private String abbreviation;

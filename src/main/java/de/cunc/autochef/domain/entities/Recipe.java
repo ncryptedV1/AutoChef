@@ -1,34 +1,51 @@
 package de.cunc.autochef.domain.entities;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Recipe {
 
-    String name;
-    List<RecipeStep> recipeStepList;
-    GroceryList ingredients;
+    private String name;
+    private List<RecipeStep> recipeStepList = new ArrayList<>();
+    private GroceryList ingredients;
 
     public Recipe(String name, RecipeStep... recipeStepList) {
-        // todo: check if steps are unique in the recipeStepList
-        this.name = name;
-        for (RecipeStep step : recipeStepList) {
-            this.recipeStepList.add(step);
+        this.recipeStepList = Arrays.asList(recipeStepList);
+        this.recipeStepList.sort((step1, step2) -> step1.getStep() > step2.getStep() ? 1 : -1);
+        for (int i = 0; i < recipeStepList.length; i++) {
+            if (recipeStepList[i].getStep() != i + 1) {
+                throw new IllegalArgumentException(
+                        "recipe step " + (i + 1) + " is not included - no consecutive recipe supplied");
+            }
         }
+
+        this.name = name;
 
         this.aggregateIngredients();
     }
 
     private void aggregateIngredients() {
-        // todo: implement
-        // this should get all ingredients from all recipesteps and summarize them in
-        // `ingredients`
+        List<GroceryItem> groceryItems = this.recipeStepList.stream()
+                .flatMap(step -> step.getIngredients().getItems().stream()).toList();
+        this.ingredients = new GroceryList(groceryItems);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public List<RecipeStep> getRecipeStepList() {
+        return recipeStepList;
+    }
+
+    public GroceryList getIngredients() {
+        return ingredients;
+    }
+
+    @Override
     public String toString() {
-        String res = String.format("Recipe: %s", this.name) + System.lineSeparator();
-        for (RecipeStep step : this.recipeStepList) {
-            res = res + step.toString() + System.lineSeparator();
-        }
-        return res;
+        return "Recipe{" + "name='" + name + '\'' + ", recipeStepList=" + recipeStepList
+                + ", ingredients=" + ingredients + '}';
     }
 }
