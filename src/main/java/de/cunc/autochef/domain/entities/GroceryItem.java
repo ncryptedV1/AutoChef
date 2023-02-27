@@ -6,9 +6,9 @@ import de.cunc.autochef.domain.valueobjects.Unit;
 
 public class GroceryItem {
 
-  private Ingredient ingredient;
-  private Quantity quantity;
-  private Unit unit;
+  final private Ingredient ingredient;
+  final private Quantity quantity;
+  final private Unit unit;
 
   public GroceryItem(Ingredient ingredient, Quantity quantity, Unit unit) {
     this.ingredient = ingredient;
@@ -31,9 +31,9 @@ public class GroceryItem {
   @Override
   public String toString() {
     return "GroceryItem{" +
-        "ingredient=" + ingredient +
-        ", quantity=" + quantity +
-        ", unit=" + unit +
-        '}';
+            "ingredient=" + ingredient +
+            ", quantity=" + quantity +
+            ", unit=" + unit +
+            '}';
   }
 }
