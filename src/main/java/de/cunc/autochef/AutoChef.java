@@ -44,11 +44,11 @@ public class AutoChef {
 
     // setup recipe steps
     RecipeStep recipeStep1 =
-        new RecipeStep(0, "Cut some banane, apple and pineapple as the basis for this salad.",
+        new RecipeStep(1, "Cut some banana, apple and pineapple as the basis for this salad.",
             item1, item2, item3);
-    RecipeStep recipeStep2 = new RecipeStep(1, "Add orange juice to make it more juicy.", item4);
+    RecipeStep recipeStep2 = new RecipeStep(2, "Add orange juice to make it more juicy.", item4);
     RecipeStep recipeStep3 =
-        new RecipeStep(2, "Add a bit of Nutella for making it look beautiful.", item5);
+        new RecipeStep(3, "Add a bit of Nutella for making it look beautiful.", item5);
 
     // setup recipe for
     Recipe recipe1 = new Recipe("Sugar-free fruit salad", recipeStep1, recipeStep2, recipeStep3);
