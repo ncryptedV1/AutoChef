@@ -11,14 +11,17 @@ public class ConsoleInputService {
   private static final Scanner consoleInputScanner =
       System.console() == null ? new Scanner(System.in) : null;
 
-  public static Integer getInteger(int lowerBound, int upperBound, String question) {
+  public static Integer getInteger(Integer lowerBound, Integer upperBound, String question) {
     return getInputWithType(userInput -> {
       try {
         Integer choice = Integer.parseInt(userInput);
-        if (choice < lowerBound || choice > upperBound) {
+        if (lowerBound != null && choice < lowerBound) {
           throw new IllegalArgumentException(
-              "Die Auswahl muss kleiner größer als " + lowerBound + " und kleiner als " + upperBound
-                  + " sein!");
+              "Die Auswahl muss größer als " + (lowerBound - 1) + " sein!");
+        }
+        if (upperBound != null && choice > upperBound) {
+          throw new IllegalArgumentException(
+              "Die Auswahl muss kleiner als " + (upperBound + 1) + " sein!");
         }
         return choice;
       } catch (NumberFormatException ex) {

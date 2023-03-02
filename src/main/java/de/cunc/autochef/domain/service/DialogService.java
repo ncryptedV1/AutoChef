@@ -6,13 +6,14 @@ import de.cunc.autochef.domain.entities.Recipe;
 import de.cunc.autochef.domain.utils.Formats;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class DialogService {
 
   public enum DialogState {
-    MAIN, MEAL_PLAN_GENERATION
+    MAIN, RECIPES, MEAL_PLAN_GENERATION
   }
 
   private static DialogState currentState;
@@ -35,17 +36,27 @@ public class DialogService {
     }
   }
 
-  public static void showRecipes() {
-    ConsoleOutputService.rawOut("Folgende Rezepte sind aktuell in unserer Datenbank:");
+  private static void showRecipes() {
+    currentState = DialogState.RECIPES;
 
+    ConsoleOutputService.rawOut("Folgende Rezepte sind aktuell in unserer Datenbank:");
     List<Recipe> recipes = PersistenceService.getRecipes();
-    recipes.forEach(recipe -> ConsoleOutputService.rawOut("- " + recipe.getName()));
+
+    List<String> options = new ArrayList<>();
+    options.add("Abbrechen");
+    options.addAll(recipes.stream().map(recipe -> recipe.getName()).toList());
+    int option = offerOptions(options);
+
+    if (option > 1) {
+      Recipe recipe = recipes.get(option - 2);
+      ConsoleOutputService.rawOut(recipe.toString());
+    }
     ConsoleOutputService.rawOut("");
 
     startMain();
   }
 
-  public static void startMealPlanGeneration() {
+  private static void startMealPlanGeneration() {
     currentState = DialogState.MEAL_PLAN_GENERATION;
 
     ConsoleOutputService.rawOut("Wir generieren jetzt zusammen einen Mahlzeiten-Plan. :D");
@@ -69,7 +80,8 @@ public class DialogService {
     for (int day = 0; day < days; day++) {
       LocalDate date = startDate.plusDays(day);
       ConsoleOutputService.rawOut(
-          Formats.DATE_FORMAT.format(date) + ": " + mealPlan.getMealList().get(day).getRecipe().getName());
+          Formats.DATE_FORMAT.format(date) + ": " + mealPlan.getMealList().get(day).getRecipe()
+              .getName());
     }
     ConsoleOutputService.rawOut("");
 
@@ -81,9 +93,13 @@ public class DialogService {
   }
 
   private static int offerOptions(String... options) {
-    for (int idx = 0; idx < options.length; idx++) {
-      ConsoleOutputService.rawOut("[" + (idx + 1) + "] " + options[idx]);
+    return offerOptions(Arrays.asList(options));
+  }
+
+  private static int offerOptions(List<String> options) {
+    for (int idx = 0; idx < options.size(); idx++) {
+      ConsoleOutputService.rawOut("[" + (idx + 1) + "] " + options.get(idx));
     }
-    return ConsoleInputService.getInteger(1, options.length, "Auswahl:");
+    return ConsoleInputService.getInteger(1, options.size(), "Auswahl:");
   }
 }

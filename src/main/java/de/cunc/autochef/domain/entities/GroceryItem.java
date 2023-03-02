@@ -30,10 +30,6 @@ public class GroceryItem {
 
   @Override
   public String toString() {
-    return "GroceryItem{" +
-        "ingredient=" + ingredient +
-        ", quantity=" + quantity +
-        ", unit=" + unit +
-        '}';
+    return quantity.toString() + unit.toString() + " " + ingredient.toString();
   }
 }

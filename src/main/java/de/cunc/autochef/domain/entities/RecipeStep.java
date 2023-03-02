@@ -1,9 +1,5 @@
 package de.cunc.autochef.domain.entities;
 
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
-
 public class RecipeStep {
 
   private int step;
@@ -28,9 +24,6 @@ public class RecipeStep {
 
   @Override
   public String toString() {
-    return "RecipeStep{" +
-        "step=" + step +
-        ", description='" + description + '\'' +
-        '}';
+    return step + ". " + description;
   }
 }

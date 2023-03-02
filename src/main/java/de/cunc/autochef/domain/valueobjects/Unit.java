@@ -20,10 +20,7 @@ public enum Unit {
 
   @Override
   public String toString() {
-    return "Unit{" +
-        "name='" + name + '\'' +
-        ", abbreviation='" + abbreviation + '\'' +
-        '}';
+    return abbreviation;
   }
 
   public String getAbbreviation() {

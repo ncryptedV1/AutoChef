@@ -14,4 +14,9 @@ public final class Quantity {
   public double getValue() {
     return this.value;
   }
+
+  @Override
+  public String toString() {
+    return String.valueOf(value);
+  }
 }

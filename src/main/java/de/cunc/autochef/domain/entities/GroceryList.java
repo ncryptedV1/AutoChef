@@ -3,10 +3,11 @@ package de.cunc.autochef.domain.entities;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GroceryList {
 
-  private List<GroceryItem> items = new ArrayList<>();
+  private List<GroceryItem> items;
 
   public GroceryList(List<GroceryItem> items) {
     this.items = items;
@@ -26,8 +27,7 @@ public class GroceryList {
 
   @Override
   public String toString() {
-    return "GroceryList{" +
-        "entries=" + items +
-        '}';
+    return "Zutaten:\n"
+        + items.stream().map(item -> "- " + item.toString()).collect(Collectors.joining("\n"));
   }
 }

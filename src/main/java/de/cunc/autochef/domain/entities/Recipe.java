@@ -1,21 +1,21 @@
 package de.cunc.autochef.domain.entities;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Recipe {
 
   private String name;
   private GroceryList ingredients;
-  private List<RecipeStep> recipeStepList = new ArrayList<>();
+  private List<RecipeStep> recipeSteps = new ArrayList<>();
 
-  public Recipe(String name, GroceryList ingredients, List<RecipeStep> recipeStepList) {
-    recipeStepList.sort((step1, step2) -> step1.getStep() > step2.getStep() ? 1 : -1);
-    for (int i = 0; i < recipeStepList.size(); i++) {
-      if (recipeStepList.get(i).getStep() != i + 1) {
+  public Recipe(String name, GroceryList ingredients, List<RecipeStep> recipeSteps) {
+    recipeSteps.sort((step1, step2) -> step1.getStep() > step2.getStep() ? 1 : -1);
+    for (int i = 0; i < recipeSteps.size(); i++) {
+      if (recipeSteps.get(i).getStep() != i + 1) {
         throw new IllegalArgumentException(
             "Recipe step " + (i + 1) + " is not included - no consecutive recipe supplied");
       }
@@ -23,19 +23,19 @@ public class Recipe {
 
     this.name = name.strip();
     this.ingredients = ingredients;
-    this.recipeStepList = recipeStepList;
+    this.recipeSteps = recipeSteps;
   }
 
-  public Recipe(String name, GroceryList ingredients, RecipeStep... recipeStepList) {
-    this(name, ingredients, Arrays.asList(recipeStepList));
+  public Recipe(String name, GroceryList ingredients, RecipeStep... recipeSteps) {
+    this(name, ingredients, Arrays.asList(recipeSteps));
   }
 
   public String getName() {
     return name;
   }
 
-  public List<RecipeStep> getRecipeStepList() {
-    return recipeStepList;
+  public List<RecipeStep> getRecipeSteps() {
+    return recipeSteps;
   }
 
   public GroceryList getIngredients() {
@@ -48,8 +48,10 @@ public class Recipe {
 
   @Override
   public String toString() {
-    return "Recipe{" + "name='" + name + '\'' + ", recipeStepList=" + recipeStepList
-        + ", ingredients=" + ingredients + '}';
+    return "Rezept: " + name + ":\n"
+        + ingredients.toString() + "\n"
+        + "Zubereitung:\n"
+        + recipeSteps.stream().map(step -> step.toString()).collect(Collectors.joining("\n"));
   }
 
   @Override
