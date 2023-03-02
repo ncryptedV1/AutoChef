@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class Recipe implements Serializable {
+public class Recipe {
 
   private String name;
   private GroceryList ingredients;

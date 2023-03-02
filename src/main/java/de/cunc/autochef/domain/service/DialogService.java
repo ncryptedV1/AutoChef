@@ -1,5 +1,8 @@
 package de.cunc.autochef.domain.service;
 
+import de.cunc.autochef.domain.entities.Recipe;
+import java.util.List;
+
 public class DialogService {
 
   public enum DialogState {
@@ -15,11 +18,20 @@ public class DialogService {
         "Willkommen bei AutoChef, deinem persönlichem Freund und Helfer bei der Rezept- & Einkauflisten-Planung!");
     ConsoleOutputService.rawOut("Wie kann ich dir weiterhelfen?");
     int option = offerOptions("Rezepte anzeigen", "Mahlzeiten-Plan generieren");
-    if(option == 1) {
-      // ToDo: implementation
-    } else if(option == 2) {
+    if (option == 1) {
+      showRecipes();
+    } else if (option == 2) {
       startMealPlanGeneration();
     }
+  }
+
+  public static void showRecipes() {
+    ConsoleOutputService.rawOut("Folgende Rezepte sind aktuell in unserer Datenbank:");
+
+    List<Recipe> recipes = PersistenceService.getRecipes();
+    recipes.forEach(recipe -> ConsoleOutputService.rawOut(recipe.toString()));
+
+    startDialog();
   }
 
   public static void startMealPlanGeneration() {
