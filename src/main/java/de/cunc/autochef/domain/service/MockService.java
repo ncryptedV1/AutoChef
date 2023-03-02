@@ -35,11 +35,13 @@ public class MockService {
     RecipeStep recipeStep1 = new RecipeStep(1,
         "Cut some banana, apple and pineapple as the basis for this salad.");
     RecipeStep recipeStep2 = new RecipeStep(2, "Add orange juice to make it more juicy.");
-    RecipeStep recipeStep3 = new RecipeStep(3, "Add a bit of Nutella for making it look beautiful.");
+    RecipeStep recipeStep3 = new RecipeStep(3,
+        "Add a bit of Nutella for making it look beautiful.");
     return Arrays.asList(recipeStep1, recipeStep2, recipeStep3);
   }
 
-  public static Recipe generateRecipe(List<GroceryItem> groceryItems, List<RecipeStep> recipeSteps) {
+  public static Recipe generateRecipe(List<GroceryItem> groceryItems,
+      List<RecipeStep> recipeSteps) {
     return new Recipe("Sugar-free fruit salad", new GroceryList(groceryItems), recipeSteps);
   }
 
@@ -49,7 +51,7 @@ public class MockService {
 
   public static MealPlan generateMealPlan(List<Meal> meals) {
     LocalDate startDate = LocalDate.of(2023, 2, 20);
-    LocalDate endDate = LocalDate.of(2023, 2, 26);
+    LocalDate endDate = startDate.plusDays(meals.size());
     return new MealPlan(meals, startDate, endDate);
   }
 

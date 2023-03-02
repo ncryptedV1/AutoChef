@@ -17,7 +17,7 @@ public class Recipe {
     for (int i = 0; i < recipeStepList.size(); i++) {
       if (recipeStepList.get(i).getStep() != i + 1) {
         throw new IllegalArgumentException(
-            "recipe step " + (i + 1) + " is not included - no consecutive recipe supplied");
+            "Recipe step " + (i + 1) + " is not included - no consecutive recipe supplied");
       }
     }
 

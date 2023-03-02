@@ -11,6 +11,12 @@ public class MealPlan {
   private LocalDate end;
 
   public MealPlan(List<Meal> mealList, LocalDate start, LocalDate end) {
+    int days = start.until(end).getDays();
+    if (mealList.size() != days) {
+      throw new IllegalArgumentException(
+          "The meal plan covers " + days + " days, but the meal list contains " + mealList.size());
+    }
+
     this.mealList = mealList;
     this.aggregateGroceryLists();
     this.start = start;
