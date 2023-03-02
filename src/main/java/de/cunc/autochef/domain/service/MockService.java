@@ -1,6 +1,7 @@
 package de.cunc.autochef.domain.service;
 
 import de.cunc.autochef.domain.entities.GroceryItem;
+import de.cunc.autochef.domain.entities.GroceryList;
 import de.cunc.autochef.domain.entities.Meal;
 import de.cunc.autochef.domain.entities.MealPlan;
 import de.cunc.autochef.domain.entities.Recipe;
@@ -30,19 +31,16 @@ public class MockService {
     return Arrays.asList(item1, item2, item3, item4, item5);
   }
 
-  public static List<RecipeStep> generateRecipeSteps(List<GroceryItem> groceryItems) {
+  public static List<RecipeStep> generateRecipeSteps() {
     RecipeStep recipeStep1 = new RecipeStep(1,
-        "Cut some banana, apple and pineapple as the basis for this salad.",
-        getSample(groceryItems));
-    RecipeStep recipeStep2 = new RecipeStep(2, "Add orange juice to make it more juicy.",
-        getSample(groceryItems));
-    RecipeStep recipeStep3 = new RecipeStep(3, "Add a bit of Nutella for making it look beautiful.",
-        getSample(groceryItems));
+        "Cut some banana, apple and pineapple as the basis for this salad.");
+    RecipeStep recipeStep2 = new RecipeStep(2, "Add orange juice to make it more juicy.");
+    RecipeStep recipeStep3 = new RecipeStep(3, "Add a bit of Nutella for making it look beautiful.");
     return Arrays.asList(recipeStep1, recipeStep2, recipeStep3);
   }
 
-  public static Recipe generateRecipe(List<RecipeStep> recipeSteps) {
-    return new Recipe("Sugar-free fruit salad", recipeSteps);
+  public static Recipe generateRecipe(List<GroceryItem> groceryItems, List<RecipeStep> recipeSteps) {
+    return new Recipe("Sugar-free fruit salad", new GroceryList(groceryItems), recipeSteps);
   }
 
   public static Meal generateMeal(Recipe recipe) {

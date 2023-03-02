@@ -8,6 +8,7 @@ import de.cunc.autochef.domain.entities.RecipeStep;
 import de.cunc.autochef.domain.service.ConsoleOutputService;
 import de.cunc.autochef.domain.service.DialogService;
 import de.cunc.autochef.domain.service.MockService;
+import de.cunc.autochef.domain.service.PersistenceService;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,14 +19,15 @@ public class AutoChef {
 
     // generate mock data
     List<GroceryItem> groceryItems = MockService.generateGroceryItems();
-    List<RecipeStep> recipeSteps = MockService.generateRecipeSteps(groceryItems);
-    Recipe recipe = MockService.generateRecipe(recipeSteps);
+    List<RecipeStep> recipeSteps = MockService.generateRecipeSteps();
+    Recipe recipe = MockService.generateRecipe(groceryItems, recipeSteps);
     Meal meal = MockService.generateMeal(recipe);
     List<Meal> meals = Arrays.asList(meal);
     MealPlan mealPlan = MockService.generateMealPlan(meals);
 
     ConsoleOutputService.info("Mahlzeiten-Plan: " + mealPlan.toString());
 
+    PersistenceService.saveRecipe(recipe);
     DialogService.startDialog();
 
     ConsoleOutputService.info("Dialog Endstatus: " + DialogService.getCurrentState());
