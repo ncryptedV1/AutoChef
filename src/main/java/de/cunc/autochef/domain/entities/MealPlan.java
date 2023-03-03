@@ -65,7 +65,7 @@ public class MealPlan {
         .collect(
             Collectors.joining("\n")) + "\n"
         + "\n"
-        + "Gesamt-Einkaufsliste:\n"
+        + "Gesamt:\n"
         + getGroceryList().toString();
   }
 

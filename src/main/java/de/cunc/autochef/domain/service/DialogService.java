@@ -4,6 +4,8 @@ import de.cunc.autochef.domain.entities.Meal;
 import de.cunc.autochef.domain.entities.MealPlan;
 import de.cunc.autochef.domain.entities.Recipe;
 import de.cunc.autochef.domain.utils.Formats;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -114,7 +116,8 @@ public class DialogService {
     if (option == 1) {
       ConsoleOutputService.rawOut(mealPlan.toString());
     } else if (option == 2) {
-      // ToDo: implementation body
+      Toolkit.getDefaultToolkit().getSystemClipboard()
+          .setContents(new StringSelection(mealPlan.toString()), null);
     }
 
     startMain();
