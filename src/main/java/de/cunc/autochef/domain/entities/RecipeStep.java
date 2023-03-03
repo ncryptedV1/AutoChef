@@ -11,7 +11,7 @@ public class RecipeStep {
     }
 
     this.step = step;
-    this.description = description;
+    this.description = description.strip();
   }
 
   public int getStep() {
