@@ -1,5 +1,8 @@
 package de.cunc.autochef.domain.entities;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Meal {
 
   private Recipe recipe;
@@ -22,11 +25,19 @@ public class Meal {
     return adjustedNumberOfPeople;
   }
 
+  public GroceryList getIngredients() {
+    List<GroceryItem> items = recipe.getIngredients().getItems().stream().map(
+        item -> new GroceryItem(item.getIngredient(),
+            item.getQuantity().multiply(adjustedNumberOfPeople), item.getUnit())).toList();
+    return new GroceryList(items);
+  }
+
   @Override
   public String toString() {
-    return "Meal{" +
-        "recipe=" + recipe +
-        ", adjustedNumberOfPeople=" + adjustedNumberOfPeople +
-        '}';
+    return "Mahlzeit (" + adjustedNumberOfPeople + " Personen): " + recipe.getName() + ":\n"
+        + getIngredients().toString() + "\n"
+        + "Zubereitung:\n"
+        + recipe.getRecipeSteps().stream().map(step -> step.toString())
+        .collect(Collectors.joining("\n"));
   }
 }

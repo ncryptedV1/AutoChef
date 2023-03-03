@@ -15,6 +15,10 @@ public final class Quantity {
     return this.value;
   }
 
+  public Quantity multiply(double factor) {
+    return new Quantity(value * factor);
+  }
+
   @Override
   public String toString() {
     return String.valueOf(value);
