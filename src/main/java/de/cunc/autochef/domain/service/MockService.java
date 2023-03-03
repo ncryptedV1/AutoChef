@@ -20,14 +20,14 @@ public class MockService {
   private static final Random random = new Random();
 
   public static List<GroceryItem> generateGroceryItems() {
-    GroceryItem item1 = new GroceryItem(new Ingredient("Banane"), new Quantity(1), Unit.GRAM);
+    GroceryItem item1 = new GroceryItem(new Ingredient("Banane"), new Quantity(1), new Unit("g"));
     GroceryItem item2 = new GroceryItem(new Ingredient("Pineapple"), new Quantity(0.2),
-        Unit.KILOGRAM);
+        new Unit("kg"));
     GroceryItem item3 = new GroceryItem(new Ingredient("Orange juice"), new Quantity(0.1),
-        Unit.LITER);
-    GroceryItem item4 = new GroceryItem(new Ingredient("Apple"), new Quantity(1), Unit.PIECE);
+        new Unit("l"));
+    GroceryItem item4 = new GroceryItem(new Ingredient("Apple"), new Quantity(1), new Unit("Stk."));
     GroceryItem item5 = new GroceryItem(new Ingredient("Nutella"), new Quantity(2),
-        Unit.TABLESPOON);
+        new Unit("EL"));
     return Arrays.asList(item1, item2, item3, item4, item5);
   }
 

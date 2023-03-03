@@ -1,29 +1,24 @@
 package de.cunc.autochef.domain.valueobjects;
 
-public enum Unit {
+public class Unit {
 
-  LITER("Liter", "l"),
-  MILLILITER("Milliliter", "ml"),
-  KILOGRAM("Kilogram", "kg"),
-  GRAM("Gram", "g"),
-  PIECE("Piece", "pc(s)"),
-  TABLESPOON("Tablespoon", "tbsp"),
-  TEASPOON("Teaspoon", "tsp");
+  private final String value;
 
-  private String name;
-  private String abbreviation;
+  public Unit(String value) {
+    value = value.strip();
+    if (value.length() == 0) {
+      throw new IllegalArgumentException(
+          "Supplied identifier must be at least one character long!");
+    }
+    this.value = value;
+  }
 
-  Unit(String name, String abbreviation) {
-    this.name = name;
-    this.abbreviation = abbreviation;
+  public String getValue() {
+    return this.value;
   }
 
   @Override
   public String toString() {
-    return abbreviation;
-  }
-
-  public String getAbbreviation() {
-    return abbreviation;
+    return String.valueOf(value);
   }
 }
