@@ -25,8 +25,8 @@ public class Meal {
     return adjustedNumberOfPeople;
   }
 
-  public GroceryList getIngredients() {
-    List<GroceryItem> items = recipe.getIngredients().getItems().stream().map(
+  public GroceryList getGroceryList() {
+    List<GroceryItem> items = recipe.getGroceryList().getItems().stream().map(
         item -> new GroceryItem(item.getIngredient(),
             item.getQuantity().multiply(adjustedNumberOfPeople), item.getUnit())).toList();
     return new GroceryList(items);
@@ -35,9 +35,9 @@ public class Meal {
   @Override
   public String toString() {
     return "Mahlzeit (" + adjustedNumberOfPeople + " Personen): " + recipe.getName() + ":\n"
-        + getIngredients().toString() + "\n"
+        + getGroceryList().toString() + "\n"
         + "Zubereitung:\n"
-        + recipe.getRecipeSteps().stream().map(step -> step.toString())
+        + recipe.getRecipeSteps().stream().map(RecipeStep::toString)
         .collect(Collectors.joining("\n"));
   }
 }

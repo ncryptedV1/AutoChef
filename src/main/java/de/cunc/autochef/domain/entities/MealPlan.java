@@ -44,9 +44,9 @@ public class MealPlan {
     return start.until(getEnd()).getDays();
   }
 
-  public GroceryList getIngredients() {
+  public GroceryList getGroceryList() {
     Map<IngredientUnitTuple, Double> itemGroups = meals.stream()
-        .flatMap(meal -> meal.getIngredients().getItems().stream()).collect(Collectors.groupingBy(
+        .flatMap(meal -> meal.getGroceryList().getItems().stream()).collect(Collectors.groupingBy(
             item -> new IngredientUnitTuple(item.getIngredient(), item.getUnit()),
             Collectors.summingDouble(item -> item.getQuantity().getValue())));
     List<GroceryItem> items = itemGroups.entrySet().stream().map(
@@ -66,7 +66,7 @@ public class MealPlan {
             Collectors.joining("\n")) + "\n"
         + "\n"
         + "Gesamt-Einkaufsliste:\n"
-        + getIngredients().toString();
+        + getGroceryList().toString();
   }
 
   private record IngredientUnitTuple(Ingredient ingredient, Unit unit) {
