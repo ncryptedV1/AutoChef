@@ -10,6 +10,10 @@ public class Meal {
     this.adjustedNumberOfPeople = adjustedNumberOfPeople;
   }
 
+  public void setRecipe(Recipe recipe) {
+    this.recipe = recipe;
+  }
+
   public Recipe getRecipe() {
     return recipe;
   }

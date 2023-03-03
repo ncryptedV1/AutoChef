@@ -25,9 +25,10 @@ public class AutoChef {
     List<Meal> meals = Arrays.asList(meal);
     MealPlan mealPlan = MockService.generateMealPlan(meals);
 
-    ConsoleOutputService.info("Mahlzeiten-Plan: " + mealPlan.toString());
-
+    // save mock recipe for later usage
     PersistenceService.saveRecipe(recipe);
+
+    // start actual user interaction
     DialogService.startDialog();
 
     ConsoleOutputService.info("Dialog Endstatus: " + DialogService.getCurrentState());
