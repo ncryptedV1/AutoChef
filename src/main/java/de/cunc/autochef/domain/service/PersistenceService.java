@@ -23,7 +23,7 @@ public class PersistenceService {
     try {
       recipesFolder.mkdirs();
       ConsoleOutputService.info(
-          "Rezept-Persistenz-Ordner angelegt an " + recipesFolder.getAbsolutePath());
+          "Rezept-Persistenz-Ordner angelegt in " + recipesFolder.getAbsolutePath());
     } catch (SecurityException ex) {
       ConsoleOutputService.severe("Es fehlen Berechtigungen den Persistenz-Ordner anzulegen unter '"
           + recipesFolder.getAbsolutePath() + "'.");

@@ -28,6 +28,7 @@ public class DialogService {
   public static void startMain() {
     currentState = DialogState.MAIN;
 
+    ConsoleOutputService.rawOut("");
     ConsoleOutputService.rawOut("Wie kann ich dir weiterhelfen?");
     int option = offerOptions("Rezepte anzeigen", "Mahlzeiten-Plan generieren");
     if (option == 1) {
@@ -53,7 +54,6 @@ public class DialogService {
       Recipe recipe = recipes.get(option - 2);
       ConsoleOutputService.rawOut(recipe.toString());
     }
-    ConsoleOutputService.rawOut("");
 
     startMain();
   }
@@ -86,25 +86,24 @@ public class DialogService {
     currentState = DialogState.POST_MEAL_PLAN_GENERATION;
 
     LocalDate startDate = mealPlan.getStart();
-    int days = startDate.until(mealPlan.getEnd()).getDays();
-
     boolean userAdapting = true;
+
     while (userAdapting) {
       ConsoleOutputService.rawOut("Das ist der aktuelle Plan:");
       ConsoleOutputService.rawOut("Möchtest du eins der Rezepte austauschen?");
       List<String> options = new ArrayList<>();
       options.add("Nein");
-      for (int day = 0; day < days; day++) {
+      for (int day = 0; day < mealPlan.getDays(); day++) {
         LocalDate date = startDate.plusDays(day);
         options.add(
-            Formats.DATE_FORMAT.format(date) + ": " + mealPlan.getMealList().get(day).getRecipe()
+            Formats.DATE_FORMAT.format(date) + ": " + mealPlan.getMeals().get(day).getRecipe()
                 .getName());
       }
       int option = offerOptions(options);
 
       userAdapting = option > 1;
       if (userAdapting) {
-        mealPlan.getMealList().get(option - 2)
+        mealPlan.getMeals().get(option - 2)
             .setRecipe(allRecipes.get(random.nextInt(allRecipes.size())));
       }
     }
@@ -112,9 +111,9 @@ public class DialogService {
     ConsoleOutputService.rawOut("Perfekt, wir haben einen Mahlzeiten-Plan!");
     ConsoleOutputService.rawOut("Was möchtest du mit ihm machen?");
     int option = offerOptions("In der Konsole ausgeben", "In die Zwischenablage kopieren");
-    if(option == 1) {
-      // ToDo: implementation body
-    } else if(option == 2) {
+    if (option == 1) {
+      ConsoleOutputService.rawOut(mealPlan.toString());
+    } else if (option == 2) {
       // ToDo: implementation body
     }
 
