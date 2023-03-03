@@ -15,7 +15,7 @@ import java.util.Random;
 public class DialogService {
 
   public enum DialogState {
-    MAIN, RECIPES, MEAL_PLAN_GENERATION, POST_MEAL_PLAN_GENERATION
+    MAIN, SHOW_RECIPES, ADD_RECIPE, MEAL_PLAN_GENERATION, POST_MEAL_PLAN_GENERATION
   }
 
   private static DialogState currentState;
@@ -32,16 +32,19 @@ public class DialogService {
 
     ConsoleOutputService.rawOut("");
     ConsoleOutputService.rawOut("Wie kann ich dir weiterhelfen?");
-    int option = offerOptions("Rezepte anzeigen", "Mahlzeiten-Plan generieren");
+    int option = offerOptions("Rezepte anzeigen", "Rezept hinzufügen",
+        "Mahlzeiten-Plan generieren");
     if (option == 1) {
       showRecipes();
     } else if (option == 2) {
+      addRecipe();
+    } else if (option == 3) {
       startMealPlanGeneration();
     }
   }
 
   private static void showRecipes() {
-    currentState = DialogState.RECIPES;
+    currentState = DialogState.SHOW_RECIPES;
 
     ConsoleOutputService.rawOut("Folgende Rezepte sind aktuell in unserer Datenbank:");
     ConsoleOutputService.rawOut("Möchtest du zu einem davon mehr erfahren?");
@@ -49,13 +52,35 @@ public class DialogService {
 
     List<String> options = new ArrayList<>();
     options.add("Nein");
-    options.addAll(recipes.stream().map(recipe -> recipe.getName()).toList());
+    options.addAll(recipes.stream().map(Recipe::getName).toList());
     int option = offerOptions(options);
 
     if (option > 1) {
       Recipe recipe = recipes.get(option - 2);
       ConsoleOutputService.rawOut(recipe.toString());
     }
+
+    startMain();
+  }
+
+  private static void addRecipe() {
+    currentState = DialogState.ADD_RECIPE;
+
+    ConsoleOutputService.rawOut(
+        "Hier kannst du sehr einfach ein Rezept von Chefkoch in deine Bibliothek mit aufnehmen.");
+    String url = ConsoleInputService.getString(userInput -> {
+          if (!userInput.matches("https://www.chefkoch.de/rezepte/\\d+/.*\\.html")) {
+            throw new IllegalArgumentException("Das ist kein Link auf ein Chefkoch-Rezept!");
+          }
+          // test website body retrieval
+          WebsiteService.getWebsiteBody(userInput);
+          return userInput;
+        },
+        "Welches Rezept würdest du gerne hinzufügen? (https://www.chefkoch.de/rezepte/XXX/XXX.html)");
+    Recipe recipe = ChefkochRecipeService.getRecipe(url);
+    PersistenceService.saveRecipe(recipe);
+    ConsoleOutputService.rawOut("Folgendes Rezept wurde erfolgreich abgespeichert:");
+    ConsoleOutputService.rawOut(recipe.toString());
 
     startMain();
   }

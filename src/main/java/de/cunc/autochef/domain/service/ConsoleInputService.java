@@ -14,7 +14,7 @@ public class ConsoleInputService {
   public static Integer getInteger(Integer lowerBound, Integer upperBound, String question) {
     return getInputWithType(userInput -> {
       try {
-        Integer choice = Integer.parseInt(userInput);
+        int choice = Integer.parseInt(userInput);
         if (lowerBound != null && choice < lowerBound) {
           throw new IllegalArgumentException(
               "Die Auswahl muss größer als " + (lowerBound - 1) + " sein!");
@@ -47,6 +47,10 @@ public class ConsoleInputService {
         throw new IllegalArgumentException();
       }
     }, question);
+  }
+
+  public static String getString(Function<String, String> validator, String question) {
+    return getInputWithType(validator, question);
   }
 
   private static <T> T getInputWithType(Function<String, T> transformFunction, String question) {
