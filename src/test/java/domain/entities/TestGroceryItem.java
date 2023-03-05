@@ -1,6 +1,7 @@
 package domain.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import de.cunc.autochef.domain.entities.GroceryItem;
 import de.cunc.autochef.domain.valueobjects.Ingredient;
@@ -22,47 +23,56 @@ public class TestGroceryItem {
   void init() {
     ingredient = new Ingredient("banana");
     quantity = new Quantity(2);
-    unit = Unit.PIECE;
+    unit = new Unit("piece");
     
     item = new GroceryItem(ingredient, quantity, unit); 
   }
   
+  @Test
+  void testConstructor() {
+    // arrange
+    Ingredient i = new Ingredient("banana");
+    Quantity q = new Quantity(2);
+    Unit u = new Unit("piece");
+
+    // act
+    GroceryItem res = new GroceryItem(i, q, u);
+    
+    // assert
+    assertNotNull(res);
+  }
   
   @Test
   void testGetIngredient() {
     // arrange 
     // act
-    Ingredient ing = item.getIngredient();
+    Ingredient res = item.getIngredient();
     // assert
-    assertEquals(ingredient, ing);
+    assertEquals(res, ingredient);
   }
 
   @Test
   void testGetQuantity() {
     // arrange 
     // act
-    Quantity q = item.getQuantity();
+    Quantity res = item.getQuantity();
     // assert
-    assertEquals(quantity, q);
+    assertEquals(res, quantity);
   }
   
   @Test
   void testGetUnit() {
     // arrange 
     // act
-    Unit u = item.getUnit();
+    Unit res = item.getUnit();
     // assert
-    assertEquals(unit, u);
+    assertEquals(res, unit);
   }
 
   @Test
   void testToString() {
     // arrange
-    String actual = "GroceryItem{" +
-        "ingredient=" + ingredient +
-        ", quantity=" + quantity +
-        ", unit=" + unit +
-        '}';
+    String actual = quantity.toString() + unit.toString() + " " + ingredient.toString();
 
     // act
     String res = item.toString();
