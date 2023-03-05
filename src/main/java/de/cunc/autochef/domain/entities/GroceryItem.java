@@ -3,6 +3,7 @@ package de.cunc.autochef.domain.entities;
 import de.cunc.autochef.domain.valueobjects.Ingredient;
 import de.cunc.autochef.domain.valueobjects.Quantity;
 import de.cunc.autochef.domain.valueobjects.Unit;
+import java.util.Objects;
 
 public class GroceryItem {
 
@@ -31,5 +32,23 @@ public class GroceryItem {
   @Override
   public String toString() {
     return quantity.toString() + unit.toString() + " " + ingredient.toString();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    GroceryItem that = (GroceryItem) o;
+    return Objects.equals(ingredient, that.ingredient) && Objects.equals(quantity, that.quantity)
+        && Objects.equals(unit, that.unit);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(ingredient, quantity, unit);
   }
 }

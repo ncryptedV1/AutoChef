@@ -20,7 +20,12 @@ public class Recipe {
       }
     }
 
-    this.name = name.strip();
+    name = name.strip();
+    if (name.length() == 0) {
+      throw new IllegalArgumentException("name must not be empty");
+    }
+
+    this.name = name;
     this.groceryList = groceryList;
     this.recipeSteps = recipeSteps;
   }

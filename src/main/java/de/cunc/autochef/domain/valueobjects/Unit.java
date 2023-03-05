@@ -1,5 +1,7 @@
 package de.cunc.autochef.domain.valueobjects;
 
+import java.util.Objects;
+
 public class Unit {
 
   private final String value;
@@ -10,6 +12,7 @@ public class Unit {
       throw new IllegalArgumentException(
           "Supplied identifier must be at least one character long!");
     }
+
     this.value = value;
   }
 
@@ -17,8 +20,29 @@ public class Unit {
     return this.value;
   }
 
+  public String getId() {
+    return this.value.toLowerCase();
+  }
+
   @Override
   public String toString() {
     return String.valueOf(value);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Unit unit = (Unit) o;
+    return Objects.equals(getId(), unit.getId());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getId());
   }
 }

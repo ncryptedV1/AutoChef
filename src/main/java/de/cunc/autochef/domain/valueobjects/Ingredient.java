@@ -24,6 +24,10 @@ public class Ingredient {
     return name;
   }
 
+  public String getId() {
+    return this.name.toLowerCase();
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -33,11 +37,11 @@ public class Ingredient {
       return false;
     }
     Ingredient that = (Ingredient) o;
-    return Objects.equals(name, that.name);
+    return Objects.equals(getId(), that.getId());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name);
+    return Objects.hash(getId());
   }
 }

@@ -1,6 +1,7 @@
 package de.cunc.autochef.domain.entities;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Meal {
@@ -39,5 +40,23 @@ public class Meal {
         + "Zubereitung:\n"
         + recipe.getRecipeSteps().stream().map(RecipeStep::toString)
         .collect(Collectors.joining("\n"));
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Meal meal = (Meal) o;
+    return adjustedNumberOfPeople == meal.adjustedNumberOfPeople && Objects.equals(recipe,
+        meal.recipe);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(recipe, adjustedNumberOfPeople);
   }
 }
