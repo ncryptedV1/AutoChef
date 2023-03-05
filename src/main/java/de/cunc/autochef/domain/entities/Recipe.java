@@ -1,5 +1,6 @@
 package de.cunc.autochef.domain.entities;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -31,7 +32,7 @@ public class Recipe {
   }
 
   public Recipe(String name, GroceryList groceryList, RecipeStep... recipeSteps) {
-    this(name, groceryList, Arrays.asList(recipeSteps));
+    this(name, groceryList, new ArrayList<>(Arrays.asList(recipeSteps)));
   }
 
   public String getName() {
