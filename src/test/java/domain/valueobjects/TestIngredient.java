@@ -2,26 +2,47 @@ package domain.valueobjects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
 
 import de.cunc.autochef.domain.valueobjects.Ingredient;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("Test Ingredient")
 public class TestIngredient {
 
-  Ingredient ingredient;
-  @BeforeEach
-  void init() {
+  @Test
+  void testConstructorHappyPath() {
+    // arrange
+    String actual = "pineapple";
+
+    // act
+    Ingredient ingredient = new Ingredient(actual);
+  
+    // assert
+    assertNotNull(ingredient);
+  }
+
+  @Test
+  void testConstructorException() {
+    // arrange
+    String input = "   ";
+    String input2 = "";
+
+    // assert
+    assertThrows(IllegalArgumentException.class, () -> new Ingredient(input));
+    assertThrows(IllegalArgumentException.class, () -> new Ingredient(input2));
   }
   
   @Test
   void testGetValue() {
     // arrange
     String name = "banana";
-    ingredient = new Ingredient(name);
+    Ingredient ingredient = new Ingredient(name);
     
     // act
     String res = ingredient.getValue();
@@ -31,35 +52,96 @@ public class TestIngredient {
   }
   
   @Test
-  void testEquals() {
+  void testToString() {
     // arrange
-    Ingredient ingredient1 = new Ingredient("banana");
-    Ingredient ingredient2 = new Ingredient("banana");
-    Ingredient ingredient3 = new Ingredient("nutella");
+    String name = "apple";
+    Ingredient ingredient = new Ingredient(name);
     
     // act
-    boolean res1 = ingredient1.equals(ingredient2);
-    boolean res2 = ingredient1.equals(ingredient3);
+    String res = ingredient.toString();
     
     // assert
-    assertTrue(res1);
-    assertFalse(res2);
+    assertEquals(res, name);
   }
   
   @Test
-  void testHashCode() {
+  void testEqualsResSelf() {
     // arrange
-    Ingredient ingredient1 = new Ingredient("banana");
-    Ingredient ingredient2 = new Ingredient("banana");
-    Ingredient ingredient3 = new Ingredient("nutella");
+    Ingredient ingredient1 = mock(Ingredient.class);
     
     // act
-    boolean res1 = ingredient1.hashCode() == ingredient2.hashCode();
-    boolean res2 = ingredient1.hashCode() == ingredient3.hashCode();
+    boolean res = ingredient1.equals(ingredient1);
     
     // assert
-    assertTrue(res1);
-    assertFalse(res2);
+    assertTrue(res);
+  }
+
+  @Test
+  void testEqualsResSame() {
+    // arrange
+    String value = "banana";
+    Ingredient ingredient1 = new Ingredient(value);
+    Ingredient ingredient2 = new Ingredient(value);
+
+    // act
+    boolean res = ingredient1.equals(ingredient2);
+
+    // assert
+    assertTrue(res);
+  }
+  
+  @Test
+  void testEqualsDifferent() {
+    // arrange
+    Ingredient ingredient1 = new Ingredient("banana");
+    Ingredient ingredient2 = new Ingredient("nutella");
+    
+    // act
+    boolean res = ingredient1.equals(ingredient2);
+    
+    // assert
+    assertFalse(res);
+  }
+
+  @Test
+  void testEqualsNull() {
+    // arrange
+    Ingredient ingredient1 = mock(Ingredient.class);
+
+    // act
+    boolean res = ingredient1.equals(null);
+
+    // assert
+    assertFalse(res);
+  }
+  
+  @Test
+  void testHashCodeTrue() {
+    // arrange
+    String value = "banana";
+    Ingredient ingredient1 = new Ingredient(value);
+    Ingredient ingredient2 = new Ingredient(value);
+    
+    // act
+    int code1 = ingredient1.hashCode();
+    int code2 = ingredient2.hashCode();
+    
+    // assert
+    assertEquals(code1, code2);
+  }
+
+  @Test
+  void testHashCodeFalse() {
+    // arrange
+    Ingredient ingredient1 = new Ingredient("banana");
+    Ingredient ingredient2 = new Ingredient("nutella");
+
+    // act
+    int code1 = ingredient1.hashCode();
+    int code2 = ingredient2.hashCode();
+
+    // assert
+    assertNotEquals(code1, code2);
   }
   
 }
