@@ -1,5 +1,6 @@
 package de.cunc.autochef.domain.entities;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +14,7 @@ public class GroceryList {
   }
 
   public GroceryList(GroceryItem... items) {
-    this(Arrays.asList(items));
+    this(new ArrayList<>(Arrays.asList(items)));
   }
 
   public void addItem(GroceryItem entry) {
