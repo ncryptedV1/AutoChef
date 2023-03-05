@@ -18,10 +18,10 @@ public class TestIngredient {
   @Test
   void testConstructorHappyPath() {
     // arrange
-    String actual = "pineapple";
+    String expected = "pineapple";
 
     // act
-    Ingredient ingredient = new Ingredient(actual);
+    Ingredient ingredient = new Ingredient(expected);
   
     // assert
     assertNotNull(ingredient);
@@ -48,7 +48,7 @@ public class TestIngredient {
     String res = ingredient.getValue();
     
     // assert
-    assertEquals(res, name);
+    assertEquals(name, res);
   }
   
   @Test
@@ -61,7 +61,7 @@ public class TestIngredient {
     String res = ingredient.toString();
     
     // assert
-    assertEquals(res, name);
+    assertEquals(name, res);
   }
   
   @Test

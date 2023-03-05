@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("Test Grocery List")
+@DisplayName("Test GroceryList")
 public class TestGroceryList {
 
   @Test
@@ -79,13 +79,13 @@ public class TestGroceryList {
     GroceryList list = new GroceryList(item1, item2);
     
     List<GroceryItem> items = list.getItems();
-    String actual = "Zutaten:\n"
+    String expected = "Zutaten:\n"
         + items.stream().map(item -> "- " + item.toString()).collect(Collectors.joining("\n"));
     
     // act
     String res = list.toString();
     
     // assert
-    assertEquals(res, actual);
+    assertEquals(res, expected);
   }
 }

@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("Test Recipe")
@@ -39,6 +40,7 @@ public class TestRecipe {
   }
   
   @Test
+  @Order(1)
   void testConstructorHappyPath() {
     // arrange
     String n = "any string";
@@ -53,6 +55,7 @@ public class TestRecipe {
   }
 
   @Test
+  @Order(2)
   void testConstructorHappyPath2() {
     // arrange
     String val = "custom value";

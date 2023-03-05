@@ -10,7 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-@DisplayName("Test Recipe Step")
+@DisplayName("Test RecipeStep")
 public class TestRecipeStep {
 
   RecipeStep recipeStep;

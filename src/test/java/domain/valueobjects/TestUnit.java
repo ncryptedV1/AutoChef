@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import de.cunc.autochef.domain.valueobjects.Unit;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("Test Unit")
@@ -13,10 +14,10 @@ public class TestUnit {
   @Test
   void testConstructorHappyPath() {
     // arrange
-    String actual = "gram";
+    String expected = "gram";
 
     // act
-    Unit unit = new Unit(actual);
+    Unit unit = new Unit(expected);
 
     // assert
     assertNotNull(unit);
@@ -35,28 +36,28 @@ public class TestUnit {
   @Test
   void testGetValue() {
     // arrange
-    String actual = "piece";
-    Unit unit = new Unit(actual);
+    String expected = "piece";
+    Unit unit = new Unit(expected);
     
     // act
     String res = unit.getValue();
     
     // assert
-    assertEquals(res, actual);
+    assertEquals(expected, res);
   }
   
   
   @Test
   void testToString() {
     // arrange
-    String actual = "piece";
-    Unit unit = new Unit(actual);
+    String expected = "piece";
+    Unit unit = new Unit(expected);
 
     // act
     String res = unit.toString();
 
     // assert
-    assertEquals(res, actual);
+    assertEquals(expected, res);
   }
   
 }

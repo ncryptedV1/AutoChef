@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("Test Grocery Item")
+@DisplayName("Test GroceryItem")
 public class TestGroceryItem {
 
   GroceryItem item;
@@ -72,13 +72,13 @@ public class TestGroceryItem {
   @Test
   void testToString() {
     // arrange
-    String actual = quantity.toString() + unit.toString() + " " + ingredient.toString();
+    String expected = quantity.toString() + unit.toString() + " " + ingredient.toString();
 
     // act
     String res = item.toString();
 
     // assert
-    assertEquals(res, actual);
+    assertEquals(res, expected);
   }
 
 }

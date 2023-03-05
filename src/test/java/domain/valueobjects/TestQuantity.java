@@ -35,27 +35,27 @@ public class TestQuantity {
   @Test
   void testGetValue() {
     // arrange
-    double actual = 2;
-    Quantity quantity = new Quantity(actual);
+    double expected = 2;
+    Quantity quantity = new Quantity(expected);
     
     // act
     double res = quantity.getValue();
     
     // assert
-    assertEquals(res, actual);
+    assertEquals(expected, res);
   }
   
   @Test
   void testToString() {
     // arrange
-    double actual = 3;
-    Quantity quantity = new Quantity(actual);
+    double expected = 3;
+    Quantity quantity = new Quantity(expected);
     
     // act
     String res = quantity.toString();
     
     // assert
-    assertEquals(res, actual + "");
+    assertEquals(expected + "", res);
   }
   
   @Test
@@ -64,13 +64,13 @@ public class TestQuantity {
     double input = 4;
     double factor = 5;
     Quantity quantity = new Quantity(input);
-    Quantity actual = new Quantity(input * factor);
+    Quantity expected = new Quantity(input * factor);
     
     // act
     Quantity res = quantity.multiply(factor);
     
     // assert
-    assertEquals(res.getValue(), actual.getValue());
+    assertEquals(expected.getValue(), res.getValue());
   }
   
 }
