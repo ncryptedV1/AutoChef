@@ -1,7 +1,10 @@
 package domain.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
 import de.cunc.autochef.domain.entities.GroceryItem;
@@ -28,8 +31,9 @@ public class TestMeal {
   @BeforeEach
   void init() {
     people = 5;
-    recipe = new Recipe(" ", generateGroceryList(), mock(List.class));
-    recipe = new Recipe(" ", generateGroceryList(), mock(List.class));
+    String val = "test";
+    recipe = new Recipe(val, generateGroceryList(), mock(List.class));
+    recipe = new Recipe(val, generateGroceryList(), mock(List.class));
     meal = new Meal(recipe, people); 
   }
   
@@ -109,5 +113,88 @@ public class TestMeal {
     groceries.addItem(new GroceryItem(new Ingredient("orange"), new Quantity(3), new Unit("slice")));
     
     return groceries;
+  }
+
+  @Test
+  void testEqualsResSelf() {
+    // arrange
+    Quantity q1 = new Quantity(8);
+
+    // act
+    boolean res = q1.equals(q1);
+
+    // assert
+    assertTrue(res);
+  }
+
+  @Test
+  void testEqualsResSame() {
+    // arrange
+    Recipe recipe1 = new Recipe("banana split", mock(GroceryList.class), mock(List.class));
+    Meal q1 = new Meal(recipe1, 2);
+    Meal q2 = new Meal(recipe1, 2);
+
+    // act
+    boolean res = q1.equals(q2);
+
+    // assert
+    assertTrue(res);
+  }
+
+  @Test
+  void testEqualsDifferent() {
+    // arrange
+    Recipe recipe1 = new Recipe("banana split", mock(GroceryList.class), mock(List.class));
+    Meal q1 = new Meal(recipe1, 2);
+    Meal q2 = new Meal(recipe1, 5);
+
+    // act
+    boolean res = q1.equals(q2);
+
+    // assert
+    assertFalse(res);
+  }
+
+  @Test
+  void testEqualsNull() {
+    // arrange
+    Recipe recipe1 = new Recipe("banana split", mock(GroceryList.class), mock(List.class));
+    Meal q1 = new Meal(recipe1, 2);
+
+    // act
+    boolean res = q1.equals(null);
+
+    // assert
+    assertFalse(res);
+  }
+
+  @Test
+  void testHashCodeTrue() {
+    // arrange
+    Recipe recipe1 = new Recipe("banana split", mock(GroceryList.class), mock(List.class));
+    Meal q1 = new Meal(recipe1, 2);
+    Meal q2 = new Meal(recipe1, 2);
+
+    // act
+    int code1 = q1.hashCode();
+    int code2 = q2.hashCode();
+
+    // assert
+    assertEquals(code1, code2);
+  }
+
+  @Test
+  void testHashCodeFalse() {
+    // arrange
+    Recipe recipe1 = new Recipe("banana split", mock(GroceryList.class), mock(List.class));
+    Meal q1 = new Meal(recipe1, 2);
+    Meal q2 = new Meal(recipe1, 4);
+
+    // act
+    int code1 = q1.hashCode();
+    int code2 = q2.hashCode();
+
+    // assert
+    assertNotEquals(code1, code2);
   }
 }

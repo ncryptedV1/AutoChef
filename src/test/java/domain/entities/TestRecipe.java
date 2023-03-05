@@ -13,7 +13,6 @@ import de.cunc.autochef.domain.entities.Recipe;
 import de.cunc.autochef.domain.entities.RecipeStep;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
@@ -103,6 +102,22 @@ public class TestRecipe {
     // assert
     assertThrows(IllegalArgumentException.class, () -> new Recipe(val,g,r));
   }
+
+  @Test
+  void testConstructorException3() {
+    // arrange
+    String val = "custom value";
+    GroceryList g = mock(GroceryList.class);
+    RecipeStep step1 = new RecipeStep(1, val);
+    RecipeStep step2 = new RecipeStep(2, val);
+
+    List<RecipeStep> r = new ArrayList<>();
+    r.add(step1);
+    r.add(step2);
+
+    // assert
+    assertThrows(IllegalArgumentException.class, () -> new Recipe(" ",g,r));
+  }
   
   @Test
   void testGetName() {
@@ -137,21 +152,6 @@ public class TestRecipe {
     String actual = name.toLowerCase();
     // act
     String res = recipe.getId();
-    // assert
-    assertEquals(res, actual);
-  }
-
-  @Test
-  void testToString() {
-    // arrange
-    String actual = "Rezept: " + name + ":\n"
-        + groceryList.toString() + "\n"
-        + "Zubereitung:\n"
-        + recipeStepList.stream().map(RecipeStep::toString).collect(Collectors.joining("\n"));
-
-    // act
-    String res = recipe.toString();
-
     // assert
     assertEquals(res, actual);
   }

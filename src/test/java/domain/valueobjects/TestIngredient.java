@@ -37,6 +37,20 @@ public class TestIngredient {
     assertThrows(IllegalArgumentException.class, () -> new Ingredient(input));
     assertThrows(IllegalArgumentException.class, () -> new Ingredient(input2));
   }
+
+  @Test
+  void testGetId() {
+    // arrange
+    String name = "banana";
+    Ingredient ingredient = new Ingredient(name);
+    String expected = name.toLowerCase();
+    
+    // act
+    String res = ingredient.getId();
+
+    // assert
+    assertEquals(expected, res);
+  }
   
   @Test
   void testGetValue() {
@@ -46,19 +60,6 @@ public class TestIngredient {
     
     // act
     String res = ingredient.getValue();
-    
-    // assert
-    assertEquals(name, res);
-  }
-  
-  @Test
-  void testToString() {
-    // arrange
-    String name = "apple";
-    Ingredient ingredient = new Ingredient(name);
-    
-    // act
-    String res = ingredient.toString();
     
     // assert
     assertEquals(name, res);

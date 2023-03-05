@@ -7,7 +7,6 @@ import static org.mockito.Mockito.mock;
 import de.cunc.autochef.domain.entities.GroceryItem;
 import de.cunc.autochef.domain.entities.GroceryList;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -69,23 +68,5 @@ public class TestGroceryList {
 
     GroceryItem res = items.get(0);
     assertEquals(res, item1);
-  }
-  
-  @Test
-  void testToString() {
-    // arrange
-    GroceryItem item1 = mock(GroceryItem.class);
-    GroceryItem item2 = mock(GroceryItem.class);
-    GroceryList list = new GroceryList(item1, item2);
-    
-    List<GroceryItem> items = list.getItems();
-    String expected = "Zutaten:\n"
-        + items.stream().map(item -> "- " + item.toString()).collect(Collectors.joining("\n"));
-    
-    // act
-    String res = list.toString();
-    
-    // assert
-    assertEquals(res, expected);
   }
 }

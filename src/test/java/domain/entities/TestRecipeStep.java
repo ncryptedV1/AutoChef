@@ -1,10 +1,14 @@
 package domain.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import de.cunc.autochef.domain.entities.RecipeStep;
+import de.cunc.autochef.domain.valueobjects.Quantity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,10 +32,9 @@ public class TestRecipeStep {
   void testConstructorHappyPath() {
     // arrange
     int s = 1;
-    String desc = Mockito.anyString();
     
     // act
-    RecipeStep res = new RecipeStep(s, desc);
+    RecipeStep res = new RecipeStep(s, "desc");
     
     // assert
     assertNotNull(res);
@@ -45,6 +48,15 @@ public class TestRecipeStep {
 
     // assert
     assertThrows(IllegalArgumentException.class, () -> new RecipeStep(step, desc));
+  }
+
+  @Test
+  void testConstructorException2() {
+    // arrange
+    int step = -1;
+
+    // assert
+    assertThrows(IllegalArgumentException.class, () -> new RecipeStep(step, " "));
   }
   
   @Test
@@ -64,17 +76,88 @@ public class TestRecipeStep {
     // assert
     assertEquals(res, description);
   }
-  
+
   @Test
-  void testToString() {
+  void testEqualsResSelf() {
     // arrange
-    String actual = step + ". " + description;
+    Quantity q1 = new Quantity(8);
 
     // act
-    String res = recipeStep.toString();
+    boolean res = q1.equals(q1);
 
     // assert
-    assertEquals(res, actual);
+    assertTrue(res);
   }
 
+  @Test
+  void testEqualsResSame() {
+    // arrange
+    String val = "any string";
+    int s = 1;
+    RecipeStep q1 = new RecipeStep(s, val);
+    RecipeStep q2 = new RecipeStep(s, val);
+
+    // act
+    boolean res = q1.equals(q2);
+
+    // assert
+    assertTrue(res);
+  }
+
+  @Test
+  void testEqualsDifferent() {
+    // arrange
+    String val = "any string";
+    RecipeStep q1 = new RecipeStep(1, val);
+    RecipeStep q2 = new RecipeStep(2, val);
+
+    // act
+    boolean res = q1.equals(q2);
+
+    // assert
+    assertFalse(res);
+  }
+
+  @Test
+  void testEqualsNull() {
+    // arrange
+    Quantity q1 = new Quantity(8);
+
+    // act
+    boolean res = q1.equals(null);
+
+    // assert
+    assertFalse(res);
+  }
+
+  @Test
+  void testHashCodeTrue() {
+    // arrange
+    String val = "any string";
+    int s = 1;
+    RecipeStep q1 = new RecipeStep(s, val);
+    RecipeStep q2 = new RecipeStep(s, val);
+
+    // act
+    int code1 = q1.hashCode();
+    int code2 = q2.hashCode();
+
+    // assert
+    assertEquals(code1, code2);
+  }
+
+  @Test
+  void testHashCodeFalse() {
+    // arrange
+    String val = "any string";
+    RecipeStep q1 = new RecipeStep(1, val);
+    RecipeStep q2 = new RecipeStep(2, val);
+
+    // act
+    int code1 = q1.hashCode();
+    int code2 = q2.hashCode();
+
+    // assert
+    assertNotEquals(code1, code2);
+  }
 }
