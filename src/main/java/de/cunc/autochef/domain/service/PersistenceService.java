@@ -1,13 +1,12 @@
 package de.cunc.autochef.domain.service;
 
-import com.google.gson.Gson;
 import de.cunc.autochef.domain.entities.Recipe;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -32,29 +31,34 @@ public class PersistenceService {
   }
 
   public static void saveRecipe(Recipe recipe) {
-    File targetFile = new File(recipesFolder.getPath() + File.separator + recipe.getId() + ".json");
-    try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(targetFile))) {
-      writer.write(new Gson().toJson(recipe));
+    File targetFile = new File(recipesFolder.getPath() + File.separator + recipe.getId());
+    try (ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(targetFile))) {
+      stream.writeObject(recipe);
     } catch (IOException e) {
+      ConsoleOutputService.severe(
+          "Fehler während der Persistierung von Rezept " + recipe.getId() + ": " + e.getMessage());
       throw new RuntimeException(e);
     }
   }
 
   public static List<Recipe> getRecipes() {
     try (Stream<Path> recipePaths = Files.list(recipesFolder.toPath())) {
-      List<String> recipeIds = recipePaths.map(path -> path.getFileName().toString())
-          .map(name -> name.substring(0, name.length() - 5)).toList();
+      List<String> recipeIds = recipePaths.map(path -> path.getFileName().toString()).toList();
       return recipeIds.stream().map(PersistenceService::getRecipe).toList();
     } catch (IOException e) {
+      ConsoleOutputService.severe(
+          "Fehler während dem Abrufen der persistierten Rezepte: " + e.getMessage());
       throw new RuntimeException(e);
     }
   }
 
   public static Recipe getRecipe(String id) {
-    File targetFile = new File(recipesFolder.getPath() + File.separator + id + ".json");
-    try (InputStreamReader reader = new InputStreamReader(new FileInputStream(targetFile))) {
-      return new Gson().fromJson(reader, Recipe.class);
-    } catch (IOException e) {
+    File targetFile = new File(recipesFolder.getPath() + File.separator + id);
+    try (ObjectInputStream stream = new ObjectInputStream(new FileInputStream(targetFile))) {
+      return (Recipe) stream.readObject();
+    } catch (IOException | ClassNotFoundException e) {
+      ConsoleOutputService.severe(
+          "Fehler während dem Abrufen des persistierten Rezepts " + id + ": " + e.getMessage());
       throw new RuntimeException(e);
     }
   }

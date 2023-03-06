@@ -1,11 +1,12 @@
 package de.cunc.autochef.domain.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GroceryList {
+public class GroceryList implements Serializable {
 
   private List<GroceryItem> items;
 

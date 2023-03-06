@@ -20,7 +20,8 @@ public class MealPlan {
     int days = start.until(end).getDays();
     if (meals.size() != days) {
       throw new IllegalArgumentException(
-          "The meal plan covers " + days + " days, but the meal list contains " + meals.size());
+          "Mahlzeiten-Plan spannt " + days + " Tage, es wurden allerdings nur " + meals.size()
+              + " Mahlzeiten übergeben");
     }
 
     this.meals = meals;

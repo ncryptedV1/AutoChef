@@ -1,12 +1,13 @@
 package de.cunc.autochef.domain.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class Recipe {
+public class Recipe implements Serializable {
 
   private String name;
   private GroceryList groceryList;
@@ -17,13 +18,14 @@ public class Recipe {
     for (int i = 0; i < recipeSteps.size(); i++) {
       if (recipeSteps.get(i).getStep() != i + 1) {
         throw new IllegalArgumentException(
-            "Recipe step " + (i + 1) + " is not included - no consecutive recipe supplied");
+            "Rezept-Schritt " + (i + 1)
+                + " wurde nicht übergeben - kein zusammenhängendes Rezept konstruierbar");
       }
     }
 
     name = name.strip();
     if (name.length() == 0) {
-      throw new IllegalArgumentException("name must not be empty");
+      throw new IllegalArgumentException("Rezept-Name darf nicht leer sein");
     }
 
     this.name = name;

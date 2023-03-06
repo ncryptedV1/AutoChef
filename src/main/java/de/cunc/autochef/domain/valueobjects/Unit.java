@@ -1,8 +1,9 @@
 package de.cunc.autochef.domain.valueobjects;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Unit {
+public class Unit implements Serializable {
 
   private final String value;
 
@@ -10,7 +11,7 @@ public class Unit {
     value = value.strip();
     if (value.length() == 0) {
       throw new IllegalArgumentException(
-          "Supplied identifier must be at least one character long!");
+          "Einheits-Wert darf nicht leer sein");
     }
 
     this.value = value;

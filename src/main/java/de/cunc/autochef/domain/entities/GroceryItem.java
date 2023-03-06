@@ -3,9 +3,10 @@ package de.cunc.autochef.domain.entities;
 import de.cunc.autochef.domain.valueobjects.Ingredient;
 import de.cunc.autochef.domain.valueobjects.Quantity;
 import de.cunc.autochef.domain.valueobjects.Unit;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class GroceryItem {
+public class GroceryItem implements Serializable {
 
   private Ingredient ingredient;
   private Quantity quantity;

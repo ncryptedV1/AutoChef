@@ -1,15 +1,16 @@
 package de.cunc.autochef.domain.valueobjects;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Ingredient {
+public class Ingredient implements Serializable {
 
   private final String name;
 
   public Ingredient(String name) {
     name = name.strip();
     if (name.length() == 0) {
-      throw new IllegalArgumentException("name must not be empty");
+      throw new IllegalArgumentException("Zutaten-Name darf nicht leer sein");
     }
 
     this.name = name;

@@ -14,12 +14,8 @@ import java.util.Random;
 
 public class DialogService {
 
-  public enum DialogState {
-    MAIN, SHOW_RECIPES, ADD_RECIPE, MEAL_PLAN_GENERATION, POST_MEAL_PLAN_GENERATION
-  }
-
-  private static DialogState currentState;
   private static final Random random = new Random();
+  private static DialogState currentState;
 
   public static void startDialog() {
     ConsoleOutputService.rawOut(
@@ -161,5 +157,9 @@ public class DialogService {
       ConsoleOutputService.rawOut("[" + (idx + 1) + "] " + options.get(idx));
     }
     return ConsoleInputService.getInteger(1, options.size(), "Auswahl:");
+  }
+
+  public enum DialogState {
+    MAIN, SHOW_RECIPES, ADD_RECIPE, MEAL_PLAN_GENERATION, POST_MEAL_PLAN_GENERATION
   }
 }

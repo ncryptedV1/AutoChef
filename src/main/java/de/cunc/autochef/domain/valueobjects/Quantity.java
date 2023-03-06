@@ -1,14 +1,15 @@
 package de.cunc.autochef.domain.valueobjects;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public final class Quantity {
+public final class Quantity implements Serializable {
 
   private final double value;
 
   public Quantity(double number) {
     if (number < 0) {
-      throw new IllegalArgumentException("number must not be less than 0");
+      throw new IllegalArgumentException("Mengenangabe muss größer als 0 sein");
     }
     this.value = number;
   }

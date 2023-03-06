@@ -1,20 +1,21 @@
 package de.cunc.autochef.domain.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class RecipeStep {
+public class RecipeStep implements Serializable {
 
   private int step;
   private String description;
 
   public RecipeStep(int step, String description) {
     if (step <= 0) {
-      throw new IllegalArgumentException("step must be greater than 0");
+      throw new IllegalArgumentException("Schritt-Nummer muss größer als 0 sein");
     }
 
     description = description.strip();
     if (description.length() == 0) {
-      throw new IllegalArgumentException("description must not be empty");
+      throw new IllegalArgumentException("Beschreibung darf nicht leer sein");
     }
 
     this.step = step;
