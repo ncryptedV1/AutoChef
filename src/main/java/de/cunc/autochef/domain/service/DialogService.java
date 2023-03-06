@@ -125,9 +125,11 @@ public class DialogService {
       int option = offerOptions(options);
 
       userAdapting = option > 1;
-      if (userAdapting) {
+      if (userAdapting && allRecipes.size() > 1) {
+        List<Recipe> otherRecipes = new ArrayList<>(allRecipes);
+        otherRecipes.remove(mealPlan.getMeals().get(option - 2).getRecipe());
         mealPlan.getMeals().get(option - 2)
-            .setRecipe(allRecipes.get(random.nextInt(allRecipes.size())));
+            .setRecipe(otherRecipes.get(random.nextInt(otherRecipes.size())));
       }
     }
 
