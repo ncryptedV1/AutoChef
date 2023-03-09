@@ -65,7 +65,7 @@ public class ChefkochRecipeService {
   }
 
   private static List<RecipeStep> extractRecipeSteps(String content) {
-    Matcher matcher = Pattern.compile("<div class=\"ds-box\">(.*?)</div>").matcher(content);
+    Matcher matcher = Pattern.compile("Zubereitung</h2>.*?<div class=\"ds-box\">(.*?)</div>").matcher(content);
     List<RecipeStep> steps = new ArrayList<>();
     int idx = 1;
     if (matcher.find()) {
