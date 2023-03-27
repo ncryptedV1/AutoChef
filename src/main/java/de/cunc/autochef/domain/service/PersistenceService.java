@@ -23,8 +23,10 @@ public class PersistenceService {
       if (recipesFolder.mkdirs()) {
         ConsoleOutputService.info(
             "Rezept-Persistenz-Ordner angelegt in '" + recipesFolder.getAbsolutePath() + "'");
-      } else if(!recipesFolder.exists()) {
-        ConsoleOutputService.severe("Rezept-Persistenz-Ordner in '" + recipesFolder.getAbsolutePath() + "' konnte nicht angelegt werden!");
+      } else if (!recipesFolder.exists()) {
+        ConsoleOutputService.severe(
+            "Rezept-Persistenz-Ordner in '" + recipesFolder.getAbsolutePath()
+                + "' konnte nicht angelegt werden!");
         throw new RuntimeException();
       }
     } catch (SecurityException ex) {
@@ -43,6 +45,21 @@ public class PersistenceService {
           "Fehler während der Persistierung von Rezept " + recipe.getId() + ": " + e.getMessage());
       throw new RuntimeException(e);
     }
+  }
+
+  public static boolean deleteRecipe(Recipe recipe) {
+    File targetFile = new File(recipesFolder.getPath() + File.separator + recipe.getId());
+    if (targetFile.exists()) {
+      try {
+        Files.delete(targetFile.toPath());
+      } catch (IOException e) {
+        ConsoleOutputService.severe(
+            "Fehler während der Löschung von Rezept " + recipe.getId() + ": " + e.getMessage());
+        throw new RuntimeException(e);
+      }
+      return true;
+    }
+    return false;
   }
 
   public static List<Recipe> getRecipes() {

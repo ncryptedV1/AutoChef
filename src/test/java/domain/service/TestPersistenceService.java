@@ -10,6 +10,7 @@ import de.cunc.autochef.domain.entities.Recipe;
 import de.cunc.autochef.domain.service.PersistenceService;
 import de.cunc.autochef.domain.valueobjects.RecipeStep;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -63,6 +64,11 @@ public class TestPersistenceService {
     // assert
     assertEquals(testRecipe, retrievedRecipe);
 
+  }
+
+  @AfterEach
+  void cleanUp() {
+    PersistenceService.deleteRecipe(testRecipe);
   }
 
 }
