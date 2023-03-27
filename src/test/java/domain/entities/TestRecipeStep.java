@@ -12,7 +12,6 @@ import de.cunc.autochef.domain.valueobjects.RecipeStep;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 @DisplayName("Test RecipeStep")
 public class TestRecipeStep {
@@ -44,7 +43,7 @@ public class TestRecipeStep {
   void testConstructorException() {
     // arrange
     int step = -1;
-    String desc = Mockito.anyString();
+    String desc = "xyz";
 
     // assert
     assertThrows(IllegalArgumentException.class, () -> new RecipeStep(step, desc));
