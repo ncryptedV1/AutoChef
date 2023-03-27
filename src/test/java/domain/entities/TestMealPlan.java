@@ -147,8 +147,8 @@ public class TestMealPlan {
     GroceryList res = mealPlanTest.getGroceryList();
   
     // assert
-    String s1 = expected.getItems().stream().map(k -> k.toString()).sorted().toList().toString();
-    String s2 = res.getItems().stream().map(k -> k.toString()).sorted().toList().toString();
+    String s1 = expected.getItems().stream().map(GroceryItem::toString).sorted().toList().toString();
+    String s2 = res.getItems().stream().map(GroceryItem::toString).sorted().toList().toString();
     assertEquals(s1, s2);
   }
 
