@@ -1,9 +1,9 @@
 package de.cunc.autochef.domain.service;
 
-import de.cunc.autochef.domain.entities.GroceryItem;
-import de.cunc.autochef.domain.entities.GroceryList;
+import de.cunc.autochef.domain.valueobjects.GroceryItem;
+import de.cunc.autochef.domain.aggregates.GroceryList;
 import de.cunc.autochef.domain.entities.Recipe;
-import de.cunc.autochef.domain.entities.RecipeStep;
+import de.cunc.autochef.domain.valueobjects.RecipeStep;
 import de.cunc.autochef.domain.valueobjects.Ingredient;
 import de.cunc.autochef.domain.valueobjects.Quantity;
 import de.cunc.autochef.domain.valueobjects.Unit;

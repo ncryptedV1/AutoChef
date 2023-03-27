@@ -3,7 +3,7 @@ package de.cunc.autochef.domain.valueobjects;
 import java.io.Serializable;
 import java.util.Objects;
 
-public final class Quantity implements Serializable {
+public class Quantity implements Serializable {
 
   private final double value;
 

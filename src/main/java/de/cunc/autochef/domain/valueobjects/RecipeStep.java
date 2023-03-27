@@ -1,12 +1,12 @@
-package de.cunc.autochef.domain.entities;
+package de.cunc.autochef.domain.valueobjects;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 public class RecipeStep implements Serializable {
 
-  private int step;
-  private String description;
+  private final int step;
+  private final String description;
 
   public RecipeStep(int step, String description) {
     if (step <= 0) {

@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import de.cunc.autochef.domain.entities.GroceryList;
+import de.cunc.autochef.domain.aggregates.GroceryList;
 import de.cunc.autochef.domain.entities.Recipe;
-import de.cunc.autochef.domain.entities.RecipeStep;
+import de.cunc.autochef.domain.valueobjects.RecipeStep;
 import de.cunc.autochef.domain.service.PersistenceService;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,6 +1,7 @@
-package de.cunc.autochef.domain.entities;
+package de.cunc.autochef.domain.aggregates;
 
 import de.cunc.autochef.domain.utils.Formats;
+import de.cunc.autochef.domain.valueobjects.GroceryItem;
 import de.cunc.autochef.domain.valueobjects.Ingredient;
 import de.cunc.autochef.domain.valueobjects.Quantity;
 import de.cunc.autochef.domain.valueobjects.Unit;

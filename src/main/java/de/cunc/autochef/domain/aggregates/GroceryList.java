@@ -1,5 +1,6 @@
-package de.cunc.autochef.domain.entities;
+package de.cunc.autochef.domain.aggregates;
 
+import de.cunc.autochef.domain.valueobjects.GroceryItem;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;

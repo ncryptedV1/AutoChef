@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 
-import de.cunc.autochef.domain.entities.GroceryItem;
-import de.cunc.autochef.domain.entities.GroceryList;
-import de.cunc.autochef.domain.entities.Meal;
-import de.cunc.autochef.domain.entities.MealPlan;
+import de.cunc.autochef.domain.valueobjects.GroceryItem;
+import de.cunc.autochef.domain.aggregates.GroceryList;
+import de.cunc.autochef.domain.aggregates.Meal;
+import de.cunc.autochef.domain.aggregates.MealPlan;
 import de.cunc.autochef.domain.entities.Recipe;
 import de.cunc.autochef.domain.valueobjects.Ingredient;
 import de.cunc.autochef.domain.valueobjects.Quantity;

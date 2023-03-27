@@ -1,16 +1,13 @@
-package de.cunc.autochef.domain.entities;
+package de.cunc.autochef.domain.valueobjects;
 
-import de.cunc.autochef.domain.valueobjects.Ingredient;
-import de.cunc.autochef.domain.valueobjects.Quantity;
-import de.cunc.autochef.domain.valueobjects.Unit;
 import java.io.Serializable;
 import java.util.Objects;
 
 public class GroceryItem implements Serializable {
 
-  private Ingredient ingredient;
-  private Quantity quantity;
-  private Unit unit;
+  private final Ingredient ingredient;
+  private final Quantity quantity;
+  private final Unit unit;
 
   public GroceryItem(Ingredient ingredient, Quantity quantity, Unit unit) {
     this.ingredient = ingredient;

@@ -1,8 +1,8 @@
 package de.cunc.autochef;
 
-import de.cunc.autochef.domain.entities.GroceryItem;
+import de.cunc.autochef.domain.valueobjects.GroceryItem;
 import de.cunc.autochef.domain.entities.Recipe;
-import de.cunc.autochef.domain.entities.RecipeStep;
+import de.cunc.autochef.domain.valueobjects.RecipeStep;
 import de.cunc.autochef.domain.service.ChefkochRecipeService;
 import de.cunc.autochef.domain.service.ConsoleOutputService;
 import de.cunc.autochef.domain.service.DialogService;

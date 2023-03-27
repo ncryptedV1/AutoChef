@@ -1,7 +1,7 @@
 package de.cunc.autochef.domain.service;
 
-import de.cunc.autochef.domain.entities.Meal;
-import de.cunc.autochef.domain.entities.MealPlan;
+import de.cunc.autochef.domain.aggregates.Meal;
+import de.cunc.autochef.domain.aggregates.MealPlan;
 import de.cunc.autochef.domain.entities.Recipe;
 import de.cunc.autochef.domain.utils.Formats;
 import java.awt.Toolkit;
