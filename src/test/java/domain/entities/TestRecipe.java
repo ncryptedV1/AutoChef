@@ -25,7 +25,7 @@ public class TestRecipe {
   String name;
   GroceryList groceryList;
   List<RecipeStep> recipeStepList;
-      
+
   @BeforeEach
   void init() {
     name = "banana split";
@@ -34,10 +34,10 @@ public class TestRecipe {
     RecipeStep step1 = new RecipeStep(1, "any value");
     recipeStepList = new ArrayList<>();
     recipeStepList.add(step1);
-    
-    recipe = new Recipe(name, groceryList, recipeStepList); 
+
+    recipe = new Recipe(name, groceryList, recipeStepList);
   }
-  
+
   @Test
   @Order(1)
   void testConstructorHappyPath() {
@@ -45,10 +45,10 @@ public class TestRecipe {
     String n = "any string";
     GroceryList g = mock(GroceryList.class);
     List<RecipeStep> r = mock(List.class);
-    
+
     // act
-    Recipe res = new Recipe(n,g,r);
-    
+    Recipe res = new Recipe(n, g, r);
+
     // assert
     assertNotNull(res);
   }
@@ -77,11 +77,11 @@ public class TestRecipe {
     GroceryList g = mock(GroceryList.class);
     RecipeStep step1 = new RecipeStep(1, val);
     RecipeStep step2 = new RecipeStep(1, val);
-    
+
     List<RecipeStep> r = new ArrayList<>();
     r.add(step1);
     r.add(step2);
-    
+
     // assert
     assertThrows(IllegalArgumentException.class, () -> new Recipe(val, g, r));
   }
@@ -100,7 +100,7 @@ public class TestRecipe {
     r.add(step2);
 
     // assert
-    assertThrows(IllegalArgumentException.class, () -> new Recipe(val,g,r));
+    assertThrows(IllegalArgumentException.class, () -> new Recipe(val, g, r));
   }
 
   @Test
@@ -116,9 +116,9 @@ public class TestRecipe {
     r.add(step2);
 
     // assert
-    assertThrows(IllegalArgumentException.class, () -> new Recipe(" ",g,r));
+    assertThrows(IllegalArgumentException.class, () -> new Recipe(" ", g, r));
   }
-  
+
   @Test
   void testGetName() {
     // arrange 
@@ -231,5 +231,5 @@ public class TestRecipe {
     List<RecipeStep> r = new ArrayList<>();
     return new Recipe(name, g, r);
   }
-  
+
 }

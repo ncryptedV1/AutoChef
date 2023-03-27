@@ -21,16 +21,16 @@ public class TestGroceryItem {
   Ingredient ingredient;
   Quantity quantity;
   Unit unit;
-      
+
   @BeforeEach
   void init() {
     ingredient = new Ingredient("banana");
     quantity = new Quantity(2);
     unit = new Unit("piece");
-    
-    item = new GroceryItem(ingredient, quantity, unit); 
+
+    item = new GroceryItem(ingredient, quantity, unit);
   }
-  
+
   @Test
   void testConstructor() {
     // arrange
@@ -40,11 +40,11 @@ public class TestGroceryItem {
 
     // act
     GroceryItem res = new GroceryItem(i, q, u);
-    
+
     // assert
     assertNotNull(res);
   }
-  
+
   @Test
   void testGetIngredient() {
     // arrange 
@@ -62,7 +62,7 @@ public class TestGroceryItem {
     // assert
     assertEquals(res, quantity);
   }
-  
+
   @Test
   void testGetUnit() {
     // arrange 
@@ -162,5 +162,5 @@ public class TestGroceryItem {
     // assert
     assertNotEquals(code1, code2);
   }
-  
+
 }

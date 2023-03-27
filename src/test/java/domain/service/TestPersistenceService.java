@@ -7,8 +7,8 @@ import static org.mockito.Mockito.mock;
 
 import de.cunc.autochef.domain.aggregates.GroceryList;
 import de.cunc.autochef.domain.entities.Recipe;
-import de.cunc.autochef.domain.valueobjects.RecipeStep;
 import de.cunc.autochef.domain.service.PersistenceService;
+import de.cunc.autochef.domain.valueobjects.RecipeStep;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,8 +17,8 @@ import org.junit.jupiter.api.Test;
 @DisplayName("Test PersistenceService")
 public class TestPersistenceService {
 
-  private Recipe testRecipe;
   String testId;
+  private Recipe testRecipe;
 
   @BeforeEach
   void setUp() {
@@ -42,13 +42,13 @@ public class TestPersistenceService {
   void testGetRecipes() {
     // arrange
     PersistenceService.saveRecipe(testRecipe);
-    
+
     // act
     List<Recipe> recipes = PersistenceService.getRecipes();
 
     // assert
     assertTrue(recipes.contains(testRecipe));
-    
+
   }
 
   @Test
@@ -56,7 +56,7 @@ public class TestPersistenceService {
   void testGetRecipe() {
     // arrange
     PersistenceService.saveRecipe(testRecipe);
-    
+
     // act
     Recipe retrievedRecipe = PersistenceService.getRecipe(testId);
 
@@ -64,5 +64,5 @@ public class TestPersistenceService {
     assertEquals(testRecipe, retrievedRecipe);
 
   }
-  
+
 }

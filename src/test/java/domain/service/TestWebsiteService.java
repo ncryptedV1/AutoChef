@@ -29,9 +29,7 @@ public class TestWebsiteService {
     String invalidUrl = "any string";
 
     // When and Then
-    assertThrows(IllegalArgumentException.class, () -> {
-      WebsiteService.getWebsiteBody(invalidUrl);
-    });
+    assertThrows(IllegalArgumentException.class, () -> WebsiteService.getWebsiteBody(invalidUrl));
   }
-  
+
 }

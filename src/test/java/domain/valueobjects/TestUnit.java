@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("Test Unit")
 public class TestUnit {
+
   @Test
   void testConstructorHappyPath() {
     // arrange
@@ -25,7 +26,7 @@ public class TestUnit {
     // assert
     assertNotNull(unit);
   }
-  
+
   @Test
   void testConstructorException() {
     // arrange
@@ -48,16 +49,16 @@ public class TestUnit {
     // assert
     assertEquals(expected, res);
   }
-  
+
   @Test
   void testGetValue() {
     // arrange
     String expected = "piece";
     Unit unit = new Unit(expected);
-    
+
     // act
     String res = unit.getValue();
-    
+
     // assert
     assertEquals(expected, res);
   }
@@ -141,7 +142,7 @@ public class TestUnit {
 
     // assert
     assertNotEquals(code1, code2);
-  } 
-  
-  
+  }
+
+
 }

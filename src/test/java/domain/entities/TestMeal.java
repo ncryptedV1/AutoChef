@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import de.cunc.autochef.domain.valueobjects.GroceryItem;
 import de.cunc.autochef.domain.aggregates.GroceryList;
 import de.cunc.autochef.domain.aggregates.Meal;
 import de.cunc.autochef.domain.entities.Recipe;
+import de.cunc.autochef.domain.valueobjects.GroceryItem;
 import de.cunc.autochef.domain.valueobjects.Ingredient;
 import de.cunc.autochef.domain.valueobjects.Quantity;
 import de.cunc.autochef.domain.valueobjects.Unit;
@@ -24,19 +24,19 @@ import org.junit.jupiter.api.Test;
 public class TestMeal {
 
   Meal meal;
-  
+
   Recipe recipe;
   int people;
-  
+
   @BeforeEach
   void init() {
     people = 5;
     String val = "test";
     recipe = new Recipe(val, generateGroceryList(), mock(List.class));
     recipe = new Recipe(val, generateGroceryList(), mock(List.class));
-    meal = new Meal(recipe, people); 
+    meal = new Meal(recipe, people);
   }
-  
+
   @Test
   void testConstructorHappyPath() {
     // arrange
@@ -45,7 +45,7 @@ public class TestMeal {
 
     // act
     Meal res = new Meal(r, p);
-    
+
     // assert
     assertNotNull(res);
   }
@@ -56,14 +56,14 @@ public class TestMeal {
     // arrange
     Recipe actual = mock(Recipe.class);
     Meal mealTest = new Meal(actual, 4);
-    
+
     // act
     Recipe res = mealTest.getRecipe();
-    
+
     // assert
     assertEquals(res, actual);
   }
-  
+
   @Test
   @Order(2)
   void testSetRecipe() {
@@ -81,7 +81,7 @@ public class TestMeal {
     // arrange 
     // act
     int res = meal.getAdjustedNumberOfPeople();
-    
+
     // assert
     assertEquals(res, people);
   }
@@ -91,27 +91,35 @@ public class TestMeal {
   void testGetGroceryList() {
     // arrange
     GroceryList g = new GroceryList();
-    g.addItem(new GroceryItem(new Ingredient("banana"), new Quantity(2*people), new Unit("piece")));
-    g.addItem(new GroceryItem(new Ingredient("banana"), new Quantity(1*people), new Unit("kilogram")));
-    g.addItem(new GroceryItem(new Ingredient("apple juice"), new Quantity(1*people), new Unit("liter")));
-    g.addItem(new GroceryItem(new Ingredient("orange"), new Quantity(3*people), new Unit("slice")));
-    
+    g.addItem(
+        new GroceryItem(new Ingredient("banana"), new Quantity(2 * people), new Unit("piece")));
+    g.addItem(
+        new GroceryItem(new Ingredient("banana"), new Quantity(1 * people), new Unit("kilogram")));
+    g.addItem(new GroceryItem(new Ingredient("apple juice"), new Quantity(1 * people),
+        new Unit("liter")));
+    g.addItem(
+        new GroceryItem(new Ingredient("orange"), new Quantity(3 * people), new Unit("slice")));
+
     // act
     GroceryList res = meal.getGroceryList();
-    
+
     // assert
     String expected = g.toString();
     String actual = res.toString();
     assertEquals(expected, actual);
   }
-  
+
   GroceryList generateGroceryList() {
     GroceryList groceries = new GroceryList();
-    groceries.addItem(new GroceryItem(new Ingredient("banana"), new Quantity(2), new Unit("piece")));
-    groceries.addItem(new GroceryItem(new Ingredient("banana"), new Quantity(1), new Unit("kilogram")));
-    groceries.addItem(new GroceryItem(new Ingredient("apple juice"), new Quantity(1), new Unit("liter")));
-    groceries.addItem(new GroceryItem(new Ingredient("orange"), new Quantity(3), new Unit("slice")));
-    
+    groceries.addItem(
+        new GroceryItem(new Ingredient("banana"), new Quantity(2), new Unit("piece")));
+    groceries.addItem(
+        new GroceryItem(new Ingredient("banana"), new Quantity(1), new Unit("kilogram")));
+    groceries.addItem(
+        new GroceryItem(new Ingredient("apple juice"), new Quantity(1), new Unit("liter")));
+    groceries.addItem(
+        new GroceryItem(new Ingredient("orange"), new Quantity(3), new Unit("slice")));
+
     return groceries;
   }
 

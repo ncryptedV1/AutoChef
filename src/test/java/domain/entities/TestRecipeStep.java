@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import de.cunc.autochef.domain.valueobjects.RecipeStep;
 import de.cunc.autochef.domain.valueobjects.Quantity;
+import de.cunc.autochef.domain.valueobjects.RecipeStep;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,22 +20,22 @@ public class TestRecipeStep {
   RecipeStep recipeStep;
   int step;
   String description;
-      
+
   @BeforeEach
   void init() {
     step = 5;
     description = "This is a random string";
-    recipeStep = new RecipeStep(step, description); 
+    recipeStep = new RecipeStep(step, description);
   }
-  
+
   @Test
   void testConstructorHappyPath() {
     // arrange
     int s = 1;
-    
+
     // act
     RecipeStep res = new RecipeStep(s, "desc");
-    
+
     // assert
     assertNotNull(res);
   }
@@ -58,7 +58,7 @@ public class TestRecipeStep {
     // assert
     assertThrows(IllegalArgumentException.class, () -> new RecipeStep(step, " "));
   }
-  
+
   @Test
   void testGetStep() {
     // arrange 

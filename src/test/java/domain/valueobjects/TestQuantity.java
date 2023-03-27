@@ -34,33 +34,33 @@ public class TestQuantity {
     // assert
     assertThrows(IllegalArgumentException.class, () -> new Quantity(input));
   }
-  
+
   @Test
   void testGetValue() {
     // arrange
     double expected = 2;
     Quantity quantity = new Quantity(expected);
-    
+
     // act
     double res = quantity.getValue();
-    
+
     // assert
     assertEquals(expected, res);
   }
-  
+
   @Test
   void testToString() {
     // arrange
     double expected = 3;
     Quantity quantity = new Quantity(expected);
-    
+
     // act
     String res = quantity.toString();
-    
+
     // assert
     assertEquals(expected + "", res);
   }
-  
+
   @Test
   void testMultiply() {
     // arrange
@@ -68,10 +68,10 @@ public class TestQuantity {
     double factor = 5;
     Quantity quantity = new Quantity(input);
     Quantity expected = new Quantity(input * factor);
-    
+
     // act
     Quantity res = quantity.multiply(factor);
-    
+
     // assert
     assertEquals(expected.getValue(), res.getValue());
   }
@@ -155,5 +155,5 @@ public class TestQuantity {
     // assert
     assertNotEquals(code1, code2);
   }
-  
+
 }

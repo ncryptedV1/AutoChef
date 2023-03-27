@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 
-import de.cunc.autochef.domain.valueobjects.GroceryItem;
 import de.cunc.autochef.domain.aggregates.GroceryList;
+import de.cunc.autochef.domain.valueobjects.GroceryItem;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,10 +17,10 @@ public class TestGroceryList {
   void testConstructorList() {
     // arrange
     List<GroceryItem> items = mock(List.class);
-    
+
     // act
     GroceryList list = new GroceryList(items);
-    
+
     // assert
     assertNotNull(list);
   }
@@ -30,14 +30,14 @@ public class TestGroceryList {
     // arrange
     GroceryItem item1 = mock(GroceryItem.class);
     GroceryItem item2 = mock(GroceryItem.class);
-    
+
     // act
     GroceryList list = new GroceryList(item1, item2);
 
     // assert
     assertNotNull(list);
   }
-  
+
   @Test
   void testGetItems() {
     // arrange
@@ -45,20 +45,20 @@ public class TestGroceryList {
     GroceryItem item1 = mock(GroceryItem.class);
     GroceryItem item2 = mock(GroceryItem.class);
     GroceryList list = new GroceryList(item1, item2);
-    
+
     // act
     List<GroceryItem> items = list.getItems();
-    
+
     // assert
     assertEquals(items.size(), 2);
   }
-  
+
   @Test
   void testAddItem() {
     // arrange
     GroceryItem item1 = mock(GroceryItem.class);
     GroceryList list = new GroceryList();
-    
+
     // act
     list.addItem(item1);
 

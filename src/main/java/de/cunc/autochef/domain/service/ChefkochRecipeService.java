@@ -1,11 +1,11 @@
 package de.cunc.autochef.domain.service;
 
-import de.cunc.autochef.domain.valueobjects.GroceryItem;
 import de.cunc.autochef.domain.aggregates.GroceryList;
 import de.cunc.autochef.domain.entities.Recipe;
-import de.cunc.autochef.domain.valueobjects.RecipeStep;
+import de.cunc.autochef.domain.valueobjects.GroceryItem;
 import de.cunc.autochef.domain.valueobjects.Ingredient;
 import de.cunc.autochef.domain.valueobjects.Quantity;
+import de.cunc.autochef.domain.valueobjects.RecipeStep;
 import de.cunc.autochef.domain.valueobjects.Unit;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +65,8 @@ public class ChefkochRecipeService {
   }
 
   private static List<RecipeStep> extractRecipeSteps(String content) {
-    Matcher matcher = Pattern.compile("Zubereitung</h2>.*?<div class=\"ds-box\">(.*?)</div>").matcher(content);
+    Matcher matcher = Pattern.compile("Zubereitung</h2>.*?<div class=\"ds-box\">(.*?)</div>")
+        .matcher(content);
     List<RecipeStep> steps = new ArrayList<>();
     int idx = 1;
     if (matcher.find()) {
