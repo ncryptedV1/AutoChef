@@ -18,11 +18,15 @@ public class PersistenceService {
   private static final File recipesFolder = new File(
       persistenceFolder.getPath() + File.separator + "recipes");
 
-  static {
+  public static void init() throws RuntimeException {
     try {
-      recipesFolder.mkdirs();
-      ConsoleOutputService.info(
-          "Rezept-Persistenz-Ordner angelegt in " + recipesFolder.getAbsolutePath());
+      if (recipesFolder.mkdirs()) {
+        ConsoleOutputService.info(
+            "Rezept-Persistenz-Ordner angelegt in '" + recipesFolder.getAbsolutePath() + "'");
+      } else if(!recipesFolder.exists()) {
+        ConsoleOutputService.severe("Rezept-Persistenz-Ordner in '" + recipesFolder.getAbsolutePath() + "' konnte nicht angelegt werden!");
+        throw new RuntimeException();
+      }
     } catch (SecurityException ex) {
       ConsoleOutputService.severe("Es fehlen Berechtigungen den Persistenz-Ordner anzulegen unter '"
           + recipesFolder.getAbsolutePath() + "'.");
