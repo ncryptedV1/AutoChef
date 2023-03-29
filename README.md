@@ -25,25 +25,25 @@ Abgabedatum: 28. Mai 2023
 
 ## 1. Einführung
 ### Übersicht über die Applikation
-AutoChef ist eine Anwendung zur einfachen und effizienten Verwaltung und Erstellung von Essensplänen, sowie dazugehöriger Einkaufslisten. Zugrunde liegt dabei eine Datenbank an Rezepten. Diese ist beliebig erweiterbar durch eine Chefkoch (chefkoch.de)-Integration. Diese ermöglicht es, einen Link zu einem Rezept auf Chefkoch an die Anwendung zu übergeben, woraufhin diese das entsprechende Rezept herunterlädt und persistiert. Diese Datenbank an Rezepten, sowie jeweilige Rezept-Details, können jederzeit eingesehen werden. Hauptfunktion ist jedoch die Generierung von Essensplänen. Dafür kann der Nutzer einen Zeitraum, sowie die Anzahl an Personen je Mahlzeit angeben und die Anwendung generiert anhand der Rezept-Datenbank, einen zufälligen Essensplan. Für diesen Essensplan wird ebenfalls eine Einkaufsliste generiert, die an die Anzahl an Personen angepasst ist. Mit diesen Funktionalitäten ist es einfach möglich, seine Woche kulinarisch zu planen und die Einkaufliste für den Wocheneinkauf zu erstellen.
+AutoChef ist eine Anwendung zur einfachen und effizienten Verwaltung und Erstellung von Essensplänen, sowie dazugehöriger Einkaufslisten. Zugrunde liegt dabei eine Datenbank an Rezepten. Diese ist beliebig erweiterbar durch eine [Chefkoch](chefkoch.de)-Integration. Diese ermöglicht es, einen Link zu einem Rezept auf Chefkoch an die Anwendung zu übergeben, woraufhin diese das entsprechende Rezept herunterlädt und persistiert. Diese Datenbank an Rezepten, sowie jeweilige Rezept-Details, können jederzeit eingesehen werden. Hauptfunktion ist jedoch die Generierung von Essensplänen. Dafür kann der Nutzer einen Zeitraum, sowie die Anzahl an Personen je Mahlzeit angeben und die Anwendung generiert anhand der Rezept-Datenbank, einen zufälligen Essensplan. Für diesen Essensplan wird ebenfalls eine Einkaufsliste generiert, die an die Anzahl an Personen angepasst ist. Mit diesen Funktionalitäten ist es einfach möglich, seine Woche kulinarisch zu planen und die Einkaufliste für den Wocheneinkauf zu erstellen.
 
 *[Was macht die Applikation? Wie funktioniert sie? Welches Problem löst sie/welchen Zweck hat sie?]*
 
 ### Wie startet man die Applikation?
-Bei AutoChef handelt es sich um eine CLI-Anwendung, geschrieben in Java 19. Zum Starten wird daher lediglich ein Desktop-Rechner mit Java 19 aufwärts benötigt. Die Anwendung kann dann über ein Konsolenfenster mit dem Befehl java -jar AutoChef.jar gestartet werden.
+Bei AutoChef handelt es sich um eine CLI-Anwendung, geschrieben in Java 19. Zum Starten wird daher lediglich ein Desktop-Rechner mit **Java 19 aufwärts** benötigt. Die Anwendung kann dann über ein Konsolenfenster mit dem Befehl `java -jar AutoChef.jar` gestartet werden.
 
 *[Wie startet man die Applikation? Welche Voraussetzungen werden benötigt? Schritt-für-Schritt-Anleitung]*
 
 ### Wie testet man die Applikation?
 Nach dem Start der Anwendung wird der Nutzer durch einen intuitiven Dialog-Prozess begrüßt und geleitet. Der Nutzer interagiert dabei mit der Anwendung mittels des Konsolenfensters. Über dieses werden sowohl Informationen ausgegeben, als auch Eingaben vom Nutzer eingeholt. Der Dialog-Prozess ist so gestaltet, dass der Nutzer in der Regel mehrere nummerierte Optionen zur Auswahl hat und nur die Nummer der gewünschten Option eingeben und mit Enter absenden muss. Für den Import von Rezepten muss der Nutzer sich zuvor ein Rezept von Chefkoch aussuchen und im entsprechenden Dialog-Prozess-Schritt den dazugehörigen Link einfügen. Zu Beginn der Nutzung ist die Rezept-Datenbank noch leer, weshalb es sich anbietet anfangs ein paar Rezepte zu importieren. Erst danach können die Funktionen der Rezept-Anzeige und Essensplan-Generierung sinnvoll genutzt werden.
 
-Hinweis: Zur Persistierung der Rezepte erstellt die Anwendung im aktuellen Arbeitsverzeichnis (des Konsolenfensters) einen persistence-Ordner. Falls der Nutzer keine Rechte hat im aktuellen Arbeitsverzeichnis Ordner & Dateien zu erstellen, sowie in diese zu schreiben, kann das Programm nicht ordnungsgemäß arbeiten und terminiert. Versuche in dem Fall die Anwendung mit erhöhten Berechtigungen zu starten oder in einem Arbeitsverzeichnis mit Schreibzugriff auszuführen.
+Hinweis: Zur Persistierung der Rezepte erstellt die Anwendung im aktuellen Arbeitsverzeichnis (des Konsolenfensters) einen `recipes`-Ordner. Falls der Nutzer keine Rechte hat im aktuellen Arbeitsverzeichnis Ordner & Dateien zu erstellen, sowie in diese zu schreiben, kann das Programm nicht ordnungsgemäß arbeiten und terminiert. Versuche in dem Fall die Anwendung mit erhöhten Berechtigungen zu starten oder in einem Arbeitsverzeichnis mit Schreibzugriff auszuführen.
 
 *[Wie testet man die Applikation? Welche Voraussetzungen werden benötigt? Schritt-für-Schritt-Anleitung]*
 
 ## 2. Clean Architecture
 ### Was ist Clean Architecture?
-Clean Architecture ist eine Architektur- und Designphilosophie, die darauf abzielt, komplexe Softwaresysteme in leicht verständliche, wartbare und erweiterbare Komponenten zu unterteilen. Es wurde von Robert C. Martin entwickelt und basiert auf den Prinzipien der SOLID-Prinzipien.
+Clean Architecture ist eine Architektur- und Designphilosophie, die darauf abzielt, komplexe Softwaresysteme in leicht verständliche, wartbare und erweiterbare Komponenten zu unterteilen. Es wurde von Robert C. Martin entwickelt und basiert auf den SOLID-Prinzipien.
 
 Im Wesentlichen sieht Clean Architecture vor, dass eine Software in mehrere Schichten unterteilt wird, wobei jede Schicht eine klare Abhängigkeitshierarchie aufweist und nur von der nächstgelegenen Schicht abhängt. Die äußerste Schicht ist die Benutzerschnittstelle, die direkt mit dem Benutzer interagiert, gefolgt von einer oder mehreren Schichten mit Geschäftslogik, Datenzugriff und Infrastruktur.
 
