@@ -1,6 +1,6 @@
 package de.cunc.autochef.domain.service;
 
-import de.cunc.autochef.domain.utils.Formats;
+import de.cunc.autochef.domain.util.Formats;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;

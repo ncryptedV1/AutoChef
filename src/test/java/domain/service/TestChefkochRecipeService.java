@@ -2,14 +2,14 @@ package domain.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import de.cunc.autochef.domain.aggregates.GroceryList;
-import de.cunc.autochef.domain.entities.Recipe;
+import de.cunc.autochef.domain.aggregate.GroceryList;
+import de.cunc.autochef.domain.entity.Recipe;
 import de.cunc.autochef.domain.service.ChefkochRecipeService;
-import de.cunc.autochef.domain.valueobjects.GroceryItem;
-import de.cunc.autochef.domain.valueobjects.Ingredient;
-import de.cunc.autochef.domain.valueobjects.Quantity;
-import de.cunc.autochef.domain.valueobjects.RecipeStep;
-import de.cunc.autochef.domain.valueobjects.Unit;
+import de.cunc.autochef.domain.valueobject.GroceryItem;
+import de.cunc.autochef.domain.valueobject.Ingredient;
+import de.cunc.autochef.domain.valueobject.Quantity;
+import de.cunc.autochef.domain.valueobject.RecipeStep;
+import de.cunc.autochef.domain.valueobject.Unit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

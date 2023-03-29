@@ -1,7 +1,7 @@
-package de.cunc.autochef.domain.entities;
+package de.cunc.autochef.domain.entity;
 
-import de.cunc.autochef.domain.aggregates.GroceryList;
-import de.cunc.autochef.domain.valueobjects.RecipeStep;
+import de.cunc.autochef.domain.aggregate.GroceryList;
+import de.cunc.autochef.domain.valueobject.RecipeStep;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;

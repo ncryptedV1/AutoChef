@@ -1,8 +1,8 @@
-package de.cunc.autochef.domain.aggregates;
+package de.cunc.autochef.domain.aggregate;
 
-import de.cunc.autochef.domain.entities.Recipe;
-import de.cunc.autochef.domain.valueobjects.GroceryItem;
-import de.cunc.autochef.domain.valueobjects.RecipeStep;
+import de.cunc.autochef.domain.entity.Recipe;
+import de.cunc.autochef.domain.valueobject.GroceryItem;
+import de.cunc.autochef.domain.valueobject.RecipeStep;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;

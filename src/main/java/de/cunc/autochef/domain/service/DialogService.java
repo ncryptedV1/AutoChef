@@ -1,9 +1,9 @@
 package de.cunc.autochef.domain.service;
 
-import de.cunc.autochef.domain.aggregates.Meal;
-import de.cunc.autochef.domain.aggregates.MealPlan;
-import de.cunc.autochef.domain.entities.Recipe;
-import de.cunc.autochef.domain.utils.Formats;
+import de.cunc.autochef.domain.aggregate.Meal;
+import de.cunc.autochef.domain.aggregate.MealPlan;
+import de.cunc.autochef.domain.entity.Recipe;
+import de.cunc.autochef.domain.util.Formats;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.time.LocalDate;

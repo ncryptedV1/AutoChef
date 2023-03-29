@@ -1,12 +1,12 @@
 package de.cunc.autochef.domain.service;
 
-import de.cunc.autochef.domain.aggregates.GroceryList;
-import de.cunc.autochef.domain.entities.Recipe;
-import de.cunc.autochef.domain.valueobjects.GroceryItem;
-import de.cunc.autochef.domain.valueobjects.Ingredient;
-import de.cunc.autochef.domain.valueobjects.Quantity;
-import de.cunc.autochef.domain.valueobjects.RecipeStep;
-import de.cunc.autochef.domain.valueobjects.Unit;
+import de.cunc.autochef.domain.aggregate.GroceryList;
+import de.cunc.autochef.domain.entity.Recipe;
+import de.cunc.autochef.domain.valueobject.GroceryItem;
+import de.cunc.autochef.domain.valueobject.Ingredient;
+import de.cunc.autochef.domain.valueobject.Quantity;
+import de.cunc.autochef.domain.valueobject.RecipeStep;
+import de.cunc.autochef.domain.valueobject.Unit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;

@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import de.cunc.autochef.domain.valueobjects.Quantity;
-import de.cunc.autochef.domain.valueobjects.RecipeStep;
+import de.cunc.autochef.domain.valueobject.Quantity;
+import de.cunc.autochef.domain.valueobject.RecipeStep;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

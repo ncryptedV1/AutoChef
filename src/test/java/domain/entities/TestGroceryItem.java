@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import de.cunc.autochef.domain.valueobjects.GroceryItem;
-import de.cunc.autochef.domain.valueobjects.Ingredient;
-import de.cunc.autochef.domain.valueobjects.Quantity;
-import de.cunc.autochef.domain.valueobjects.Unit;
+import de.cunc.autochef.domain.valueobject.GroceryItem;
+import de.cunc.autochef.domain.valueobject.Ingredient;
+import de.cunc.autochef.domain.valueobject.Quantity;
+import de.cunc.autochef.domain.valueobject.Unit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

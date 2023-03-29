@@ -1,10 +1,10 @@
-package de.cunc.autochef.domain.aggregates;
+package de.cunc.autochef.domain.aggregate;
 
-import de.cunc.autochef.domain.utils.Formats;
-import de.cunc.autochef.domain.valueobjects.GroceryItem;
-import de.cunc.autochef.domain.valueobjects.Ingredient;
-import de.cunc.autochef.domain.valueobjects.Quantity;
-import de.cunc.autochef.domain.valueobjects.Unit;
+import de.cunc.autochef.domain.util.Formats;
+import de.cunc.autochef.domain.valueobject.GroceryItem;
+import de.cunc.autochef.domain.valueobject.Ingredient;
+import de.cunc.autochef.domain.valueobject.Quantity;
+import de.cunc.autochef.domain.valueobject.Unit;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;

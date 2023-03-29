@@ -1,4 +1,4 @@
-package de.cunc.autochef.domain.valueobjects;
+package de.cunc.autochef.domain.valueobject;
 
 import java.io.Serializable;
 import java.util.Objects;

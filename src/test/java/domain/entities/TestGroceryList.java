@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 
-import de.cunc.autochef.domain.aggregates.GroceryList;
-import de.cunc.autochef.domain.valueobjects.GroceryItem;
+import de.cunc.autochef.domain.aggregate.GroceryList;
+import de.cunc.autochef.domain.valueobject.GroceryItem;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package de.cunc.autochef.domain.utils;
+package de.cunc.autochef.domain.util;
 
 import java.time.format.DateTimeFormatter;
 
