@@ -32,6 +32,9 @@ public class TestRecipeFileRepository {
 
   @AfterAll
   public static void tearDownClass() {
+    for (File file : persistenceFolder.listFiles()) {
+      file.delete();
+    }
     persistenceFolder.delete();
   }
 
