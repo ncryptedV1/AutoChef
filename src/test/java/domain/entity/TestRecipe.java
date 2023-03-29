@@ -1,4 +1,4 @@
-package domain.entities;
+package domain.entity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -21,13 +21,13 @@ import org.junit.jupiter.api.Test;
 @DisplayName("Test Recipe")
 public class TestRecipe {
 
-  Recipe recipe;
-  String name;
-  GroceryList groceryList;
-  List<RecipeStep> recipeStepList;
+  private Recipe recipe;
+  private String name;
+  private GroceryList groceryList;
+  private List<RecipeStep> recipeStepList;
 
   @BeforeEach
-  void init() {
+  public void setUp() {
     name = "banana split";
     groceryList = mock(GroceryList.class);
 
@@ -40,7 +40,7 @@ public class TestRecipe {
 
   @Test
   @Order(1)
-  void testConstructorHappyPath() {
+  public void testConstructorHappyPath() {
     // arrange
     String n = "any string";
     GroceryList g = mock(GroceryList.class);
@@ -55,7 +55,7 @@ public class TestRecipe {
 
   @Test
   @Order(2)
-  void testConstructorHappyPath2() {
+  public void testConstructorHappyPath2() {
     // arrange
     String val = "custom value";
     String n = "any string";
@@ -71,7 +71,7 @@ public class TestRecipe {
   }
 
   @Test
-  void testConstructorException() {
+  public void testConstructorException() {
     // arrange
     String val = "custom value";
     GroceryList g = mock(GroceryList.class);
@@ -88,7 +88,7 @@ public class TestRecipe {
 
 
   @Test
-  void testConstructorException2() {
+  public void testConstructorException2() {
     // arrange
     String val = "custom value";
     GroceryList g = mock(GroceryList.class);
@@ -104,7 +104,7 @@ public class TestRecipe {
   }
 
   @Test
-  void testConstructorException3() {
+  public void testConstructorException3() {
     // arrange
     String val = "custom value";
     GroceryList g = mock(GroceryList.class);
@@ -120,7 +120,7 @@ public class TestRecipe {
   }
 
   @Test
-  void testGetName() {
+  public void testGetName() {
     // arrange 
     // act
     String res = recipe.getName();
@@ -129,7 +129,7 @@ public class TestRecipe {
   }
 
   @Test
-  void testGetRecipeSteps() {
+  public void testGetRecipeSteps() {
     // arrange 
     // act
     List<RecipeStep> res = recipe.getRecipeSteps();
@@ -138,7 +138,7 @@ public class TestRecipe {
   }
 
   @Test
-  void testGetGroceryList() {
+  public void testGetGroceryList() {
     // arrange 
     // act
     GroceryList res = recipe.getGroceryList();
@@ -147,7 +147,7 @@ public class TestRecipe {
   }
 
   @Test
-  void testGetId() {
+  public void testGetId() {
     // arrange 
     String actual = name.toLowerCase();
     // act
@@ -157,7 +157,7 @@ public class TestRecipe {
   }
 
   @Test
-  void testEqualsResSelf() {
+  public void testEqualsResSelf() {
     // arrange
     // act
     boolean res = recipe.equals(recipe);
@@ -167,7 +167,7 @@ public class TestRecipe {
   }
 
   @Test
-  void testEqualsResSame() {
+  public void testEqualsResSame() {
     // arrange
     // act
     boolean res = recipe.equals(generateCompatibleRecipe());
@@ -177,7 +177,7 @@ public class TestRecipe {
   }
 
   @Test
-  void testEqualsDifferent() {
+  public void testEqualsDifferent() {
     // arrange
     // act
     boolean res = recipe.equals(generateIncompatibleRecipe());
@@ -187,7 +187,7 @@ public class TestRecipe {
   }
 
   @Test
-  void testEqualsNull() {
+  public void testEqualsNull() {
     // arrange
     // act
     boolean res = recipe.equals(null);
@@ -197,7 +197,7 @@ public class TestRecipe {
   }
 
   @Test
-  void testHashCodeTrue() {
+  public void testHashCodeTrue() {
     // arrange
     // act
     int code1 = recipe.hashCode();
@@ -208,7 +208,7 @@ public class TestRecipe {
   }
 
   @Test
-  void testHashCodeFalse() {
+  public void testHashCodeFalse() {
     // arrange
     // act
     int code1 = recipe.hashCode();
@@ -218,15 +218,14 @@ public class TestRecipe {
     assertNotEquals(code1, code2);
   }
 
-
-  Recipe generateIncompatibleRecipe() {
+  private Recipe generateIncompatibleRecipe() {
     String val = "apple juice";
     GroceryList g = mock(GroceryList.class);
     List<RecipeStep> r = new ArrayList<>();
     return new Recipe(val, g, r);
   }
 
-  Recipe generateCompatibleRecipe() {
+  private Recipe generateCompatibleRecipe() {
     GroceryList g = mock(GroceryList.class);
     List<RecipeStep> r = new ArrayList<>();
     return new Recipe(name, g, r);

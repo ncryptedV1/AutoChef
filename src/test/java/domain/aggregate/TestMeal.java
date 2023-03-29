@@ -1,4 +1,4 @@
-package domain.entities;
+package domain.aggregate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -23,22 +23,19 @@ import org.junit.jupiter.api.Test;
 @DisplayName("Test Meal")
 public class TestMeal {
 
-  Meal meal;
-
-  Recipe recipe;
-  int people;
+  private Meal meal;
+  private int people;
 
   @BeforeEach
-  void init() {
+  public void setUp() {
     people = 5;
     String val = "test";
-    recipe = new Recipe(val, generateGroceryList(), mock(List.class));
-    recipe = new Recipe(val, generateGroceryList(), mock(List.class));
+    Recipe recipe = new Recipe(val, generateGroceryList(), mock(List.class));
     meal = new Meal(recipe, people);
   }
 
   @Test
-  void testConstructorHappyPath() {
+  public void testConstructorHappyPath() {
     // arrange
     int p = 5;
     Recipe r = mock(Recipe.class);
@@ -52,7 +49,7 @@ public class TestMeal {
 
   @Test
   @Order(1)
-  void testGetRecipe() {
+  public void testGetRecipe() {
     // arrange
     Recipe actual = mock(Recipe.class);
     Meal mealTest = new Meal(actual, 4);
@@ -66,7 +63,7 @@ public class TestMeal {
 
   @Test
   @Order(2)
-  void testSetRecipe() {
+  public void testSetRecipe() {
     // arrange
     Recipe actual = mock(Recipe.class);
     // act
@@ -77,7 +74,7 @@ public class TestMeal {
   }
 
   @Test
-  void testGetRecipeSteps() {
+  public void testGetRecipeSteps() {
     // arrange 
     // act
     int res = meal.getAdjustedNumberOfPeople();
@@ -88,14 +85,14 @@ public class TestMeal {
 
   @Test
   @Order(3)
-  void testGetGroceryList() {
+  public void testGetGroceryList() {
     // arrange
     GroceryList g = new GroceryList();
     g.addItem(
         new GroceryItem(new Ingredient("banana"), new Quantity(2 * people), new Unit("piece")));
     g.addItem(
-        new GroceryItem(new Ingredient("banana"), new Quantity(1 * people), new Unit("kilogram")));
-    g.addItem(new GroceryItem(new Ingredient("apple juice"), new Quantity(1 * people),
+        new GroceryItem(new Ingredient("banana"), new Quantity(people), new Unit("kilogram")));
+    g.addItem(new GroceryItem(new Ingredient("apple juice"), new Quantity(people),
         new Unit("liter")));
     g.addItem(
         new GroceryItem(new Ingredient("orange"), new Quantity(3 * people), new Unit("slice")));
@@ -109,22 +106,8 @@ public class TestMeal {
     assertEquals(expected, actual);
   }
 
-  GroceryList generateGroceryList() {
-    GroceryList groceries = new GroceryList();
-    groceries.addItem(
-        new GroceryItem(new Ingredient("banana"), new Quantity(2), new Unit("piece")));
-    groceries.addItem(
-        new GroceryItem(new Ingredient("banana"), new Quantity(1), new Unit("kilogram")));
-    groceries.addItem(
-        new GroceryItem(new Ingredient("apple juice"), new Quantity(1), new Unit("liter")));
-    groceries.addItem(
-        new GroceryItem(new Ingredient("orange"), new Quantity(3), new Unit("slice")));
-
-    return groceries;
-  }
-
   @Test
-  void testEqualsResSelf() {
+  public void testEqualsResSelf() {
     // arrange
     Quantity q1 = new Quantity(8);
 
@@ -136,7 +119,7 @@ public class TestMeal {
   }
 
   @Test
-  void testEqualsResSame() {
+  public void testEqualsResSame() {
     // arrange
     Recipe recipe1 = new Recipe("banana split", mock(GroceryList.class), mock(List.class));
     Meal q1 = new Meal(recipe1, 2);
@@ -150,7 +133,7 @@ public class TestMeal {
   }
 
   @Test
-  void testEqualsDifferent() {
+  public void testEqualsDifferent() {
     // arrange
     Recipe recipe1 = new Recipe("banana split", mock(GroceryList.class), mock(List.class));
     Meal q1 = new Meal(recipe1, 2);
@@ -164,7 +147,7 @@ public class TestMeal {
   }
 
   @Test
-  void testEqualsNull() {
+  public void testEqualsNull() {
     // arrange
     Recipe recipe1 = new Recipe("banana split", mock(GroceryList.class), mock(List.class));
     Meal q1 = new Meal(recipe1, 2);
@@ -177,7 +160,7 @@ public class TestMeal {
   }
 
   @Test
-  void testHashCodeTrue() {
+  public void testHashCodeTrue() {
     // arrange
     Recipe recipe1 = new Recipe("banana split", mock(GroceryList.class), mock(List.class));
     Meal q1 = new Meal(recipe1, 2);
@@ -192,7 +175,7 @@ public class TestMeal {
   }
 
   @Test
-  void testHashCodeFalse() {
+  public void testHashCodeFalse() {
     // arrange
     Recipe recipe1 = new Recipe("banana split", mock(GroceryList.class), mock(List.class));
     Meal q1 = new Meal(recipe1, 2);
@@ -204,5 +187,19 @@ public class TestMeal {
 
     // assert
     assertNotEquals(code1, code2);
+  }
+
+  private GroceryList generateGroceryList() {
+    GroceryList groceries = new GroceryList();
+    groceries.addItem(
+        new GroceryItem(new Ingredient("banana"), new Quantity(2), new Unit("piece")));
+    groceries.addItem(
+        new GroceryItem(new Ingredient("banana"), new Quantity(1), new Unit("kilogram")));
+    groceries.addItem(
+        new GroceryItem(new Ingredient("apple juice"), new Quantity(1), new Unit("liter")));
+    groceries.addItem(
+        new GroceryItem(new Ingredient("orange"), new Quantity(3), new Unit("slice")));
+
+    return groceries;
   }
 }

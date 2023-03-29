@@ -1,4 +1,4 @@
-package domain.entities;
+package domain.valueobject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,73 +8,61 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import de.cunc.autochef.domain.valueobject.Quantity;
-import de.cunc.autochef.domain.valueobject.RecipeStep;
-import org.junit.jupiter.api.BeforeEach;
+import de.cunc.autochef.domain.valueobject.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("Test RecipeStep")
-public class TestRecipeStep {
-
-  RecipeStep recipeStep;
-  int step;
-  String description;
-
-  @BeforeEach
-  void init() {
-    step = 5;
-    description = "This is a random string";
-    recipeStep = new RecipeStep(step, description);
-  }
+@DisplayName("Test Unit")
+public class TestUnit {
 
   @Test
   void testConstructorHappyPath() {
     // arrange
-    int s = 1;
+    String expected = "gram";
 
     // act
-    RecipeStep res = new RecipeStep(s, "desc");
+    Unit unit = new Unit(expected);
 
     // assert
-    assertNotNull(res);
+    assertNotNull(unit);
   }
 
   @Test
   void testConstructorException() {
     // arrange
-    int step = -1;
-    String desc = "xyz";
+    String input = "";
 
     // assert
-    assertThrows(IllegalArgumentException.class, () -> new RecipeStep(step, desc));
+    assertThrows(IllegalArgumentException.class, () -> new Unit(input));
   }
 
   @Test
-  void testConstructorException2() {
+  void testGetId() {
     // arrange
-    int step = -1;
+    String val = "Gram";
+    Unit unit = new Unit(val);
+    String expected = val.toLowerCase();
+
+    // act
+    String res = unit.getId();
 
     // assert
-    assertThrows(IllegalArgumentException.class, () -> new RecipeStep(step, " "));
+    assertEquals(expected, res);
   }
 
   @Test
-  void testGetStep() {
-    // arrange 
+  void testGetValue() {
+    // arrange
+    String expected = "piece";
+    Unit unit = new Unit(expected);
+
     // act
-    int res = recipeStep.getStep();
+    String res = unit.getValue();
+
     // assert
-    assertEquals(res, step);
+    assertEquals(expected, res);
   }
 
-  @Test
-  void testGetDescription() {
-    // arrange 
-    // act
-    String res = recipeStep.getDescription();
-    // assert
-    assertEquals(res, description);
-  }
 
   @Test
   void testEqualsResSelf() {
@@ -91,10 +79,9 @@ public class TestRecipeStep {
   @Test
   void testEqualsResSame() {
     // arrange
-    String val = "any string";
-    int s = 1;
-    RecipeStep q1 = new RecipeStep(s, val);
-    RecipeStep q2 = new RecipeStep(s, val);
+    String value = "piece";
+    Unit q1 = new Unit(value);
+    Unit q2 = new Unit(value);
 
     // act
     boolean res = q1.equals(q2);
@@ -106,9 +93,8 @@ public class TestRecipeStep {
   @Test
   void testEqualsDifferent() {
     // arrange
-    String val = "any string";
-    RecipeStep q1 = new RecipeStep(1, val);
-    RecipeStep q2 = new RecipeStep(2, val);
+    Unit q1 = new Unit("gram");
+    Unit q2 = new Unit("liter");
 
     // act
     boolean res = q1.equals(q2);
@@ -132,10 +118,9 @@ public class TestRecipeStep {
   @Test
   void testHashCodeTrue() {
     // arrange
-    String val = "any string";
-    int s = 1;
-    RecipeStep q1 = new RecipeStep(s, val);
-    RecipeStep q2 = new RecipeStep(s, val);
+    String value = "piece";
+    Unit q1 = new Unit(value);
+    Unit q2 = new Unit(value);
 
     // act
     int code1 = q1.hashCode();
@@ -148,9 +133,8 @@ public class TestRecipeStep {
   @Test
   void testHashCodeFalse() {
     // arrange
-    String val = "any string";
-    RecipeStep q1 = new RecipeStep(1, val);
-    RecipeStep q2 = new RecipeStep(2, val);
+    Unit q1 = new Unit("gram");
+    Unit q2 = new Unit("liter");
 
     // act
     int code1 = q1.hashCode();
@@ -159,4 +143,6 @@ public class TestRecipeStep {
     // assert
     assertNotEquals(code1, code2);
   }
+
+
 }

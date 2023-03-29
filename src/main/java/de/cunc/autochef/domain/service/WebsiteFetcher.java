@@ -15,7 +15,7 @@ public class WebsiteFetcher {
       URL url = new URL(urlString);
       URLConnection connection = url.openConnection();
       InputStream inputStream = connection.getInputStream();
-      String encoding = connection.getContentEncoding();  // ** WRONG: should use "con.getContentType()" instead but it returns something like "text/html; charset=UTF-8" so this value must be parsed to extract the actual encoding
+      String encoding = connection.getContentEncoding();
       encoding = encoding == null ? "UTF-8" : encoding;
       StringBuilder content = new StringBuilder();
       try (BufferedReader reader = new BufferedReader(

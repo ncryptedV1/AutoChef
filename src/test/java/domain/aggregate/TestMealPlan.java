@@ -1,4 +1,4 @@
-package domain.entities;
+package domain.aggregate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -23,21 +23,18 @@ import org.junit.jupiter.api.Test;
 @DisplayName("Test MealPlan")
 public class TestMealPlan {
 
-  MealPlan mealPlan;
+  private MealPlan mealPlan;
+  private LocalDate start;
 
-  List<Meal> meals;
-
-  LocalDate start;
-
-  LocalDate end;
+  private LocalDate end;
 
   @BeforeEach
-  void init() {
+  public void setUp() {
     start = LocalDate.now();
     end = start.plusDays(5);
     int totalMeals = start.until(end).getDays();
 
-    meals = new ArrayList<>();
+    List<Meal> meals = new ArrayList<>();
     for (int i = 0; i < totalMeals; i++) {
       meals.add(mock(Meal.class));
     }
@@ -46,7 +43,7 @@ public class TestMealPlan {
   }
 
   @Test
-  void testConstructorHappyPath() {
+  public void testConstructorHappyPath() {
     // arrange
     int days = 5;
     LocalDate s = LocalDate.now();
@@ -66,7 +63,7 @@ public class TestMealPlan {
   }
 
   @Test
-  void testConstructorException() {
+  public void testConstructorException() {
     // arrange
     int days = 3;
     LocalDate s = LocalDate.now();
@@ -85,7 +82,7 @@ public class TestMealPlan {
 
 
   @Test
-  void testGetStart() {
+  public void testGetStart() {
     // arrange
     // act
     LocalDate res = mealPlan.getStart();
@@ -95,7 +92,7 @@ public class TestMealPlan {
   }
 
   @Test
-  void testGetEnd() {
+  public void testGetEnd() {
     // arrange
     // act
     LocalDate res = mealPlan.getEnd();
@@ -105,7 +102,7 @@ public class TestMealPlan {
   }
 
   @Test
-  void testGetDays() {
+  public void testGetDays() {
     // arrange
     int d = 28;
     LocalDate s = LocalDate.now();
@@ -126,7 +123,7 @@ public class TestMealPlan {
 
 
   @Test
-  void testGetGroceryList() {
+  public void testGetGroceryList() {
     // arrange
     int d = 3;
     LocalDate s = LocalDate.now();
@@ -154,7 +151,7 @@ public class TestMealPlan {
     assertEquals(s1, s2);
   }
 
-  Meal generateMeal() {
+  private Meal generateMeal() {
     GroceryList groceries = new GroceryList();
     groceries.addItem(
         new GroceryItem(new Ingredient("banana"), new Quantity(2), new Unit("piece")));

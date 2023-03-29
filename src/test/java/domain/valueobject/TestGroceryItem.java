@@ -1,4 +1,4 @@
-package domain.entities;
+package domain.valueobject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -17,13 +17,13 @@ import org.junit.jupiter.api.Test;
 @DisplayName("Test GroceryItem")
 public class TestGroceryItem {
 
-  GroceryItem item;
-  Ingredient ingredient;
-  Quantity quantity;
-  Unit unit;
+  private GroceryItem item;
+  private Ingredient ingredient;
+  private Quantity quantity;
+  private Unit unit;
 
   @BeforeEach
-  void init() {
+  public void setUp() {
     ingredient = new Ingredient("banana");
     quantity = new Quantity(2);
     unit = new Unit("piece");
@@ -32,7 +32,7 @@ public class TestGroceryItem {
   }
 
   @Test
-  void testConstructor() {
+  public void testConstructor() {
     // arrange
     Ingredient i = new Ingredient("banana");
     Quantity q = new Quantity(2);
@@ -46,7 +46,7 @@ public class TestGroceryItem {
   }
 
   @Test
-  void testGetIngredient() {
+  public void testGetIngredient() {
     // arrange 
     // act
     Ingredient res = item.getIngredient();
@@ -55,7 +55,7 @@ public class TestGroceryItem {
   }
 
   @Test
-  void testGetQuantity() {
+  public void testGetQuantity() {
     // arrange 
     // act
     Quantity res = item.getQuantity();
@@ -64,7 +64,7 @@ public class TestGroceryItem {
   }
 
   @Test
-  void testGetUnit() {
+  public void testGetUnit() {
     // arrange 
     // act
     Unit res = item.getUnit();
@@ -74,7 +74,7 @@ public class TestGroceryItem {
 
 
   @Test
-  void testEqualsResSelf() {
+  public void testEqualsResSelf() {
     // arrange
     Ingredient ingredient1 = new Ingredient("apple");
     Quantity quantity1 = new Quantity(44);
@@ -90,7 +90,7 @@ public class TestGroceryItem {
   }
 
   @Test
-  void testEqualsResSame() {
+  public void testEqualsResSame() {
     // arrange
     Ingredient ingredient1 = new Ingredient("apple");
     Quantity quantity1 = new Quantity(44);
@@ -107,7 +107,7 @@ public class TestGroceryItem {
   }
 
   @Test
-  void testEqualsDifferent() {
+  public void testEqualsDifferent() {
     // arrange
     GroceryItem q1 = new GroceryItem(new Ingredient("apple"), new Quantity(2), new Unit("piece"));
     GroceryItem q2 = new GroceryItem(new Ingredient("banana"), new Quantity(2), new Unit("piece"));
@@ -120,7 +120,7 @@ public class TestGroceryItem {
   }
 
   @Test
-  void testEqualsNull() {
+  public void testEqualsNull() {
     // arrange
     Quantity q1 = new Quantity(8);
 
@@ -132,7 +132,7 @@ public class TestGroceryItem {
   }
 
   @Test
-  void testHashCodeTrue() {
+  public void testHashCodeTrue() {
     // arrange
     Ingredient ingredient1 = new Ingredient("apple");
     Quantity quantity1 = new Quantity(44);
@@ -150,7 +150,7 @@ public class TestGroceryItem {
   }
 
   @Test
-  void testHashCodeFalse() {
+  public void testHashCodeFalse() {
     // arrange
     GroceryItem q1 = new GroceryItem(new Ingredient("apple"), new Quantity(2), new Unit("piece"));
     GroceryItem q2 = new GroceryItem(new Ingredient("banana"), new Quantity(2), new Unit("piece"));

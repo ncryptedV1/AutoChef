@@ -17,28 +17,11 @@ import org.junit.jupiter.api.Test;
 @DisplayName("Test ChefkochRecipeFetcher")
 public class TestChefkochRecipeFetcher {
 
-  Recipe recipe;
-  String url;
-  /* 
-  Rezept: Italienisches Schweinefilet à la Nonna:
-  Zutaten:
-- 500.0g Schweinefilet(s)
-- 150.0g Parmaschinken, in dünnen Scheiben
-- 1.0Stk. Zwiebel(n)
-- 3.0Zehe/n Knoblauch
-- 50.0g Oliven, schwarze
-- 1.0Dose Tomaten, stückige
-- 250.0ml Sahne
-Zubereitung:
-1. Schweinefilet in Medaillons schneiden, diese mit Parmaschinken umwickeln und in eine Auflaufform legen.
-2. Zwiebeln und Knoblauch würfeln und in Olivenöl anschwitzen, aber keine Farbe nehmen lassen. Dosentomaten und Oliven dazugeben und langsam erhitzen, mit den Kräutern und Gewürzen abschmecken. Die Sahne dazugeben und aufkochen lassen. Evtl. nachwürzen. Es darf gerne auch scharf sein.
-3. Die Soße auf die Schweinefiletscheiben geben und die Form für ungefähr 45 Minuten bei 180 Grad in den Ofen geben.
-4. Dazu Reis oder Ciabatta reichen.
-
-  * */
+  private Recipe recipe;
+  private String url;
 
   @BeforeEach
-  void setUp() {
+  public void setUp() {
     url = "https://www.chefkoch.de/rezepte/1909521311313294/Italienisches-Schweinefilet-a-la-Nonna.html";
 
     String title = "Italienisches Schweinefilet à la Nonna";

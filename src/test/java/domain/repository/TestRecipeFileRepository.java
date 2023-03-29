@@ -13,27 +13,33 @@ import java.io.File;
 import java.util.List;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("Test RecipeFileRepository")
 public class TestRecipeFileRepository {
 
-  private static Recipe testRecipe;
+  private Recipe recipe;
+  private static File persistenceFolder;
   private static RecipeFileRepository recipeFileRepository;
 
   @BeforeAll
-  public static void setUp() {
-    GroceryList list = mock(GroceryList.class);
-    RecipeStep step = new RecipeStep(1, "description");
-    testRecipe = new Recipe("test123", list, step);
-
-    recipeFileRepository = new RecipeFileRepository(new File("recipes"));
+  public static void setUpClass() {
+    persistenceFolder = new File("recipes-test");
+    recipeFileRepository = new RecipeFileRepository(persistenceFolder);
   }
 
   @AfterAll
-  public static void tearDown() {
-    recipeFileRepository.deleteRecipe(testRecipe);
+  public static void tearDownClass() {
+    persistenceFolder.delete();
+  }
+
+  @BeforeEach
+  public void setUp() {
+    GroceryList list = mock(GroceryList.class);
+    RecipeStep step = new RecipeStep(1, "description");
+    recipe = new Recipe("test123", list, step);
   }
 
   @Test
@@ -42,20 +48,20 @@ public class TestRecipeFileRepository {
     // arrange
     // act
     // assert
-    assertDoesNotThrow(() -> recipeFileRepository.saveRecipe(testRecipe));
+    assertDoesNotThrow(() -> recipeFileRepository.saveRecipe(recipe));
   }
 
   @Test
   @DisplayName("Get a list of recipes")
   public void testGetRecipes() {
     // arrange
-    recipeFileRepository.saveRecipe(testRecipe);
+    recipeFileRepository.saveRecipe(recipe);
 
     // act
     List<Recipe> recipes = recipeFileRepository.getRecipes();
 
     // assert
-    assertTrue(recipes.contains(testRecipe));
+    assertTrue(recipes.contains(recipe));
 
   }
 
@@ -63,13 +69,13 @@ public class TestRecipeFileRepository {
   @DisplayName("Get specific recipe")
   public void testGetRecipe() {
     // arrange
-    recipeFileRepository.saveRecipe(testRecipe);
+    recipeFileRepository.saveRecipe(recipe);
 
     // act
-    Recipe retrievedRecipe = recipeFileRepository.getRecipe(testRecipe.getId());
+    Recipe retrievedRecipe = recipeFileRepository.getRecipe(recipe.getId());
 
     // assert
-    assertEquals(testRecipe, retrievedRecipe);
+    assertEquals(recipe, retrievedRecipe);
   }
 
 }

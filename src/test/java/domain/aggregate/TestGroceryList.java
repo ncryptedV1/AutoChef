@@ -1,4 +1,4 @@
-package domain.entities;
+package domain.aggregate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 public class TestGroceryList {
 
   @Test
-  void testConstructorList() {
+  public void testConstructorList() {
     // arrange
     List<GroceryItem> items = mock(List.class);
 
@@ -26,7 +26,7 @@ public class TestGroceryList {
   }
 
   @Test
-  void testConstructorVarArgs() {
+  public void testConstructorVarArgs() {
     // arrange
     GroceryItem item1 = mock(GroceryItem.class);
     GroceryItem item2 = mock(GroceryItem.class);
@@ -39,7 +39,7 @@ public class TestGroceryList {
   }
 
   @Test
-  void testGetItems() {
+  public void testGetItems() {
     // arrange
 
     GroceryItem item1 = mock(GroceryItem.class);
@@ -54,7 +54,7 @@ public class TestGroceryList {
   }
 
   @Test
-  void testAddItem() {
+  public void testAddItem() {
     // arrange
     GroceryItem item1 = mock(GroceryItem.class);
     GroceryList list = new GroceryList();
