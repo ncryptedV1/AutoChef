@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ChefkochRecipeService {
+public class ChefkochRecipeFetcher {
 
   public static Recipe getRecipe(String url) {
-    String content = WebsiteService.getWebsiteBody(url);
+    String content = WebsiteFetcher.getWebsiteBody(url);
     String name = extractRecipeName(content);
     GroceryList groceryList = extractIngredients(content);
     List<RecipeStep> recipeSteps = extractRecipeSteps(content);

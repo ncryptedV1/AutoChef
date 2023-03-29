@@ -3,6 +3,7 @@ package de.cunc.autochef.domain.service;
 import de.cunc.autochef.domain.aggregate.Meal;
 import de.cunc.autochef.domain.aggregate.MealPlan;
 import de.cunc.autochef.domain.entity.Recipe;
+import de.cunc.autochef.domain.repository.RecipeRepository;
 import de.cunc.autochef.domain.util.Formats;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
@@ -15,15 +16,20 @@ import java.util.Random;
 public class DialogService {
 
   private static final Random random = new Random();
-  private static DialogState currentState;
+  private DialogState currentState;
+  private final RecipeRepository recipeRepository;
 
-  public static void startDialog() {
+  public DialogService(RecipeRepository recipeRepository) {
+    this.recipeRepository = recipeRepository;
+  }
+
+  public void startDialog() {
     ConsoleOutputService.rawOut(
         "Willkommen bei AutoChef, deinem persönlichem Freund und Helfer bei der Rezept- & Einkauflisten-Planung!");
     startMain();
   }
 
-  public static void startMain() {
+  public void startMain() {
     currentState = DialogState.MAIN;
 
     ConsoleOutputService.rawOut("");
@@ -39,12 +45,12 @@ public class DialogService {
     }
   }
 
-  private static void showRecipes() {
+  private void showRecipes() {
     currentState = DialogState.SHOW_RECIPES;
 
     ConsoleOutputService.rawOut("Folgende Rezepte sind aktuell in unserer Datenbank:");
     ConsoleOutputService.rawOut("Möchtest du zu einem davon mehr erfahren?");
-    List<Recipe> recipes = PersistenceService.getRecipes();
+    List<Recipe> recipes = recipeRepository.getRecipes();
 
     List<String> options = new ArrayList<>();
     options.add("Nein");
@@ -59,7 +65,7 @@ public class DialogService {
     startMain();
   }
 
-  private static void addRecipe() {
+  private void addRecipe() {
     currentState = DialogState.ADD_RECIPE;
 
     ConsoleOutputService.rawOut(
@@ -69,19 +75,19 @@ public class DialogService {
             throw new IllegalArgumentException("Das ist kein Link auf ein Chefkoch-Rezept!");
           }
           // test website body retrieval
-          WebsiteService.getWebsiteBody(userInput);
+          WebsiteFetcher.getWebsiteBody(userInput);
           return userInput;
         },
         "Welches Rezept würdest du gerne hinzufügen? (https://www.chefkoch.de/rezepte/XXX/XXX.html)");
-    Recipe recipe = ChefkochRecipeService.getRecipe(url);
-    PersistenceService.saveRecipe(recipe);
+    Recipe recipe = ChefkochRecipeFetcher.getRecipe(url);
+    recipeRepository.saveRecipe(recipe);
     ConsoleOutputService.rawOut("Folgendes Rezept wurde erfolgreich abgespeichert:");
     ConsoleOutputService.rawOut(recipe.toString());
 
     startMain();
   }
 
-  private static void startMealPlanGeneration() {
+  private void startMealPlanGeneration() {
     currentState = DialogState.MEAL_PLAN_GENERATION;
 
     ConsoleOutputService.rawOut("Wir generieren jetzt zusammen einen Mahlzeiten-Plan. :D");
@@ -94,7 +100,7 @@ public class DialogService {
     int days = startDate.until(endDate).getDays();
     ConsoleOutputService.rawOut("Ok, ich generiere einen Plan für " + days + " Tage...");
 
-    List<Recipe> recipes = PersistenceService.getRecipes();
+    List<Recipe> recipes = recipeRepository.getRecipes();
     List<Meal> meals = new ArrayList<>();
     for (int i = 0; i < days; i++) {
       meals.add(new Meal(recipes.get(random.nextInt(recipes.size())), people));
@@ -105,7 +111,7 @@ public class DialogService {
     startPostMealPlanGeneration(mealPlan, recipes);
   }
 
-  private static void startPostMealPlanGeneration(MealPlan mealPlan, List<Recipe> allRecipes) {
+  private void startPostMealPlanGeneration(MealPlan mealPlan, List<Recipe> allRecipes) {
     currentState = DialogState.POST_MEAL_PLAN_GENERATION;
 
     LocalDate startDate = mealPlan.getStart();
@@ -146,7 +152,7 @@ public class DialogService {
     startMain();
   }
 
-  public static DialogState getCurrentState() {
+  public DialogState getCurrentState() {
     return currentState;
   }
 

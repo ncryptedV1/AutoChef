@@ -8,7 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class WebsiteService {
+public class WebsiteFetcher {
 
   public static String getWebsiteBody(String urlString) {
     try {

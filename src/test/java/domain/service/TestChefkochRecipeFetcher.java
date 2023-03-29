@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import de.cunc.autochef.domain.aggregate.GroceryList;
 import de.cunc.autochef.domain.entity.Recipe;
-import de.cunc.autochef.domain.service.ChefkochRecipeService;
+import de.cunc.autochef.domain.service.ChefkochRecipeFetcher;
 import de.cunc.autochef.domain.valueobject.GroceryItem;
 import de.cunc.autochef.domain.valueobject.Ingredient;
 import de.cunc.autochef.domain.valueobject.Quantity;
@@ -14,8 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("Test ChefkochRecipeService")
-public class TestChefkochRecipeService {
+@DisplayName("Test ChefkochRecipeFetcher")
+public class TestChefkochRecipeFetcher {
 
   Recipe recipe;
   String url;
@@ -79,7 +79,7 @@ Zubereitung:
   public void testGetRecipe() {
     // arrange
     // act
-    Recipe res = ChefkochRecipeService.getRecipe(url);
+    Recipe res = ChefkochRecipeFetcher.getRecipe(url);
 
     // assert
     assertEquals(recipe.getId(), res.getId());

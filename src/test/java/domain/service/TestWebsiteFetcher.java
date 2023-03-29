@@ -2,13 +2,13 @@ package domain.service;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import de.cunc.autochef.domain.service.WebsiteService;
+import de.cunc.autochef.domain.service.WebsiteFetcher;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("Test WebsiteService")
-public class TestWebsiteService {
+@DisplayName("Test WebsiteFetcher")
+public class TestWebsiteFetcher {
 
   @Test
   public void testGetWebsiteBody() {
@@ -16,7 +16,7 @@ public class TestWebsiteService {
     String validUrl = "https://google.com";
 
     // act
-    String websiteBody = WebsiteService.getWebsiteBody(validUrl);
+    String websiteBody = WebsiteFetcher.getWebsiteBody(validUrl);
 
     // assert
     Assertions.assertNotNull(websiteBody);
@@ -29,7 +29,7 @@ public class TestWebsiteService {
     String invalidUrl = "any string";
 
     // When and Then
-    assertThrows(IllegalArgumentException.class, () -> WebsiteService.getWebsiteBody(invalidUrl));
+    assertThrows(IllegalArgumentException.class, () -> WebsiteFetcher.getWebsiteBody(invalidUrl));
   }
 
 }

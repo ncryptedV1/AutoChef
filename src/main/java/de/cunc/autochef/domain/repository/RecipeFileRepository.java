@@ -1,6 +1,7 @@
-package de.cunc.autochef.domain.service;
+package de.cunc.autochef.domain.repository;
 
 import de.cunc.autochef.domain.entity.Recipe;
+import de.cunc.autochef.domain.service.ConsoleOutputService;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -12,13 +13,13 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class PersistenceService {
+public class RecipeFileRepository implements RecipeRepository {
 
-  private static final File persistenceFolder = new File("persistence");
-  private static final File recipesFolder = new File(
-      persistenceFolder.getPath() + File.separator + "recipes");
+  private final File recipesFolder;
 
-  public static void init() throws RuntimeException {
+  public RecipeFileRepository(File recipesFolder) {
+    this.recipesFolder = recipesFolder;
+
     try {
       if (recipesFolder.mkdirs()) {
         ConsoleOutputService.info(
@@ -36,7 +37,7 @@ public class PersistenceService {
     }
   }
 
-  public static void saveRecipe(Recipe recipe) {
+  public void saveRecipe(Recipe recipe) {
     File targetFile = new File(recipesFolder.getPath() + File.separator + recipe.getId());
     try (ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(targetFile))) {
       stream.writeObject(recipe);
@@ -47,7 +48,7 @@ public class PersistenceService {
     }
   }
 
-  public static boolean deleteRecipe(Recipe recipe) {
+  public boolean deleteRecipe(Recipe recipe) {
     File targetFile = new File(recipesFolder.getPath() + File.separator + recipe.getId());
     if (targetFile.exists()) {
       try {
@@ -62,10 +63,10 @@ public class PersistenceService {
     return false;
   }
 
-  public static List<Recipe> getRecipes() {
+  public List<Recipe> getRecipes() {
     try (Stream<Path> recipePaths = Files.list(recipesFolder.toPath())) {
       List<String> recipeIds = recipePaths.map(path -> path.getFileName().toString()).toList();
-      return recipeIds.stream().map(PersistenceService::getRecipe).toList();
+      return recipeIds.stream().map(this::getRecipe).toList();
     } catch (IOException e) {
       ConsoleOutputService.severe(
           "Fehler während dem Abrufen der persistierten Rezepte: " + e.getMessage());
@@ -73,7 +74,7 @@ public class PersistenceService {
     }
   }
 
-  public static Recipe getRecipe(String id) {
+  public Recipe getRecipe(String id) {
     File targetFile = new File(recipesFolder.getPath() + File.separator + id);
     try (ObjectInputStream stream = new ObjectInputStream(new FileInputStream(targetFile))) {
       return (Recipe) stream.readObject();
