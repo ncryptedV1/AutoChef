@@ -1,4 +1,4 @@
-package de.cunc.autochef.domain.service;
+package de.cunc.autochef.domain.util.web;
 
 import de.cunc.autochef.domain.aggregate.GroceryList;
 import de.cunc.autochef.domain.entity.Recipe;

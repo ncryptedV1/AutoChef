@@ -1,15 +1,11 @@
-package de.cunc.autochef.domain.service;
+package de.cunc.autochef.domain.util.io;
 
 import de.cunc.autochef.domain.util.Formats;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 import java.util.function.Function;
 
-public class ConsoleInputService {
-
-  private static final Scanner consoleInputScanner =
-      System.console() == null ? new Scanner(System.in) : null;
+public class ConsoleInputParser {
 
   public static Integer getInteger(Integer lowerBound, Integer upperBound, String question) {
     return getInputWithType(userInput -> {
@@ -57,7 +53,7 @@ public class ConsoleInputService {
     T choice = null;
     while (choice == null) {
       ConsoleOutputService.rawOut(question);
-      String userInput = readLine();
+      String userInput = ConsoleInputReader.readLine();
       try {
         choice = transformFunction.apply(userInput);
       } catch (IllegalArgumentException ex) {
@@ -70,13 +66,5 @@ public class ConsoleInputService {
       }
     }
     return choice;
-  }
-
-  private static String readLine() {
-    if (consoleInputScanner == null) {
-      return System.console().readLine();
-    } else {
-      return consoleInputScanner.nextLine();
-    }
   }
 }

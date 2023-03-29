@@ -1,7 +1,7 @@
 package de.cunc.autochef.domain.repository;
 
 import de.cunc.autochef.domain.entity.Recipe;
-import de.cunc.autochef.domain.service.ConsoleOutputService;
+import de.cunc.autochef.domain.util.io.ConsoleOutputService;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

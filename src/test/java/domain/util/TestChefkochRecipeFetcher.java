@@ -1,10 +1,10 @@
-package domain.service;
+package domain.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import de.cunc.autochef.domain.aggregate.GroceryList;
 import de.cunc.autochef.domain.entity.Recipe;
-import de.cunc.autochef.domain.service.ChefkochRecipeFetcher;
+import de.cunc.autochef.domain.util.web.ChefkochRecipeFetcher;
 import de.cunc.autochef.domain.valueobject.GroceryItem;
 import de.cunc.autochef.domain.valueobject.Ingredient;
 import de.cunc.autochef.domain.valueobject.Quantity;

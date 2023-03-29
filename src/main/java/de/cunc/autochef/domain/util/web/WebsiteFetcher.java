@@ -1,4 +1,4 @@
-package de.cunc.autochef.domain.service;
+package de.cunc.autochef.domain.util.web;
 
 import java.io.BufferedReader;
 import java.io.IOException;

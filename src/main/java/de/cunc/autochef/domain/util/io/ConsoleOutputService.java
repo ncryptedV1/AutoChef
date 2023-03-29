@@ -1,4 +1,4 @@
-package de.cunc.autochef.domain.service;
+package de.cunc.autochef.domain.util.io;
 
 import de.cunc.autochef.AutoChef;
 import java.io.IOException;

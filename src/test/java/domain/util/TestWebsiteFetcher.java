@@ -1,8 +1,8 @@
-package domain.service;
+package domain.util;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import de.cunc.autochef.domain.service.WebsiteFetcher;
+import de.cunc.autochef.domain.util.web.WebsiteFetcher;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
