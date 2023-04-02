@@ -4,11 +4,10 @@ import de.cunc.autochef.domain.aggregate.Meal;
 import de.cunc.autochef.domain.aggregate.MealPlan;
 import de.cunc.autochef.domain.entity.Recipe;
 import de.cunc.autochef.domain.repository.RecipeRepository;
-import de.cunc.autochef.domain.util.web.ChefkochRecipeFetcher;
+import de.cunc.autochef.domain.util.Formats;
 import de.cunc.autochef.domain.util.io.ConsoleInputParser;
 import de.cunc.autochef.domain.util.io.ConsoleOutputService;
-import de.cunc.autochef.domain.util.Formats;
-import de.cunc.autochef.domain.util.web.WebsiteFetcher;
+import de.cunc.autochef.domain.util.web.ChefkochRecipeFetcher;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.time.LocalDate;
@@ -78,8 +77,6 @@ public class DialogService {
           if (!userInput.matches("https://www.chefkoch.de/rezepte/\\d+/.*\\.html")) {
             throw new IllegalArgumentException("Das ist kein Link auf ein Chefkoch-Rezept!");
           }
-          // test website body retrieval
-          WebsiteFetcher.getWebsiteBody(userInput);
           return userInput;
         },
         "Welches Rezept würdest du gerne hinzufügen? (https://www.chefkoch.de/rezepte/XXX/XXX.html)");
