@@ -259,6 +259,7 @@ Test-Klasse: `TestIngredient`
     assertNotEquals(code1, code2);
   }
 ```
+
 Diese Testklasse mit den dargestellten Methoden ist ein Positivbeispiel für "thorough testing". All diese Testmethoden testen verschiedene Zweige der selbstimplementieren `equals` Methode der Klasse `Ingredient`. Sie testen Vergeliche zwischen
 - einer `Ingredient`-Instanz mit sich selbst
 - zwei gleichen `Ingredient`-Instanzen
@@ -305,6 +306,7 @@ Da die Tests für diese Methode vollständig fehlen, werden dementsprechend auch
 #### positives Beispiel
 
 Test-Methode: `TestWebsiteFetcher#testGetWebsiteBodyInvalidUrl`
+
 ```java
   @Test
   public void testGetWebsiteBodyInvalidUrl() {
@@ -373,6 +375,7 @@ Unabhängig dessen begründet sich die Code-Coverage wie folgt:
 In diesem Projekt wurden vor allem Mock-Objekte eingesetzt. Sie wurden genutzt, um benötigte Nebenklassen zu mocken. Nachfolgend sind zwei demonstrative Beispiel für den Einsatz von Mock-Objekten mit dazugehörigen UML Diagrammen zu sehen. 
 
 Beispiel aus: `TestGroceryList#testConstructorVarArgs`
+
 ```java
   @Test
   public void testConstructorVarArgs() {
@@ -393,6 +396,7 @@ _[TODO: Analyse und Begründung für Einsatz]
 
 
 Beispiel aus: `TestMealPlan#setUp`
+
 ```java
   @BeforeEach
   public void setUp() {
@@ -432,6 +436,7 @@ _[4 Beispiele für die Ubiquitous Language; jeweils Bezeichung, Bedeutung und ku
 ### Entities
 
 zugehörige Klassen(n): `Recipe`
+
 ![Entity Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/entity.iuml)
 
 Die `Recipe` Entity beschreibt ein semantisches Rezept. Wie das UML-Diagram zeigt, besteht ein Rezept aus einem Name, einer Liste von Zutaten (GroceryList) und einer Liste von Schritten zur Zubereitung (RecipeStep). Ein Rezept wird eineindeutig über eine ID indetifiziert. In diesem Fall besteht die ID aus dem Namen in Kleinschrift. Haben also zwei Rezepte den selben Namen, werden sie als gleich angesehen. Weiterhin hat die `Recipe` Klasse mehrere Getter-Methoden für die einzelnen Attribute und die ID als auch einen Konstruktor.
@@ -445,6 +450,7 @@ Der Einsatz dieser Entity begründet sich dadurch, dass es notwendig war, ein Re
 ### Value Objects
 
 zugehörige Klassen(n): `Ingredient`
+
 ![Entity Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/value-object.iuml)
 
 Das `Ingredient` Value Object beschreibt eine Zutat für ein Gericht. Es besitzt als einziges Attribute einen Namen, der es definiert. Neben dem Namen besitzt es zwei Getter-Methoden für den Namen (`getValue`) und für die ID (`getID`). Letztere, ist dabei jedoch nicht zur eindeutigen Identifizierung im Sinne einer Entity anzusehen, sondern wird lediglich zum einfacheren Vergleich zweier `Ingredient`-Instanzen verwendet. Die ID setzt sich aus dem Namen in Kleinschrift zusammen. Zusätzlich existiert ein Konstruktor zur Erzeugung einer Ingredient-Instanz, bei der die Richtigkeit des Namens überprüft wird. Ähnlich wie bei der `Recipe`-Klassen, muss ein Namen mindestens ein Zeichen enthalten, das keinem White-Space Zeichen entspricht. 
@@ -454,6 +460,7 @@ Ein `Ingredient` hat keinen Lebenszyklus und auch keine relevante Logik implemen
 ### Repositories
 
 zugehörige Klassen(n): `RecipeFileRepository`
+
 ![Repository Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/repository.iuml)
 
 - `saveRecipe`: speichert ein gegebenes Rezept in einer Datei im Dateiort `recipesFolder` ab
@@ -469,6 +476,7 @@ Um die Persistenzverwaltung gründlich und sauber von der Domänenlogik zu trenn
 ### Aggregates
 
 zugehörige Klassen(n): `Meal`
+
 ![Aggregate Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/aggregate.iuml)
 
 In diesem Projekt wurde die `Meal`-Klasse als Aggregate ausgewählt.Die `Meal`-Klasse fasst logsiches Verhalten verschiedener Elemente zusammen. Es definiert sich durch ein Rezept `recipe` und einem Integer `adjustedNumberOfPeople`, das darstellt, auf wie viele Personen die Zutatenmenge des Rezeptes angepasst werden soll. Der Konstruktor enthält keine weitere Logik zur Überprüfung der Attribute. Des Weiteren exisiteren folge Methoden:
