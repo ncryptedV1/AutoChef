@@ -1,0 +1,23 @@
+@startuml
+
+left to right direction
+
+interface RecipeRepository {
+  + saveRecipe(recipe: Recipe): void
+  + deleteRecipe(recipe: Recipe): boolean
+  + getRecipes(): List<Recipe>
+  + getRecipe(id: String): Recipe
+}
+
+class RecipeFileRepository {
+  - recipesFolder: File
+  + RecipeFileRepository(recipesFolder: File)
+  + saveRecipe(recipe: Recipe): void
+  + deleteRecipe(recipe: Recipe): boolean
+  + getRecipes(): List<Recipe>
+  + getRecipe(id: String): Recipe
+}
+
+RecipeRepository <|.. RecipeFileRepository
+
+@enduml

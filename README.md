@@ -146,7 +146,7 @@ _[jeweils eine bis jetzt noch nicht behandelte Klasse als positives und negative
 ![Kohäsion Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/cohesion.iuml)
 
 ### Don’t Repeat Yourself (DRY)\*
-
+commit sha: d89dcb3
 _[ein Commit angeben, bei dem duplizierter Code/duplizierte Logik aufgelöst wurde; Code-Beispiele (vorher/nachher); begründen und Auswirkung beschreiben]_
 
 ## 5. Unit Tests
@@ -422,32 +422,62 @@ _[Analyse und Begründung des Einsatzes von 2 Fake/Mock-Objekten; zusätzlich je
 ### Ubiquitous Language
 
 _[4 Beispiele für die Ubiquitous Language; jeweils Bezeichung, Bedeutung und kurze Begründung, warum es zur Ubiquitous Language gehört]_
-| Bezeichnung | Bedeutung | Begründung |
-|-------------|-----------|------------|
-|             |           |            |
-|             |           |            |
-|             |           |            |
-|             |           |            |
+| Bezeichnung  | Bedeutung                     | Begründung                                                                                                                          |
+|--------------|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| Ingredient   | Zutat                         | Jedes Gericht besteht aus verschiedenen Lebensmitteln sogenannten Zutaten.                                                          |
+| Grocery item | Element der Lebensmittelliste | Ein Gericht braucht Zutaten in bestimmten Mengen. Lebensmittel auf der Lebensmittelliste sind in Menge und Einheit daran angepasst. |
+| Grocery list | Lebensmittelliste             | Für Gerichte werden eine Menge von Lebensmittel benötigt. Die Lebensmittelliste fasst all diese zusammen.                           |
+| Meal plan    | Essensplan                    | Ein Essensplan beschreibt eine Sammlung von Gerichten für einen bestimmten Zeitraum.                                                |
 
 ### Entities
 
-_[UML, Beschreibung und Begründung des Einsatzes einer Entity; falls keine Entity vorhanden: ausführliche Begründung, warum es keines geben kann/hier nicht sinnvoll ist]_
+zugehörige Klassen(n): `Recipe`
 ![Entity Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/entity.iuml)
+
+Die `Recipe` Entity beschreibt ein semantisches Rezept. Wie das UML-Diagram zeigt, besteht ein Rezept aus einem Name, einer Liste von Zutaten (GroceryList) und einer Liste von Schritten zur Zubereitung (RecipeStep). Ein Rezept wird eineindeutig über eine ID indetifiziert. In diesem Fall besteht die ID aus dem Namen in Kleinschrift. Haben also zwei Rezepte den selben Namen, werden sie als gleich angesehen. Weiterhin hat die `Recipe` Klasse mehrere Getter-Methoden für die einzelnen Attribute und die ID als auch einen Konstruktor.
+
+Bei der Erstellung einer `Recipe`-Instanz mittels des Konstruktors wird die Richtigkeit der Attribute überprüft:
+- Der Name muss mindestens ein Zeichen abgesehen von White-Space beinhalten.
+- Die `RecipeStep`-Instanzen der Liste müssen in der richtigen Reihenfolge und konsektutiv vollständig sein, d.h. es dürfen keine Schritten zwischendrin fehlen.
+
+Der Einsatz dieser Entity begründet sich dadurch, dass es notwendig war, ein Rezept abbilden zu können. Rezepte werden gespeichert und haben somit einen Lebenszyklus. Das erzwingt laut Domain Driven Design Richtlinien die Erstellung einer Entity.
 
 ### Value Objects
 
-_[UML, Beschreibung und Begründung des Einsatzes eines Value Objects; falls kein Value Object vorhanden: ausführliche Begründung, warum es keines geben kann/hier nicht sinnvoll ist]_
+zugehörige Klassen(n): `Ingredient`
 ![Entity Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/value-object.iuml)
+
+Das `Ingredient` Value Object beschreibt eine Zutat für ein Gericht. Es besitzt als einziges Attribute einen Namen, der es definiert. Neben dem Namen besitzt es zwei Getter-Methoden für den Namen (`getValue`) und für die ID (`getID`). Letztere, ist dabei jedoch nicht zur eindeutigen Identifizierung im Sinne einer Entity anzusehen, sondern wird lediglich zum einfacheren Vergleich zweier `Ingredient`-Instanzen verwendet. Die ID setzt sich aus dem Namen in Kleinschrift zusammen. Zusätzlich existiert ein Konstruktor zur Erzeugung einer Ingredient-Instanz, bei der die Richtigkeit des Namens überprüft wird. Ähnlich wie bei der `Recipe`-Klassen, muss ein Namen mindestens ein Zeichen enthalten, das keinem White-Space Zeichen entspricht. 
+
+Ein `Ingredient` hat keinen Lebenszyklus und auch keine relevante Logik implementiert. Es dient lediglich zur Repräsentation von Informationen. Aus diesem Grund ist es auch nicht möglich die Informationen einer `Ingredient`-Instanz anzupassen - sie sind konstant. All diese Punkte begründen, warum sich hier für ein Value Object anstelle einer Entity oder Ähnlichem entschieden wurde.
 
 ### Repositories
 
-_[UML, Beschreibung und Begründung des Einsatzes eines Repositories; falls kein Repository vorhanden: ausführliche Begründung, warum es keines geben kann/hier nicht sinnvoll ist]_
+zugehörige Klassen(n): `RecipeFileRepository`
 ![Repository Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/repository.iuml)
+
+- `saveRecipe`: speichert ein gegebenes Rezept in einer Datei im Dateiort `recipesFolder` ab
+Repositories dienen als Vermittler zwischen Datenmodell und Domänenlogik. Sie werden genutzt, um Daten zu speichern oder sie abzurufen aus ebendiesen Speicher. In diesem Projekt wurde ein Repository `RecipeFileRepository` genutzt, um die Persistenz von Rezepten zu verwalten. Das `RecipeFileRepository` besitzt als einziges Attribut eine Instanz der `File`-Klasse namens `recipesFolder`, die angibt, wo im Dateisystem Rezepte gespeichert werden sollten. Zusätzlich existieren Methoden zur Persistenzverwaltung, die von dem Interface `RecipeRepository` implementiert werden:
+- `deleteRecipe`: löscht ein gegebenes Rezept im Dateiort `recipesFolder`
+- `getRecipe`: liest ein anhand der ID definiertes Rezept im Dateiort `recipesFolder` ein
+- `getRecipes`: liest alle vorhandenen Rezepte im Dateiort `recipesFolder` ein
+
+Damit sind die relevanten Methoden der Persistenzverwaltung abgedeckt. Bei der Erstellung einer `RecipeFileRepository`-Instanz mittels des Konstruktors wird ebenso geprüft, ob ein Ordner im Pfad `recipesFolder` angelegt werden kann. Sollte das nicht der Fall sein, tritt ein Fehler auf und es kann keine Instanz angelegt werden. 
+
+Um die Persistenzverwaltung gründlich und sauber von der Domänenlogik zu trennen, wurde dieses Repository eingesetzt. Mit Nutzung des Interfaces, kann sichergestellt werden, dass beide Elemente getrennt bleiben. Zusätzlich ermöglicht der Einsatz eines Repositories, Veränderungen an der Persistenzverwaltung vorzunehmen, ob auf die Domänenlogik eingreifen zu müsssen. 
 
 ### Aggregates
 
-_[UML, Beschreibung und Begründung des Einsatzes eines Aggregates; falls kein Aggregate vorhanden: ausführliche Begründung, warum es keines geben kann/hier nicht sinnvoll ist]_
+zugehörige Klassen(n): `Meal`
 ![Aggregate Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/aggregate.iuml)
+
+In diesem Projekt wurde die `Meal`-Klasse als Aggregate ausgewählt.Die `Meal`-Klasse fasst logsiches Verhalten verschiedener Elemente zusammen. Es definiert sich durch ein Rezept `recipe` und einem Integer `adjustedNumberOfPeople`, das darstellt, auf wie viele Personen die Zutatenmenge des Rezeptes angepasst werden soll. Der Konstruktor enthält keine weitere Logik zur Überprüfung der Attribute. Des Weiteren exisiteren folge Methoden:
+- `getRecipe`: eine Getter-Methode für `recipe`
+- `setRecipe`: eine Setter-Methode für `recipe`
+- `getAdjustedNumberOfPeople`: eine Getter-Methode für `adjustedNumberOfPeople`
+- `getGroceryList`: eine Getter-Methode, die die Zutaten des Rezeptes zurückgibt. Dabei werden die Mengen der Zutaten auf `adjustedNumberOfPeople` angepasst.
+
+Damit fasst das `Meal`-Aggregate Logik eines Gerichtes zusammen. Es hält jedoch keine eigene Identität, da dies bereits durch `Recipe` erfolgt ist. Es dient lediglich als Wrapper für ein Rezept um jenes zu repräsentieren. In der Theorie wäre es möglich, der `Meal`-Klasse eine eigenständige Identität und Lebenszyklus zu verleihen und es damit zu einer Entity zu transferieren. Das wäre vor allem hilfreich, wenn Logik zur Persistierung von Gerichten implementiert werden sollte. Da das aber nicht im Umfang der Anwendung inbegriffen ist, ist ein Transfer zu einer Entity nicht notwendig. 
 
 ## 7. Refactoring
 
