@@ -18,7 +18,10 @@ public class MealPlan {
   private LocalDate end;
 
   public MealPlan(List<Meal> meals, LocalDate start, LocalDate end) {
-    int days = start.until(end).getDays();
+    this.start = start;
+    this.end = end;
+    
+    int days = getDays();
     if (meals.size() != days) {
       throw new IllegalArgumentException(
           "Mahlzeiten-Plan spannt " + days + " Tage, es wurden allerdings nur " + meals.size()
@@ -26,8 +29,6 @@ public class MealPlan {
     }
 
     this.meals = meals;
-    this.start = start;
-    this.end = end;
   }
 
   public List<Meal> getMeals() {
