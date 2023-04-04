@@ -604,32 +604,214 @@ Damit fasst das `Meal`-Aggregate Logik eines Gerichtes zusammen. Es hält jedoch
 
 ### Code Smells
 
-_[jeweils 1 Code-Beispiel zu 2 Code Smells aus der Vorlesung; jeweils Code-Beispiel und einen möglichen Lösungsweg bzw. den genommen Lösungsweg beschreiben (inkl. (Pseudo-)Code)]_
 #### Code Smell 1
-https://github.com/ncryptedV1/AutoChef/commit/d89dcb38a0e45759dd3e689593870d1e9ed0da96
-Duplicate Code
+Code Smell: Duplicate Code
+([Commit](https://github.com/ncryptedV1/AutoChef/commit/d89dcb38a0e45759dd3e689593870d1e9ed0da96))
 
+vorher:
 
-Large Method / Extract Class
-https://github.com/ncryptedV1/AutoChef/commit/8a66d9a6405c9ca4cf710490ae06eb810ea87978#diff-a914343e6af07030cd7b3b51d56fc5e0f541d6bd350ee0ef11324a9bc5aae66f
+```java
+  public MealPlan(List<Meal> meals, LocalDate start, LocalDate end) {
+    int days = start.until(end).getDays();
+    if (meals.size() != days) {
+      throw new IllegalArgumentException(
+        "Mahlzeiten-Plan spannt " + days + " Tage, es wurden allerdings nur " + meals.size()
+          + " Mahlzeiten übergeben");
+    }
 
-Dead Code
-https://github.com/ncryptedV1/AutoChef/commit/f2b13c5e535bf60d72c17d51970f2993bd3457cf
+    this.meals = meals;
+    this.start = start;
+    this.end = end;
+  }
 
+  // ...
+
+  public int getDays() {
+    return start.until(getEnd()).getDays();
+  }
+```
+
+nachher:
+
+```java
+  public MealPlan(List<Meal> meals, LocalDate start, LocalDate end) {
+    this.start = start;
+    this.end = end;
+
+    int days = getDays();
+    if (meals.size() != days) {
+      throw new IllegalArgumentException(
+          "Mahlzeiten-Plan spannt " + days + " Tage, es wurden allerdings nur " + meals.size()
+              + " Mahlzeiten übergeben");
+    }
+
+    this.meals = meals;
+  }
+
+  // ...
+  
+  public int getDays() {
+    return start.until(getEnd()).getDays();
+  }
+```
+
+Dieser Code Smell umfasst eine Code Duplication in der `MealPlan`-Klasse. Relevant ist hierbei vor allem Zeile 2. Hier wird die folgende Berechnung ausgeführt:
+
+```
+int days = start.until(end).getDays();
+```
+
+`days` gibt dabei die Anzahl an Tagen zwischen `start` udn `end` an. Was dabei aber auffällt, ist, dass diese Logik bereits zu anderen Zwecken in der `getDays`-Methode vorhanden ist. Diese Methode wird verwendet, um auch von außen Zugriff auf die Anzahl der Tage zu haben. Damit kann hier eine kleine Dopplung vorgefunden werden. Diese wurde nun, wie im zweiten Code-Beispiel ersichtlich, behoben. Dabei wurde die Zuweisung der Variable `this.start` und `this.end` nach oebn verschoben, sodass dann die Methode `getDays` aufgerufen werden kann. Dieser Methodenaufruf ermöglicht es jetzt, die Logik der Berechnung der Anzahl der Tage zu kapseln und somit die Wartbarkeit zu erhöhen.
+
+#### Code Smell 2
+Code Smell 2: Large Method
+([Commit](https://github.com/ncryptedV1/AutoChef/commit/990e2b31be1fb10314691630584319d48b3d0cd8#diff-fdae48ae8bf101ffc36c43d7bbad7c1da1bef6ba56429655006dac33210fe387))
+
+vorher: 
+
+```java
+  public static void main(String[] args) {
+    logger.info("Starting...");
+
+    // setup groceries
+    GroceryItem item1 = new GroceryItem(new Ingredient("Banane"), new Quantity(1), Unit.GRAM);
+    GroceryItem item2 =
+        new GroceryItem(new Ingredient("Pineapple"), new Quantity(0.2), Unit.KILOGRAM);
+    GroceryItem item3 =
+        new GroceryItem(new Ingredient("Orange juice"), new Quantity(0.1), Unit.LITER);
+    GroceryItem item4 = new GroceryItem(new Ingredient("Apple"), new Quantity(1), Unit.PIECE);
+    GroceryItem item5 =
+        new GroceryItem(new Ingredient("Nutella"), new Quantity(2), Unit.TABLESPOON);
+
+    // setup recipe steps
+    RecipeStep recipeStep1 =
+        new RecipeStep(1, "Cut some banana, apple and pineapple as the basis for this salad.",
+            item1, item2, item3);
+    RecipeStep recipeStep2 = new RecipeStep(2, "Add orange juice to make it more juicy.", item4);
+    RecipeStep recipeStep3 =
+        new RecipeStep(3, "Add a bit of Nutella for making it look beautiful.", item5);
+
+    // setup recipe for
+    Recipe recipe1 = new Recipe("Sugar-free fruit salad", recipeStep1, recipeStep2, recipeStep3);
+
+    // setup meal
+    Meal meal1 = new Meal(recipe1, 2);
+    // setup meal plan
+    List<Meal> mealList = Arrays.asList(meal1);
+    LocalDate startDate = LocalDate.of(2023, 2, 20);
+    LocalDate endDate = LocalDate.of(2023, 2, 26);
+    MealPlan mealPlan = new MealPlan(mealList, startDate, endDate);
+
+    logger.info(mealPlan.toString());
+  }
+```
+
+nachher: 
+
+```java
+  public static void main(String[] args) {
+    logger.info("Starting...");
+
+    // generate mock data
+    List<GroceryItem> groceryItems = MockService.generateGroceryItems();
+    List<RecipeStep> recipeSteps = MockService.generateRecipeSteps(groceryItems);
+    Recipe recipe = MockService.generateRecipe(recipeSteps);
+    Meal meal = MockService.generateMeal(recipe);
+    List<Meal> meals = Arrays.asList(meal);
+    MealPlan mealPlan = MockService.generateMealPlan(meals);
+
+    logger.info(mealPlan.toString());
+  }
+```
+
+```java
+public class MockService {
+
+  private static final Random random = new Random();
+
+  public static List<GroceryItem> generateGroceryItems() {
+    GroceryItem item1 = new GroceryItem(new Ingredient("Banane"), new Quantity(1), Unit.GRAM);
+    GroceryItem item2 = new GroceryItem(new Ingredient("Pineapple"), new Quantity(0.2),
+            Unit.KILOGRAM);
+    GroceryItem item3 = new GroceryItem(new Ingredient("Orange juice"), new Quantity(0.1),
+            Unit.LITER);
+    GroceryItem item4 = new GroceryItem(new Ingredient("Apple"), new Quantity(1), Unit.PIECE);
+    GroceryItem item5 = new GroceryItem(new Ingredient("Nutella"), new Quantity(2),
+            Unit.TABLESPOON);
+    return Arrays.asList(item1, item2, item3, item4, item5);
+  }
+
+  public static List<RecipeStep> generateRecipeSteps(List<GroceryItem> groceryItems) {
+    RecipeStep recipeStep1 = new RecipeStep(1,
+            "Cut some banana, apple and pineapple as the basis for this salad.",
+            getSample(groceryItems));
+    RecipeStep recipeStep2 = new RecipeStep(2, "Add orange juice to make it more juicy.",
+            getSample(groceryItems));
+    RecipeStep recipeStep3 = new RecipeStep(3, "Add a bit of Nutella for making it look beautiful.",
+            getSample(groceryItems));
+    return Arrays.asList(recipeStep1, recipeStep2, recipeStep3);
+  }
+
+  public static Recipe generateRecipe(List<RecipeStep> recipeSteps) {
+    return new Recipe("Sugar-free fruit salad", recipeSteps);
+  }
+
+  public static Meal generateMeal(Recipe recipe) {
+    return new Meal(recipe, 2);
+  }
+
+  public static MealPlan generateMealPlan(List<Meal> meals) {
+    LocalDate startDate = LocalDate.of(2023, 2, 20);
+    LocalDate endDate = LocalDate.of(2023, 2, 26);
+    return new MealPlan(meals, startDate, endDate);
+  }
+
+  private static <T> List<T> getSample(List<T> list) {
+    int sampleSize = random.nextInt(1, list.size());
+    List<T> result = new ArrayList<>(list);
+    result = result.subList(0, sampleSize);
+    return result;
+  }
+}
+```
+
+Der zweite Code Smell befasst sich mit der Auslagerung der `MockService`-Klasse, die im aktuellen Stand nicht mehr vorhanden ist. In diesem Fall ist der Code Smell eine _Large Method_: die `main`-Methode. Sie umfasst die Erstellung einiger Objekte, damit die Anwendung mit Testdaten getestet werden konnte. Da es sich hier um vergleichsweise viele Objekte handelt, ist die Methode groß. 
+
+Um das zu beheben, wurde die vorhandene Logik extrahiert in eine `MockService`-Klasse. Diese Klasse ist nun dafür verantwortlich, Testobjekte und -daten zu generieren und über Methodenaufrufe zurückzugeben. Dabei sind mehrere Methoden im Mock-Service entstanden, was die Komplexität des Code-Smells zeigt.
 
 ### 2 Refactorings
 
-_[2 unterschiedliche Refactorings aus der Vorlesung anwenden, begründen, sowie UML vorher/nachher liefern; jeweils auf die Commits verweisen]_
+[//]: # (Refactoring: Extract Method)
+
+[//]: # ([Commit]&#40;https://github.com/ncryptedV1/AutoChef/commit/8a66d9a6405c9ca4cf710490ae06eb810ea87978#diff-a914343e6af07030cd7b3b51d56fc5e0f541d6bd350ee0ef11324a9bc5aae66f&#41;)
 
 #### Refactoring 1
+Refactoring 2: Extract Class (ConsoleOutputService)
+([Commit](https://github.com/ncryptedV1/AutoChef/commit/d2251bcb4cc4053a1de24e20213a46034d3e0dbf))
+
+vorher:
 
 ![Refactoring Beispiel 1 Pre UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/refactoring-1-pre.iuml)
+
+nachher:
+
 ![Refactoring Beispiel 1 Post UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/refactoring-1-post.iuml)
 
+Das in den UML-Diagrammen gezeigte Refactoring ist das _Extract Class_-Refactoring, das genutzt wurde um die `ConsoleOutputService`-Klasse zu erschaffen. Der Commit und das erste UML-Diagramm zeigen, dass die `AutoChef`-Klasse mit der `main`-Methode zunächst auch für die Konsolenausgabe verantwortlich war. Um das aber sauber voneinander zu trennen, und die Komplexität der `main`-Methode so einfach wie möglich zu halten, wurde die Logik der Consolenausgabe in eine separate Klasse ausgelagert. Die neu geschaffene Klasse `ConsoleOutputService` umfasst neben der Logik, die vorher in der `main`-Methode existierte, auch noch weitere Funktionalitäten. Das zeigt auch das zweite UML-Diagramm. Zu sehen ist hier die `ConsoleOutputService`-Klasse mit ihren verschiedenen Methoden zur Konsolenausgabe. Mit diesem Refactoring konnte eine saubere Trennung der Verantwortlichkeiten, sowie eine kleinere `main`-Klasse erreicht werden.
+
 #### Refactoring 2
+Refactoring 2: Rename Method
+([Commit](https://github.com/ncryptedV1/AutoChef/commit/19fb6fc9c8bdee1a0e1d31f31c431a38eaf68ae2#diff-a621a84bbbaeb91c8fc33118865eb8c87e0bf202d7dfe7b5bf8d20a786a51239))
+
+vorher: 
 
 ![Refactoring Beispiel 2 Pre UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/refactoring-2-pre.iuml)
+
+nachher: 
+
 ![Refactoring Beispiel 2 Post UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/refactoring-2-post.iuml)
+
+Dieses Refactoring umfasst das Umbenennen einer Methode (_Rename Method_) um mehr Klarheit im Quellcode zu schaffen. Es handelt sich dabei um die Methode `getIngredients` respektive `getGroceryList` (nach dem Refactoring). Diese kleine Änderung im Code ist auch in den UML-Diagrammen ersichtlich. Der Commit zeigt ebenso, dass die Größe der Änderung vergleichsweise klein ist. Die `getIngredients`-Methode wurde dabei umbenannt in `getGroceryList`. Für den Entwickler macht das vor allem deutlich, dass das Rückgabeergebnis eine `GroceryList` anstelle einer `List<Ingredient>` ist. Das ist besonders wichtig, da es sich hier um verschiedene Objekte mit unterschiedlichen Eigenschaften und Funktionalitäten handelt. So können vermeintliche Fehler in der Benutzung der Methode durch mehr Klarheit vermieden werden, die sonst durch Unachtsamkeit aufgetreten wären.
 
 ## 8. Entwurfsmuster
 
