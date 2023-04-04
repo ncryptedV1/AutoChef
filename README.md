@@ -154,17 +154,34 @@ Dabei könnte `startMealPlanGeneration` mit einem `GenerationService` interagier
 
 ### Analyse Open-Closed-Principle (OCP)
 
-_[Analyse mit Begründung, warum das OCP erfüllt/nicht erfüllt wurde – falls erfüllt: warum hier sinnvoll/welches Problem gab es? Falls nicht erfüllt: wie könnte man es lösen (inkl. UML)?]_
 
 #### Positiv-Beispiel
 
+gewählte Klasse(n): `RecipeFileRepository` mit Interface `RecipeRepository` 
+
 ![Open-Closed positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/open-closed-pos.iuml)
+
+Die `RecipeFileRepository`-Klasse ist ein Repository, dass das Interface `RecipeRepository` implementiert. Das Interface beschreibt, welche Schnittstelle zum Speichern von Daten benötigt wird. Die `RecipeFileRepository`-Klasse implementiert diese Methoden für den Fall von Datenpersistenz in Dateien. 
+
+Da hier ein Interface verwendet wird, ist es leicht möglich neue Funktionalität hinzuzufügen. Dazu muss lediglich eine neuer Methodekopf im Interface definiert werden. Die dazugehörige Methode muss in allen Klassen, die das Interface implementieren, hinzugefügt werden. Damit ist die "Open" Eigenschaft des OCP erfüllt. Auf der anderen Seite sollte Code "closed" gegenüber Modifikationen sein. Das ist ebenso durch die Verwendung eines Interfaces erfüllt. Das Interface bestimmt die Funktionalitäten der Klasse.  
+
+Hier mit dem OCP zu arbeiten ist vor allem aus Sicht der Flexibilität und Erweiterbarkeit sinnhaft. Sollte sich später dazu entschieden werden, eine andere Methode der Datenpersistenz zu wählen, muss lediglich die Implementierung des Interfaces angepasst bzw weitere Klassen, die das Interface implementieren hinzugefügt werden. So kann die Anwendung an verschiedene Umgebungen und Anforderungen leichter angepasst werden, ohne die inneren Schichten der Clean-Architecture verändern zu müssen. Gerade in Hinsicht dessen, dass dieses Projekt eventuell freizeitlich weiterverfolgt wird, ergibt dieser Ansatz Sinn.  
 
 #### Negativ-Beispiel
 
+gewählte Klasse(n): `ChefkochRecipeFetcher`
+
+vorher:
 ![Open-Closed negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/open-closed-neg-1.iuml)
 
+nachher:
 ![Open-Closed negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/open-closed-neg-2.iuml)
+
+Die `ChefkochRecipeFetcher`-Klasse ist ein Beispiel davon, wie das OCP verletzt werden kann. Diese Klasse dient dazu, Daten aus einer Chefkoch-Website zu extrahieren. Dazu werden verschiedene RegEx-Ausdrücke genutzt. 
+
+Das OCP ist hier nicht erfüllt, da die Klasse nicht offen für Erweiterungen ist, ohne gleichzeitig geschlossen für Modifikationen zu sein. Sollte die Anforderung aufkommen, weitere Anbieter wie KitchenStories.com zu integrieren oder gar die Chefkoch-Integration zu ersetzen, müssten einige Code-Modifikationen durchgeführt werden. Dadurch ist das OCP verletzt.
+
+Gelöst werden kann das durch ein Interface wie im zweiten UML ersichtlich. Ein abstrakter `RecipeFetcher` kann als Interface für die Integration genutzt werden. Welche spezielle Webseiten-Integration im Hintergrund benutzt wird, ist dabei irrelevant für die inneren Schichten der Clean-Architecture. So wäre die Implementierung offen für weitere Erweiterungen unter Verwendung des Interfaces. Gleichzeitig müssten keine aufwändigen Code-Modifikationen an den inneren Schichten oder dem Interface vorgenommen werden, damit beide Module miteinander interagieren können. Dadurch wäre das OCP erfüllt.
 
 ### Analyse Liskov-Substitution- (LSP), Interface-Segreggation- (ISP), Dependency-Inversion-Principle (DIP)
 
@@ -224,7 +241,7 @@ vorher:
   }
 ```
 
-danach:
+nachher:
 
 ```java
   public MealPlan(List<Meal> meals, LocalDate start, LocalDate end) {

@@ -1,0 +1,29 @@
+@startuml
+
+left to right direction
+
+interface RecipeFetcher {
+  + getRecipe(url: String): Recipe 
+  + extractRecipeName(content: String): String 
+  + extractIngredients(content: String): GroceryList 
+  + extractRecipeSteps(content: String): List<RecipeStep>
+}
+
+class ChefkochRecipeFetcher {
+  + getRecipe(url: String): Recipe 
+  + extractRecipeName(content: String): String 
+  + extractIngredients(content: String): GroceryList 
+  + extractRecipeSteps(content: String): List<RecipeStep> 
+}
+
+class KitchenStoriesRecipeFetcher {
+  + getRecipe(url: String): Recipe 
+  + extractRecipeName(content: String): String 
+  + extractIngredients(content: String): GroceryList 
+  + extractRecipeSteps(content: String): List<RecipeStep> 
+}
+
+RecipeFetcher <|.. ChefkochRecipeFetcher
+RecipeFetcher <|.. KitchenStoriesRecipeFetcher
+
+@enduml
