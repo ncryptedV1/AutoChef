@@ -77,10 +77,6 @@ _[(1 Klasse, die die Dependency Rule einhält und eine Klasse, die die Dependenc
 
 ### Analyse der Schichten
 
-[//]: # (#### Plugins)
-[//]: # (- ConsoleInputReader, ConsoleOutputService)
-
-
 #### Schicht: Domain Code
 
 - gewählte Klasse(n): `Recipe`
@@ -100,13 +96,9 @@ Damit liegt die Aufgabe der `Recipe`-Entität darin, ein Rezept semantisch im Co
 
 - gewählte Klasse(n): `DialogService` mit `DialogState` 
 
-[//]: # (mit `RecipeRepository`, `RecipeFileRepository` und `DialogState`)
-
 ![Schicht 2 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/layer-2.iuml)
 
 Die Schicht des Applications Codes umfasst mehrere Klassen. Dabei soll die Klasse `DialogService` im Fokus stehen. 
-
-[//]: # (Da dieser Service aber Abhängigkeiten zu anderen Klassen hat, die relevant in der Betrachtung und Einordnung sind, werden sie hier mit aufgeführt.)
 
 Im Kern ist der Dialog-Service für die Ablauflogik der Anwendung verantwortlich. Er verwaltet die Datenpersistenz über die Klassen `RecipeRepository` und `RecipeFileRepository`, ist aber gleichzeitig auch für die Nutzung von Benutzereingaben über die Klassen `ConsoleInputReader`, `ConsoleInputParser` und `ConsoleOutputService` verantwortlich. Damit ist er die Schnittstelle zwischen den einzelnen Verantwortungsbereichen der Anwendung.
 
@@ -117,8 +109,6 @@ Ebenso bedeutet das, dass Änderungen an dem DialogService keinen Einfluss auf d
 ## 3. SOLID
 
 ### Analyse Single-Responsibility-Principle (SRP)
-
-_[Beschreibung der Aufgabe bzw. der Aufgaben und möglicher Lösungsweg des Negativ-Beispiels (inkl. UML)]_
 
 #### Positiv-Beispiel
 
@@ -277,7 +267,6 @@ Der Commit sorgte dafür, dass dieser Code durch einen Aufruf der `getDays` Meth
 
 ### 10 Unit Tests
 
-_[Nennung von 10 Unit-Tests und Beschreibung, was getestet wird]_
 | Unit Test                                         | Beschreibung                                                                                                                                     |
 |---------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
 | _TestUnit#testHashCodeTrue_                       | testet, ob die `hashCode` Funktion der `Unit` Klasse, für zwei Objekte, den selben Hashcode korrekt zurückgibt zurückgibt                        |
@@ -295,8 +284,6 @@ _[Nennung von 10 Unit-Tests und Beschreibung, was getestet wird]_
 Die Tests wurden mittels Testautomatisierung realisiert. Dabei wurde JUnit 5 verwendet, um automatisierte Tests zu schreiben. Über die IDE IntelliJ IDEA können die Test simpel über einen Knopfdruck ausgeführt werden. Im Anschluss laufen alle Tests automatisch. Das Ergebnis der Testautomatisierung zeigt, ob ein individueller Test erfolgreich (bestanden) oder nicht erfolgreich (fehlgeschlagen) war.
 
 ### ATRIP: Thorough
-
-_[jeweils 1 positives und negatives Beispiel zu ‘Thorough’; jeweils Code-Beispiel, Analyse und Begründung, was professionell/nicht professionell ist]_
 
 #### positives Beispiel
 
@@ -550,7 +537,6 @@ _[Analyse und Begründung des Einsatzes von 2 Fake/Mock-Objekten; zusätzlich je
 
 ### Ubiquitous Language
 
-_[4 Beispiele für die Ubiquitous Language; jeweils Bezeichung, Bedeutung und kurze Begründung, warum es zur Ubiquitous Language gehört]_
 | Bezeichnung  | Bedeutung                     | Begründung                                                                                                                          |
 |--------------|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
 | Ingredient   | Zutat                         | Jedes Gericht besteht aus verschiedenen Lebensmitteln sogenannten Zutaten.                                                          |
