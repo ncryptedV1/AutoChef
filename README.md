@@ -146,8 +146,62 @@ _[jeweils eine bis jetzt noch nicht behandelte Klasse als positives und negative
 ![Kohäsion Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/cohesion.iuml)
 
 ### Don’t Repeat Yourself (DRY)\*
-commit sha: d89dcb3
-_[ein Commit angeben, bei dem duplizierter Code/duplizierte Logik aufgelöst wurde; Code-Beispiele (vorher/nachher); begründen und Auswirkung beschreiben]_
+Commit-SHA: d89dcb3 ([Link](https://github.com/ncryptedV1/AutoChef/commit/d89dcb38a0e45759dd3e689593870d1e9ed0da96))
+
+vorher:
+
+```java
+  public MealPlan(List<Meal> meals, LocalDate start, LocalDate end) {
+    int days = start.until(end).getDays();
+    if (meals.size() != days) {
+      throw new IllegalArgumentException(
+        "Mahlzeiten-Plan spannt " + days + " Tage, es wurden allerdings nur " + meals.size()
+          + " Mahlzeiten übergeben");
+    }
+
+    this.meals = meals;
+    this.start = start;
+    this.end = end;
+  }
+
+  // ...
+
+  public int getDays() {
+    return start.until(getEnd()).getDays();
+  }
+```
+
+danach:
+
+```java
+  public MealPlan(List<Meal> meals, LocalDate start, LocalDate end) {
+    this.start = start;
+    this.end = end;
+
+    int days = getDays();
+    if (meals.size() != days) {
+      throw new IllegalArgumentException(
+          "Mahlzeiten-Plan spannt " + days + " Tage, es wurden allerdings nur " + meals.size()
+              + " Mahlzeiten übergeben");
+    }
+
+    this.meals = meals;
+  }
+
+  // ...
+  
+  public int getDays() {
+    return start.until(getEnd()).getDays();
+  }
+```
+
+Die oben gezeigte Änderung ist ein kleines Beispiel zur Reduktion von Code-Duplikationen. Die Methode `getDays` ware bereits vor dem Commit vorhanden. Sie dient dazu, die Anzahl an Tagen zwischen `start` und `end` zu berechnen. Vor dem Commit, wurde jedoch dieselbe Logik im Konstruktor in der 2. Zeile verwendet: 
+
+```java
+int days = start.until(end).getDays();
+```
+
+Der Commit sorgte dafür, dass dieser Code durch einen Aufruf der `getDays` Methode ersetzt wurde. Das hat zur Folge, dass die Logik der Berechnung der Anzahl der Tage nur an einem Punkt im Code genutzt wird: in der `getDays` Methode. Dadurch können Fehler vermieden werden, die durch unachtsame Änderungen an einer der beiden Code-Stellen aufgetreten wären. 
 
 ## 5. Unit Tests
 
@@ -390,6 +444,7 @@ Beispiel aus: `TestGroceryList#testConstructorVarArgs`
     assertNotNull(list);
   }
 ```
+
 ![Fakes und Mocks Beispiel 1 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/fake-mock-1.iuml)
 
 _[TODO: Analyse und Begründung für Einsatz]
@@ -492,6 +547,17 @@ Damit fasst das `Meal`-Aggregate Logik eines Gerichtes zusammen. Es hält jedoch
 ### Code Smells
 
 _[jeweils 1 Code-Beispiel zu 2 Code Smells aus der Vorlesung; jeweils Code-Beispiel und einen möglichen Lösungsweg bzw. den genommen Lösungsweg beschreiben (inkl. (Pseudo-)Code)]_
+#### Code Smell 1
+https://github.com/ncryptedV1/AutoChef/commit/d89dcb38a0e45759dd3e689593870d1e9ed0da96
+Duplicate Code
+
+
+Large Method / Extract Class
+https://github.com/ncryptedV1/AutoChef/commit/8a66d9a6405c9ca4cf710490ae06eb810ea87978#diff-a914343e6af07030cd7b3b51d56fc5e0f541d6bd350ee0ef11324a9bc5aae66f
+
+Dead Code
+https://github.com/ncryptedV1/AutoChef/commit/f2b13c5e535bf60d72c17d51970f2993bd3457cf
+
 
 ### 2 Refactorings
 
