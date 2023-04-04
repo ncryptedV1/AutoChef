@@ -162,9 +162,11 @@ Hier mit dem OCP zu arbeiten ist vor allem aus Sicht der Flexibilität und Erwei
 gewählte Klasse(n): `ChefkochRecipeFetcher`
 
 vorher:
+
 ![Open-Closed negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/open-closed-neg-1.iuml)
 
 nachher:
+
 ![Open-Closed negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/open-closed-neg-2.iuml)
 
 Die `ChefkochRecipeFetcher`-Klasse ist ein Beispiel davon, wie das OCP verletzt werden kann. Diese Klasse dient dazu, Daten aus einer Chefkoch-Website zu extrahieren. Dazu werden verschiedene RegEx-Ausdrücke genutzt. 
@@ -546,7 +548,7 @@ _[Analyse und Begründung des Einsatzes von 2 Fake/Mock-Objekten; zusätzlich je
 
 ### Entities
 
-zugehörige Klassen(n): `Recipe`
+zugehörige Klasse(n): `Recipe`
 
 ![Entity Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/entity.iuml)
 
@@ -560,7 +562,7 @@ Der Einsatz dieser Entity begründet sich dadurch, dass es notwendig war, ein Re
 
 ### Value Objects
 
-zugehörige Klassen(n): `Ingredient`
+zugehörige Klasse(n): `Ingredient`
 
 ![Entity Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/value-object.iuml)
 
@@ -570,7 +572,7 @@ Ein `Ingredient` hat keinen Lebenszyklus und auch keine relevante Logik implemen
 
 ### Repositories
 
-zugehörige Klassen(n): `RecipeFileRepository`
+zugehörige Klasse(n): `RecipeFileRepository`
 
 ![Repository Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/repository.iuml)
 
@@ -586,7 +588,7 @@ Um die Persistenzverwaltung gründlich und sauber von der Domänenlogik zu trenn
 
 ### Aggregates
 
-zugehörige Klassen(n): `Meal`
+zugehörige Klasse(n): `Meal`
 
 ![Aggregate Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/aggregate.iuml)
 
