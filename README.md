@@ -118,19 +118,43 @@ Ebenso bedeutet das, dass Änderungen an dem DialogService keinen Einfluss auf d
 
 ### Analyse Single-Responsibility-Principle (SRP)
 
-_[jeweils eine Klasse als positives und negatives Beispiel für SRP; jeweils UML der Klasse und Beschreibung der Aufgabe bzw. der Aufgaben und möglicher Lösungsweg des Negativ-Beispiels (inkl. UML)]_
+_[Beschreibung der Aufgabe bzw. der Aufgaben und möglicher Lösungsweg des Negativ-Beispiels (inkl. UML)]_
 
 #### Positiv-Beispiel
 
+gewählte Klasse: `Quantity`
+
 ![Single Responsibility positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/single-responsibility-pos.iuml)
+
+Die `Quantity`-Klasse bildet eine "Menge" oder "Anzahl" ab. Es ist relevant für die Menge von Zutaten in einem Rezept. Die Klasse ist maßgeblich definiert durch ihr einziges Attribute `value`, das eine Menge als `double` repräsentiert. Zusätzlich dazu kann über die Methode `multiply` eine `Quantity`-Instanz mit einem Wert multipliziert werden, was wieder eine neue `Quantity`-Instanz zurückgibt. `Quantity` ist vor allem relevant im Kontext von `GroceryItem`, da dort beschrieben wird, wie viel von einem `Ingredient` benötigt wird.
+
+Die Verantwortung der Klasse liegt demnach darin, semantisch eine "Menge" abzubilden. Daneben besitzt sie keine weiteren Verantwortlichkeiten.
 
 #### Negativ-Beispiel
 
-![Single Responsibility negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/single-responsibility-neg.iuml)
+gewählte Klasse: `DialogService`
+
+![Single Responsibility negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/single-responsibility-neg-1.iuml)
+
+Ein Negativbeispiel für das SRP ist der Dialog-Service - im Speziellen die `startMealPlanGeneration`-Methode. Die Klasse nimmt die Rolle eines "Controllers" ein, da sie die Persistenz von Daten und die Ausgabe an das Command-Line-Interface verwaltet. Als Teil der Application-Code-Schicht enthält der Dialog-Service jedwede Logik für den Ablauf der Anwendung: 
+- es startet den Dialog mit dem Benutzer
+- organisiert die Generierung von Essensplänen und 
+- gibt dem Benutzer die Möglichkeit Rezepte hinzuzufügen.
+Der Dialog-Service ist speziell für den Anwendungsfall einer CLI-Anwendung definiert.
+
+Der Dialog-Service hat jedoch mehrere Verantwortlichkeiten und bricht damit das SRP:
+- Steuerung der Ablauflogik (dafür werden die Verwaltung von Benutzerein- und -ausgabe als auch der Datenpersistenz genutzt)  
+- Generierung eines Essensplan über die Methode `startMealPlanGeneration`
+
+Gerade die zweite Verantwortlichkeit - die Generierung eines Essenplans - kann in einen separaten Service ausgelagert werden:
+
+![Single Responsibility negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/single-responsibility-negc.iuml)
+
+Dabei könnte `startMealPlanGeneration` mit einem `GenerationService` interagieren. Der `GenerationService` wäre dann für die eigentliche Generierung des Essensplans verantwortlich, während die `startMealPlanGeneration` lediglich eine verwaltende Rolle einnehmen würde. 
 
 ### Analyse Open-Closed-Principle (OCP)
 
-_[jeweils eine Klasse als positives und negatives Beispiel für OCP; jeweils UML der Klasse und Analyse mit Begründung, warum das OCP erfüllt/nicht erfüllt wurde – falls erfüllt: warum hier sinnvoll/welches Problem gab es? Falls nicht erfüllt: wie könnte man es lösen (inkl. UML)?]_
+_[Analyse mit Begründung, warum das OCP erfüllt/nicht erfüllt wurde – falls erfüllt: warum hier sinnvoll/welches Problem gab es? Falls nicht erfüllt: wie könnte man es lösen (inkl. UML)?]_
 
 #### Positiv-Beispiel
 
@@ -138,7 +162,9 @@ _[jeweils eine Klasse als positives und negatives Beispiel für OCP; jeweils UML
 
 #### Negativ-Beispiel
 
-![Open-Closed negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/open-closed-neg.iuml)
+![Open-Closed negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/open-closed-neg-1.iuml)
+
+![Open-Closed negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/open-closed-neg-2.iuml)
 
 ### Analyse Liskov-Substitution- (LSP), Interface-Segreggation- (ISP), Dependency-Inversion-Principle (DIP)
 
