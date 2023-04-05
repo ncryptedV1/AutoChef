@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-public class ConsoleOutputService {
+public class ConsoleOutputService implements UserOutputInterface{
 
   private static final Logger logger;
 
@@ -19,23 +19,23 @@ public class ConsoleOutputService {
     }
   }
 
-  public static void info(String msg) {
+  public void info(String msg) {
     logger.info(msg);
   }
 
-  public static void warning(String msg) {
+  public void warning(String msg) {
     logger.warning(msg);
   }
 
-  public static void severe(String msg) {
+  public void severe(String msg) {
     logger.severe(msg);
   }
 
-  public static void rawOut(Object msg) {
+  public void rawOut(Object msg) {
     System.out.println(msg);
   }
 
-  public static void rawErr(Object msg) {
+  public void rawErr(Object msg) {
     System.err.println(msg);
   }
 }

@@ -4,12 +4,15 @@ import de.cunc.autochef.domain.repository.RecipeFileRepository;
 import de.cunc.autochef.domain.repository.RecipeRepository;
 import de.cunc.autochef.domain.util.io.ConsoleOutputService;
 import de.cunc.autochef.domain.service.DialogService;
+import de.cunc.autochef.domain.util.io.UserOutputInterface;
 import java.io.File;
 
 public class AutoChef {
 
   public static void main(String[] args) {
-    ConsoleOutputService.info("Starte...");
+    UserOutputInterface outputService = new ConsoleOutputService();
+
+    outputService.info("Starte...");
 
     // initialize services
     RecipeRepository recipeRepository = new RecipeFileRepository(new File("recipes"));
@@ -17,6 +20,6 @@ public class AutoChef {
 
     // start user dialog
     dialogService.startDialog();
-    ConsoleOutputService.info("Dialog Endstatus: " + dialogService.getCurrentState());
+    outputService.info("Dialog Endstatus: " + dialogService.getCurrentState());
   }
 }

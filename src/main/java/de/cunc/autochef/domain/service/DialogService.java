@@ -7,6 +7,7 @@ import de.cunc.autochef.domain.repository.RecipeRepository;
 import de.cunc.autochef.domain.util.Formats;
 import de.cunc.autochef.domain.util.io.ConsoleInputParser;
 import de.cunc.autochef.domain.util.io.ConsoleOutputService;
+import de.cunc.autochef.domain.util.io.UserOutputInterface;
 import de.cunc.autochef.domain.util.web.ChefkochRecipeFetcher;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
@@ -21,13 +22,15 @@ public class DialogService {
   private static final Random random = new Random();
   private DialogState currentState;
   private final RecipeRepository recipeRepository;
+  UserOutputInterface outputService;
 
   public DialogService(RecipeRepository recipeRepository) {
     this.recipeRepository = recipeRepository;
+    outputService = new ConsoleOutputService();
   }
 
   public void startDialog() {
-    ConsoleOutputService.rawOut(
+    outputService.rawOut(
         "Willkommen bei AutoChef, deinem persönlichem Freund und Helfer bei der Rezept- & Einkauflisten-Planung!");
     startMain();
   }
@@ -35,8 +38,8 @@ public class DialogService {
   public void startMain() {
     currentState = DialogState.MAIN;
 
-    ConsoleOutputService.rawOut("");
-    ConsoleOutputService.rawOut("Wie kann ich dir weiterhelfen?");
+    outputService.rawOut("");
+    outputService.rawOut("Wie kann ich dir weiterhelfen?");
     int option = offerOptions("Rezepte anzeigen", "Rezept hinzufügen",
         "Mahlzeiten-Plan generieren");
     if (option == 1) {
@@ -51,8 +54,8 @@ public class DialogService {
   private void showRecipes() {
     currentState = DialogState.SHOW_RECIPES;
 
-    ConsoleOutputService.rawOut("Folgende Rezepte sind aktuell in unserer Datenbank:");
-    ConsoleOutputService.rawOut("Möchtest du zu einem davon mehr erfahren?");
+    outputService.rawOut("Folgende Rezepte sind aktuell in unserer Datenbank:");
+    outputService.rawOut("Möchtest du zu einem davon mehr erfahren?");
     List<Recipe> recipes = recipeRepository.getRecipes();
 
     List<String> options = new ArrayList<>();
@@ -62,7 +65,7 @@ public class DialogService {
 
     if (option > 1) {
       Recipe recipe = recipes.get(option - 2);
-      ConsoleOutputService.rawOut(recipe.toString());
+      outputService.rawOut(recipe.toString());
     }
 
     startMain();
@@ -71,7 +74,7 @@ public class DialogService {
   private void addRecipe() {
     currentState = DialogState.ADD_RECIPE;
 
-    ConsoleOutputService.rawOut(
+    outputService.rawOut(
         "Hier kannst du sehr einfach ein Rezept von Chefkoch in deine Bibliothek mit aufnehmen.");
     String url = ConsoleInputParser.getString(userInput -> {
           if (!userInput.matches("https://www.chefkoch.de/rezepte/\\d+/.*\\.html")) {
@@ -82,8 +85,8 @@ public class DialogService {
         "Welches Rezept würdest du gerne hinzufügen? (https://www.chefkoch.de/rezepte/XXX/XXX.html)");
     Recipe recipe = ChefkochRecipeFetcher.getRecipe(url);
     recipeRepository.saveRecipe(recipe);
-    ConsoleOutputService.rawOut("Folgendes Rezept wurde erfolgreich abgespeichert:");
-    ConsoleOutputService.rawOut(recipe.toString());
+    outputService.rawOut("Folgendes Rezept wurde erfolgreich abgespeichert:");
+    outputService.rawOut(recipe.toString());
 
     startMain();
   }
@@ -91,7 +94,7 @@ public class DialogService {
   private void startMealPlanGeneration() {
     currentState = DialogState.MEAL_PLAN_GENERATION;
 
-    ConsoleOutputService.rawOut("Wir generieren jetzt zusammen einen Mahlzeiten-Plan. :D");
+    outputService.rawOut("Wir generieren jetzt zusammen einen Mahlzeiten-Plan. :D");
     LocalDate startDate = ConsoleInputParser.getDate(null, null,
         "Wann soll der Plan beginnen? (DD.MM.YYYY)");
     LocalDate endDate = ConsoleInputParser.getDate(startDate, null,
@@ -99,7 +102,7 @@ public class DialogService {
     int people = ConsoleInputParser.getInteger(1, 99,
         "Für wie viele Leute soll der Plan generiert werden?");
     int days = startDate.until(endDate).getDays();
-    ConsoleOutputService.rawOut("Ok, ich generiere einen Plan für " + days + " Tage...");
+    outputService.rawOut("Ok, ich generiere einen Plan für " + days + " Tage...");
 
     List<Recipe> recipes = recipeRepository.getRecipes();
     List<Meal> meals = new ArrayList<>();
@@ -119,8 +122,8 @@ public class DialogService {
     boolean userAdapting = true;
 
     while (userAdapting) {
-      ConsoleOutputService.rawOut("Das ist der aktuelle Plan:");
-      ConsoleOutputService.rawOut("Möchtest du eins der Rezepte austauschen?");
+      outputService.rawOut("Das ist der aktuelle Plan:");
+      outputService.rawOut("Möchtest du eins der Rezepte austauschen?");
       List<String> options = new ArrayList<>();
       options.add("Nein");
       for (int day = 0; day < mealPlan.getDays(); day++) {
@@ -140,11 +143,11 @@ public class DialogService {
       }
     }
 
-    ConsoleOutputService.rawOut("Perfekt, wir haben einen Mahlzeiten-Plan!");
-    ConsoleOutputService.rawOut("Was möchtest du mit ihm machen?");
+    outputService.rawOut("Perfekt, wir haben einen Mahlzeiten-Plan!");
+    outputService.rawOut("Was möchtest du mit ihm machen?");
     int option = offerOptions("In der Konsole ausgeben", "In die Zwischenablage kopieren");
     if (option == 1) {
-      ConsoleOutputService.rawOut(mealPlan.toString());
+      outputService.rawOut(mealPlan.toString());
     } else if (option == 2) {
       Toolkit.getDefaultToolkit().getSystemClipboard()
           .setContents(new StringSelection(mealPlan.toString()), null);
@@ -162,8 +165,10 @@ public class DialogService {
   }
 
   private static int offerOptions(List<String> options) {
+    ConsoleOutputService outputService = new ConsoleOutputService();
+    
     for (int idx = 0; idx < options.size(); idx++) {
-      ConsoleOutputService.rawOut("[" + (idx + 1) + "] " + options.get(idx));
+      outputService.rawOut("[" + (idx + 1) + "] " + options.get(idx));
     }
     return ConsoleInputParser.getInteger(1, options.size(), "Auswahl:");
   }

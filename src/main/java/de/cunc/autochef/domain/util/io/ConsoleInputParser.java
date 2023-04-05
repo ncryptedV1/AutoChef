@@ -50,18 +50,19 @@ public class ConsoleInputParser {
   }
 
   private static <T> T getInputWithType(Function<String, T> transformFunction, String question) {
+    ConsoleOutputService outputService = new ConsoleOutputService();
     T choice = null;
     while (choice == null) {
-      ConsoleOutputService.rawOut(question);
+      outputService.rawOut(question);
       String userInput = ConsoleInputReader.readLine();
       try {
         choice = transformFunction.apply(userInput);
       } catch (IllegalArgumentException ex) {
         // this is also a parent class of NumberFormatException -> in case of non-integer user input
-        ConsoleOutputService.rawErr(
+        outputService.rawErr(
             "'" + userInput + "' ist keine gültige Option, versuche es erneut!");
         if (ex.getMessage() != null) {
-          ConsoleOutputService.rawErr(ex.getMessage());
+          outputService.rawErr(ex.getMessage());
         }
       }
     }

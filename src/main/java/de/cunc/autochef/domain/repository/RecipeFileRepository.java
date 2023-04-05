@@ -2,6 +2,7 @@ package de.cunc.autochef.domain.repository;
 
 import de.cunc.autochef.domain.entity.Recipe;
 import de.cunc.autochef.domain.util.io.ConsoleOutputService;
+import de.cunc.autochef.domain.util.io.UserOutputInterface;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -16,22 +17,24 @@ import java.util.stream.Stream;
 public class RecipeFileRepository implements RecipeRepository {
 
   private final File recipesFolder;
+  UserOutputInterface outputService;
 
   public RecipeFileRepository(File recipesFolder) {
     this.recipesFolder = recipesFolder;
-
+    outputService = new ConsoleOutputService();
+    
     try {
       if (recipesFolder.mkdirs()) {
-        ConsoleOutputService.info(
+        outputService.info(
             "Rezept-Persistenz-Ordner angelegt in '" + recipesFolder.getAbsolutePath() + "'");
       } else if (!recipesFolder.exists()) {
-        ConsoleOutputService.severe(
+        outputService.severe(
             "Rezept-Persistenz-Ordner in '" + recipesFolder.getAbsolutePath()
                 + "' konnte nicht angelegt werden!");
         throw new RuntimeException();
       }
     } catch (SecurityException ex) {
-      ConsoleOutputService.severe("Es fehlen Berechtigungen den Persistenz-Ordner anzulegen unter '"
+      outputService.severe("Es fehlen Berechtigungen den Persistenz-Ordner anzulegen unter '"
           + recipesFolder.getAbsolutePath() + "'.");
       throw ex;
     }
@@ -42,7 +45,7 @@ public class RecipeFileRepository implements RecipeRepository {
     try (ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(targetFile))) {
       stream.writeObject(recipe);
     } catch (IOException e) {
-      ConsoleOutputService.severe(
+      outputService.severe(
           "Fehler während der Persistierung von Rezept " + recipe.getId() + ": " + e.getMessage());
       throw new RuntimeException(e);
     }
@@ -54,7 +57,7 @@ public class RecipeFileRepository implements RecipeRepository {
       try {
         Files.delete(targetFile.toPath());
       } catch (IOException e) {
-        ConsoleOutputService.severe(
+        outputService.severe(
             "Fehler während der Löschung von Rezept " + recipe.getId() + ": " + e.getMessage());
         throw new RuntimeException(e);
       }
@@ -68,7 +71,7 @@ public class RecipeFileRepository implements RecipeRepository {
       List<String> recipeIds = recipePaths.map(path -> path.getFileName().toString()).toList();
       return recipeIds.stream().map(this::getRecipe).toList();
     } catch (IOException e) {
-      ConsoleOutputService.severe(
+      outputService.severe(
           "Fehler während dem Abrufen der persistierten Rezepte: " + e.getMessage());
       throw new RuntimeException(e);
     }
@@ -79,7 +82,7 @@ public class RecipeFileRepository implements RecipeRepository {
     try (ObjectInputStream stream = new ObjectInputStream(new FileInputStream(targetFile))) {
       return (Recipe) stream.readObject();
     } catch (IOException | ClassNotFoundException e) {
-      ConsoleOutputService.severe(
+      outputService.severe(
           "Fehler während dem Abrufen des persistierten Rezepts " + id + ": " + e.getMessage());
       throw new RuntimeException(e);
     }
