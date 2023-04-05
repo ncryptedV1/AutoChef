@@ -1,6 +1,6 @@
 package domain.util;
 
-import de.cunc.autochef.domain.util.io.OutputService;
+import de.cunc.autochef.domain.service.io.OutputService;
 
 public class OutputServiceFake implements OutputService {
 

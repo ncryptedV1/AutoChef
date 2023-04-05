@@ -1,4 +1,4 @@
-package de.cunc.autochef.domain.util.io;
+package de.cunc.autochef.domain.service.io;
 
 import java.time.LocalDate;
 import java.util.function.Function;

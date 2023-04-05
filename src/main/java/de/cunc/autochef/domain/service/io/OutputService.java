@@ -1,4 +1,4 @@
-package de.cunc.autochef.domain.util.io;
+package de.cunc.autochef.domain.service.io;
 
 public interface OutputService {
   
