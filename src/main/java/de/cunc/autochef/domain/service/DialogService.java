@@ -26,9 +26,10 @@ public class DialogService {
   UserOutputInterface outputService;
   UserInputParser inputParser;
 
-  public DialogService(RecipeRepository recipeRepository) {
+  public DialogService(RecipeRepository recipeRepository, UserOutputInterface outputService, UserInputParser inputParser) {
     this.recipeRepository = recipeRepository;
-    outputService = new ConsoleOutputService();
+    this.outputService = outputService;
+    this.inputParser = inputParser;
   }
 
   public void startDialog() {
