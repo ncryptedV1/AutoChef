@@ -1147,12 +1147,32 @@ aufgetreten wären.
 
 ## 8. Entwurfsmuster
 
-_[2 unterschiedliche Entwurfsmuster aus der Vorlesung (oder nach Absprache auch andere) jeweils sinnvoll einsetzen, begründen und UML-Diagramm]_
+#### 8.1. Entwurfsmuster: Facade
 
-#### 8.1. Entwurfsmuster: [Name]
+# gewählte Klasse: `ConsoleOutputService`
 
-![Entwurfstmuster 1 Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/design-pattern-1.iuml)
+![Entwurfstmuster Facade Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/design-pattern-facade.iuml)
 
-#### 8.2. Entwurfsmuster: [Name]
+Die obige Klasse `ConsoleOutputService` stellt eine Facade für die `Logger`-Klasse dar, weil sie eine vereinfachte und einheitliche Schnittstelle für das Logging-System bereitstellt. Die Hauptziele einer Facade sind die Vereinfachung der Schnittstelle und die Entkopplung von Subsystemen.
 
-![Entwurfstmuster 2 Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/design-pattern-1.iuml)
+In diesem Fall verbirgt die `ConsoleOutputService`-Klasse die Komplexität der `Logger`-Klasse und des LogManager-Systems, indem sie nur eine Reihe von statischen Methoden zur Verfügung stellt:
+
+- `info(String msg)`: zum Loggen von Info-Nachrichten.
+- `warning(String msg)`: zum Loggen von Warn-Nachrichten.
+- `severe(String msg)`: zum Loggen von schwerwiegenden Fehlermeldungen.
+- `rawOut(Object msg)`: zum direkten Ausgeben von Nachrichten auf der Standardausgabe (stdout).
+- `rawErr(Object msg)`: zum direkten Ausgeben von Fehlermeldungen auf der Standardfehlerausgabe (stderr).
+
+Die `ConsoleOutputService`-Klasse kapselt die Details der `Logger`-Konfiguration im statischen Block und -Initialisierung. Dies ermöglicht den Nutzern, die Logging-Funktionalität einfach zu verwenden, ohne sich um die zugrunde liegenden Details kümmern zu müssen.
+
+#### 8.2. Entwurfsmuster: Builder
+
+- gewählte Klasse: `MealPlanBuilder`
+
+![Entwurfstmuster Builder Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/design-pattern-builder.iuml)
+
+Der `MealPlanBuilder` ist ein Beispiel für das Entwurfsmuster Builder, da er eine einfache Schnittstelle bietet, um komplexe Objekte schrittweise aufzubauen. Mithilfe von Methoden wie `setStartDate()`, `setEndDate()` und `addMeal()` kann der Verwender des `MealPlanBuilder` einen Mahlzeiten-Plan definieren, ohne dabei die genaue Implementierung des `MealPlan` kennen zu müssen.
+
+Die `build()` Methode ist das Herzstück des Builders und erzeugt das fertige Objekt. Dabei wird die Konsistenz des Objekts sichergestellt und gegebenenfalls eine `IllegalStateException` geworfen, wenn zum Beispiel ein Start- oder Enddatum fehlt oder nicht alle Mahlzeiten definiert sind.
+
+Der Builder ist ein nützliches Muster, wenn die Erstellung von Objekten viele Parameter erfordert oder komplex ist. Indem er den Verwendet von der Komplexität des Aufbaus des Objekts abschirmt, ermöglicht er eine klare und einfache API und stellt sicher, dass die erstellten Objekte korrekt initialisiert sind.

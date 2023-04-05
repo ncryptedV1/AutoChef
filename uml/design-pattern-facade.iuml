@@ -1,0 +1,35 @@
+@startuml
+
+left to right direction
+
+class ConsoleOutputService {
+  - logger: Logger
+  + info(String msg)
+  + warning(String msg)
+  + severe(String msg)
+  + rawOut(Object msg)
+  + rawErr(Object msg)
+}
+
+class Logger {
+  - name: String
+  - resourceBundleName: String
+  - handlers: Handler[]
+  - parent: Logger
+  // further attributes
+  - Logger(name: String)
+  - Logger(name: String, resourceBundleName: String)
+  - getHandlers(): Handler[]
+  - setHandlers(handlers: Handler[])
+  - addHandler(handler: Handler)
+  - removeHandler(handler: Handler)
+  - log(record: LogRecord)
+  - log(level: Level, msg: String)
+  - log(level: Level, msg: String, params: Object[])
+  - log(level: Level, msg: String, thrown: Throwable)
+  // further methods()
+}
+
+ConsoleOutputService -> Logger
+
+@enduml
