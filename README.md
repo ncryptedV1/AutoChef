@@ -333,11 +333,19 @@ Da zur Einhaltung der Dependency Rule der Clean Architecture-Methode oft das DIP
 
 #### Positiv-Beispiel
 
+- gewählte Klasse(n): `DialogService`
+
 ![Dependency-Inversion-Principle positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/dependency-inversion-pos.iuml)
+
+Wie im obigen UML ersichtlich, wurde das DIP im `DialogService` eingehalten. Die Klasse `DialogService` hängt von einer Abstraktion (dem Interface `RecipeRepository`) ab und nicht von einer konkreten Implementierung (der Klasse `RecipeFileRepository`).
 
 #### Negativ-Beispiel
 
+- gewählte Klasse(n): `ChefkochRecipeFetcher`
+
 ![Dependency-Inversion-Principle negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/dependency-inversion-neg.iuml)
+
+Das DIP wird in der Klasse `ChefkochRecipeFetcher` verletzt. Die Klasse `ChefkochRecipeFetcher` verwendet direkt die Klasse `WebsiteFetcher`, um den Inhalt einer Webseite abzurufen. Hier wäre es besser, ein Interface für das Abrufen von Webinhalten zu erstellen und dieses Interface als Abstraktion zu verwenden.
 
 ## 4. Weitere Prinzipien
 
