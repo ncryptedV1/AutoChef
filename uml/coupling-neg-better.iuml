@@ -9,7 +9,11 @@ class ChefkochRecipeFetcher {
   -extractRecipeSteps(content: String): List<RecipeStep>
 }
 
-class WebsiteFetcher {
+interface WebsiteFetcher {
+  +getWebsiteBody(urlString: String): String
+}
+
+class BufferedWebsiteFetcher {
   +getWebsiteBody(urlString: String): String
 }
 
@@ -26,6 +30,7 @@ class RecipeStep {
 }
 
 WebsiteFetcher <-- ChefkochRecipeFetcher
+WebsiteFetcher <|.. BufferedWebsiteFetcher
 Recipe <-- ChefkochRecipeFetcher
 GroceryList <-- ChefkochRecipeFetcher
 RecipeStep <-- ChefkochRecipeFetcher

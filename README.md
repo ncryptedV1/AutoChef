@@ -34,41 +34,42 @@ Abgabedatum: 28. Mai 2023
 - Code-Beispiel = Code in das Dokument kopieren
 
 ## Inhaltsverzeichnis
+
 - [Einführung](#1-einführung)
-  - [Übersicht über die Applikation](#11-übersicht-über-die-applikation)
-  - [Wie startet man die Applikation?](#12-wie-startet-man-die-applikation)
-  - [Wie testet man die Applikation?](#13-wie-testet-man-die-applikation)
+    - [Übersicht über die Applikation](#11-übersicht-über-die-applikation)
+    - [Wie startet man die Applikation?](#12-wie-startet-man-die-applikation)
+    - [Wie testet man die Applikation?](#13-wie-testet-man-die-applikation)
 - [Clean Architecture](#2-clean-architecture)
-  - [Was ist Clean Architecture?](#21-was-ist-clean-architecture)
-  - [Analyse der Dependency Rule](#22-analyse-der-dependency-rule)
-  - [Analyse der Schichten](#23-analyse-der-schichten)
+    - [Was ist Clean Architecture?](#21-was-ist-clean-architecture)
+    - [Analyse der Dependency Rule](#22-analyse-der-dependency-rule)
+    - [Analyse der Schichten](#23-analyse-der-schichten)
 - [SOLID](#3-solid)
-  - [Analyse Single-Responsibility-Principle (SRP)](#31-analyse-single-responsibility-principle--srp-)
-  - [Analyse Open-Closed-Principle (OCP)](#32-analyse-open-closed-principle--ocp-)
-  - [Analyse Dependency-Inversion-Principle (DIP)](#33-analyse-dependency-inversion-principle--dip-)
+    - [Analyse Single-Responsibility-Principle (SRP)](#31-analyse-single-responsibility-principle--srp-)
+    - [Analyse Open-Closed-Principle (OCP)](#32-analyse-open-closed-principle--ocp-)
+    - [Analyse Dependency-Inversion-Principle (DIP)](#33-analyse-dependency-inversion-principle--dip-)
 - [Weitere Prinzipien](#4-weitere-prinzipien)
-  - [Analyse GRASP: Geringe Kopplung](#41-analyse-grasp--geringe-kopplung)
-  - [Analyse GRASP: Hohe Kohäsion](#42-analyse-grasp--hohe-kohäsion)
-  - [Don't repeat yourself (DRY)](#43-dont-repeat-yourself--dry-)
+    - [Analyse GRASP: Geringe Kopplung](#41-analyse-grasp--geringe-kopplung)
+    - [Analyse GRASP: Hohe Kohäsion](#42-analyse-grasp--hohe-kohäsion)
+    - [Don't repeat yourself (DRY)](#43-dont-repeat-yourself--dry-)
 - [Unit Tests](#5-unit-tests)
-  - [10 Unit Tests](#51-10-unit-tests)
-  - [ATRIP: Automatic](#52-atrip--automatic)
-  - [ATRIP: Thorough](#53-atrip--thorough)
-  - [ATRIP: Professional](#54-atrip--professional)
-  - [Code Coverage](#55-code-coverage)
-  - [Fakes und Mocks](#56-fakes-und-mocks)
+    - [10 Unit Tests](#51-10-unit-tests)
+    - [ATRIP: Automatic](#52-atrip--automatic)
+    - [ATRIP: Thorough](#53-atrip--thorough)
+    - [ATRIP: Professional](#54-atrip--professional)
+    - [Code Coverage](#55-code-coverage)
+    - [Fakes und Mocks](#56-fakes-und-mocks)
 - [Domain Driven Design](#6-domain-driven-design)
-  - [Ubiquitous Language](#61-ubiquitous-language)
-  - [Entities](#62-entities)
-  - [Value Objects](#63-value-objects)
-  - [Repositories](#64-repositories)
-  - [Aggregates](#65-aggregates)
+    - [Ubiquitous Language](#61-ubiquitous-language)
+    - [Entities](#62-entities)
+    - [Value Objects](#63-value-objects)
+    - [Repositories](#64-repositories)
+    - [Aggregates](#65-aggregates)
 - [Refactoring](#7-refactoring)
-  - [Code Smells](#71-code-smells)
-  - [2 Refactorings](#72-2-refactorings)
+    - [Code Smells](#71-code-smells)
+    - [2 Refactorings](#72-2-refactorings)
 - [Entwurfsmuster](#8-entwurfsmuster)
-  - [Entwurfsmuster: Name](#81-entwurfsmuster--name)
-  - [Entwurfsmuster: Name](#82-entwurfsmuster--name)
+    - [Entwurfsmuster: Name](#81-entwurfsmuster--name)
+    - [Entwurfsmuster: Name](#82-entwurfsmuster--name)
 
 ## 1. Einführung
 
@@ -152,11 +153,18 @@ Abhängigkeitshierarchie zwischen den Komponenten eingeführt wird.
 ![Dependency Rule positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/dependency-rule-pos.iuml)
 
 `DialogService` ist abhängig von `RecipeRepository` (Interface).
-`DialogService` hat keine Abhängigkeiten zu Implementierungen, nur zu Interfaces und anderen Domänen-Entities/Value Objects.
-In dieser Anwendung zeigt die `DialogService`-Klasse ein gutes Beispiel für das Einhalten der Dependency Rule, da sie nur vom `RecipeRepository`-Interface abhängt und nicht von einer konkreten
-Implementierung. Das bedeutet, dass die äußeren Schichten (in diesem Fall die Infrastrukturschicht mit der `RecipeFileRepository`-Implementierung) von der inneren Schicht (Domänenschicht) abhängen und nicht umgekehrt. Die Abhängigkeiten richten sich somit von außen nach innen.
-Es gibt nur eine Klasse, die von `DialogService` abhängt: `AutoChef`. Dies ist die Main-Klasse der Anwendung. Ihre Aufgabe ist die Initialisierung des `DialogService` mitsamt Abhängigkeiten (`RecipeRepository`) und enthält daher keine weitere Logik noch
-Konfigurationsdetails. Aus diesem Grund ist sie der Infrastrukturschicht zuzuordnen. Auch hier wird die Dependency Rule eingehalten, da eine Abhängigkeit von außen nach innen besteht.
+`DialogService` hat keine Abhängigkeiten zu Implementierungen, nur zu Interfaces und anderen
+Domänen-Entities/Value Objects.
+In dieser Anwendung zeigt die `DialogService`-Klasse ein gutes Beispiel für das Einhalten der
+Dependency Rule, da sie nur vom `RecipeRepository`-Interface abhängt und nicht von einer konkreten
+Implementierung. Das bedeutet, dass die äußeren Schichten (in diesem Fall die Infrastrukturschicht
+mit der `RecipeFileRepository`-Implementierung) von der inneren Schicht (Domänenschicht) abhängen
+und nicht umgekehrt. Die Abhängigkeiten richten sich somit von außen nach innen.
+Es gibt nur eine Klasse, die von `DialogService` abhängt: `AutoChef`. Dies ist die Main-Klasse der
+Anwendung. Ihre Aufgabe ist die Initialisierung des `DialogService` mitsamt
+Abhängigkeiten (`RecipeRepository`) und enthält daher keine weitere Logik noch
+Konfigurationsdetails. Aus diesem Grund ist sie der Infrastrukturschicht zuzuordnen. Auch hier wird
+die Dependency Rule eingehalten, da eine Abhängigkeit von außen nach innen besteht.
 
 #### Negativ-Beispiel: Dependency Rule
 
@@ -165,9 +173,15 @@ Konfigurationsdetails. Aus diesem Grund ist sie der Infrastrukturschicht zuzuord
 ![Dependency Rule negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/dependency-rule-neg.iuml)
 
 `ChefkochRecipeFetcher` ist abhängig von `WebsiteFetcher`.
-`WebsiteFetcher` ist eine Util-Klasse, die für das Abrufen von Webseiten-Inhalten zuständig ist und damit der Infrastruktursschicht zugehörig.
-Dadurch verletzt die `ChefkochRecipeFetcher`-Klasse die Dependency Rule, da eine Abhängigkeit von der Applikationsschicht in die Infrastrukturschicht besteht. Die `ChefkochRecipeFetcher`-Klasse sollte stattdessen von einem Interface abhängen, das in der Domänenschicht definiert ist und von einer Implementierung in einer äußeren Schicht bereitgestellt wird, um die Abhängigkeiten korrekt von außen nach innen zu richten.
-Von der Klasse abhängig ist lediglich der `DialogService`, welcher sich auf selbiger Schicht befindet.
+`WebsiteFetcher` ist eine Util-Klasse, die für das Abrufen von Webseiten-Inhalten zuständig ist und
+damit der Infrastruktursschicht zugehörig.
+Dadurch verletzt die `ChefkochRecipeFetcher`-Klasse die Dependency Rule, da eine Abhängigkeit von
+der Applikationsschicht in die Infrastrukturschicht besteht. Die `ChefkochRecipeFetcher`-Klasse
+sollte stattdessen von einem Interface abhängen, das in der Domänenschicht definiert ist und von
+einer Implementierung in einer äußeren Schicht bereitgestellt wird, um die Abhängigkeiten korrekt
+von außen nach innen zu richten.
+Von der Klasse abhängig ist lediglich der `DialogService`, welcher sich auf selbiger Schicht
+befindet.
 
 ### 2.3. Analyse der Schichten
 
@@ -329,7 +343,8 @@ wäre das OCP erfüllt.
 
 ### 3.3. Analyse Dependency-Inversion-Principle (DIP)
 
-Da zur Einhaltung der Dependency Rule der Clean Architecture-Methode oft das DIP genutzt wird, können hier selbige Beispiel wie aus [Kapitel 2.2](#22-analyse-der-dependency-rule) genutzt werden.
+Da zur Einhaltung der Dependency Rule der Clean Architecture-Methode oft das DIP genutzt wird,
+können hier selbige Beispiel wie aus [Kapitel 2.2](#22-analyse-der-dependency-rule) genutzt werden.
 
 #### Positiv-Beispiel
 
@@ -337,7 +352,9 @@ Da zur Einhaltung der Dependency Rule der Clean Architecture-Methode oft das DIP
 
 ![Dependency-Inversion-Principle positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/dependency-inversion-pos.iuml)
 
-Wie im obigen UML ersichtlich, wurde das DIP im `DialogService` eingehalten. Die Klasse `DialogService` hängt von einer Abstraktion (dem Interface `RecipeRepository`) ab und nicht von einer konkreten Implementierung (der Klasse `RecipeFileRepository`).
+Wie im obigen UML ersichtlich, wurde das DIP im `DialogService` eingehalten. Die
+Klasse `DialogService` hängt von einer Abstraktion (dem Interface `RecipeRepository`) ab und nicht
+von einer konkreten Implementierung (der Klasse `RecipeFileRepository`).
 
 #### Negativ-Beispiel
 
@@ -345,21 +362,45 @@ Wie im obigen UML ersichtlich, wurde das DIP im `DialogService` eingehalten. Die
 
 ![Dependency-Inversion-Principle negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/dependency-inversion-neg.iuml)
 
-Das DIP wird in der Klasse `ChefkochRecipeFetcher` verletzt. Die Klasse `ChefkochRecipeFetcher` verwendet direkt die Klasse `WebsiteFetcher`, um den Inhalt einer Webseite abzurufen. Hier wäre es besser, ein Interface für das Abrufen von Webinhalten zu erstellen und dieses Interface als Abstraktion zu verwenden.
+Das DIP wird in der Klasse `ChefkochRecipeFetcher` verletzt. Die Klasse `ChefkochRecipeFetcher`
+verwendet direkt die Klasse `WebsiteFetcher`, um den Inhalt einer Webseite abzurufen. Hier wäre es
+besser, ein Interface für das Abrufen von Webinhalten zu erstellen und dieses Interface als
+Abstraktion zu verwenden.
 
 ## 4. Weitere Prinzipien
 
 ### 4.1. Analyse GRASP: Geringe Kopplung
 
-_[jeweils eine bis jetzt noch nicht behandelte Klasse als positives und negatives Beispiel geringer Kopplung; jeweils UML Diagramm mit zusammenspielenden Klassen, Aufgabenbeschreibung und Begründung für die Umsetzung der geringen Kopplung bzw. Beschreibung, wie die Kopplung aufgelöst werden kann]_
-
 #### Positiv-Beispiel
+
+- gewählte Klasse: `DialogInputParser`
 
 ![Kopplung positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/coupling-pos.iuml)
 
+Diese Klasse ist für das Parsen der Benutzereingaben zuständig. Sie ist abhängig von `InputReader`
+und `OutputService`, wobei es sich in beiden Fällen um Interfaces handelt. Damit hält die
+Klasse `DialogInputParser` die Kopplung gering, da sie von Interfaces, statt konkreten
+Implementierungen abhängt. Dadurch wird die Austauschbarkeit ermöglicht und die Testbarkeit der
+Klasse verbessert.
+
 #### Negativ-Beispiel
 
+- gewählte Klasse: `ChefkochRecipeFetcher`
+
 ![Kopplung negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/coupling-neg.iuml)
+
+Diese Klasse ist dafür zuständig, Rezeptinformationen von der Chefkoch-Website abzurufen und sie in eine Rezept-Instanz umzuwandeln. Sie ist von `WebsiteFetcher`, `Recipe`, `GroceryList` und `RecipeStep` abhängig. Durch die Abhängigkeit von `WebsiteFetcher` weist die Klasse `ChefkochRecipeFetcher` eine hohe Kopplung auf, da sie direkt die statische Methode getWebsiteBody() aufruft. Dies könnte gelöst werden, indem man eine Schnittstelle für das Abrufen von Webseiten erstellt und diese Schnittstelle von der `ChefkochRecipeFetcher`-Klasse verwendet. Auf diese Weise könnten verschiedene Implementierungen zum Abrufen von Webseiten ausgetauscht werden, was die Kopplung verringert.
+
+![Kopplung negatives Beispiel verbessert UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/coupling-neg-better.iuml)
+
+#### Positiv-Beispiel 2
+Da eine Klasse gefordert wurde, die nicht bereits in einem vorigen Kapitel behandelt wurde und dies beim vorherigen Negativ-Beispiel mit `ChefkochRecipeFetcher` nicht der Fall ist, wird ein weiteres Positiv-Beispiel aufgeführt.
+
+- gewählte Klasse: `RecipeRepository`
+
+![Kopplung positives Beispiel 2 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/coupling-pos-2.iuml)
+
+Die `RecipeRepository` Klasse ist ein Interface, das die Methoden für den Zugriff auf Rezept-Entitäten definiert. Sie ist lediglich von `Recipe` abhängig. Daher ist es ein weiteres Beispiel für geringe Kopplung. Es definiert lediglich die benötigten Methoden für den Zugriff auf Rezept-Entitäten, ohne sich auf eine spezifische Implementierung festzulegen. Die Implementierung von `RecipeRepository` (z.B. `RecipeFileRepository`) kann dann von der Anwendungsentwicklung abhängig gemacht werden, ohne die gesamte Anwendung zu beeinflussen. 
 
 ### 4.2. Analyse GRASP: Hohe Kohäsion
 
@@ -367,8 +408,13 @@ _[jeweils eine bis jetzt noch nicht behandelte Klasse als positives und negative
 
 ![Kohäsion Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/cohesion.iuml)
 
-Die Klasse `Recipe` repräsentiert ein Rezept und besteht aus einem Namen, einer Einkaufsliste (`GroceryList`) und einer Liste von Rezeptschritten (`RecipeStep`).
-Sie weist hohe Kohäsion auf, da sie eng verwandte Attribute und Methoden enthält, die speziell für die Repräsentation eines Rezepts erforderlich sind. Alle Attribute sind eng miteinander verbunden und arbeiten zusammen, um ein konsistentes Rezeptmodell bereitzustellen. Die Klasse hat keine zusätzlichen Verantwortlichkeiten, die nicht direkt mit der Darstellung eines Rezepts zusammenhängen.
+Die Klasse `Recipe` repräsentiert ein Rezept und besteht aus einem Namen, einer
+Einkaufsliste (`GroceryList`) und einer Liste von Rezeptschritten (`RecipeStep`).
+Sie weist hohe Kohäsion auf, da sie eng verwandte Attribute und Methoden enthält, die speziell für
+die Repräsentation eines Rezepts erforderlich sind. Alle Attribute sind eng miteinander verbunden
+und arbeiten zusammen, um ein konsistentes Rezeptmodell bereitzustellen. Die Klasse hat keine
+zusätzlichen Verantwortlichkeiten, die nicht direkt mit der Darstellung eines Rezepts
+zusammenhängen.
 
 ### 4.3. Don’t Repeat Yourself (DRY)
 
