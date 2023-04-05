@@ -6,7 +6,13 @@ import java.time.format.DateTimeParseException;
 import java.util.function.Function;
 
 public class DialogInputParser implements InputParser {
-
+  
+  private InputReader inputReader;
+  
+  public DialogInputParser(InputReader inputReader) {
+    this.inputReader = inputReader;
+  }
+  
   public Integer getInteger(Integer lowerBound, Integer upperBound, String question) {
     return getInputWithType(userInput -> {
       try {
@@ -51,12 +57,11 @@ public class DialogInputParser implements InputParser {
 
   private <T> T getInputWithType(Function<String, T> transformFunction, String question) {
     ConsoleOutputService outputService = new ConsoleOutputService();
-    InputReader inputReader = new ConsoleInputReader();
         
     T choice = null;
     while (choice == null) {
       outputService.rawOut(question);
-      String userInput = inputReader.readLine();
+      String userInput = this.inputReader.readLine();
       try {
         choice = transformFunction.apply(userInput);
       } catch (IllegalArgumentException ex) {
