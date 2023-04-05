@@ -33,9 +33,46 @@ Abgabedatum: 28. Mai 2023
 - verlangte Positiv-Beispiele müssen gebracht werden
 - Code-Beispiel = Code in das Dokument kopieren
 
+## Inhaltsverzeichnis
+- [Einführung](#1-einführung)
+  - [Übersicht über die Applikation](#11-übersicht-über-die-applikation)
+  - [Wie startet man die Applikation?](#12-wie-startet-man-die-applikation)
+  - [Wie testet man die Applikation?](#13-wie-testet-man-die-applikation)
+- [Clean Architecture](#2-clean-architecture)
+  - [Was ist Clean Architecture?](#21-was-ist-clean-architecture)
+  - [Analyse der Dependency Rule](#22-analyse-der-dependency-rule)
+  - [Analyse der Schichten](#23-analyse-der-schichten)
+- [SOLID](#3-solid)
+  - [Analyse Single-Responsibility-Principle (SRP)](#31-analyse-single-responsibility-principle--srp-)
+  - [Analyse Open-Closed-Principle (OCP)](#32-analyse-open-closed-principle--ocp-)
+  - [Analyse Dependency-Inversion-Principle (DIP)](#33-analyse-dependency-inversion-principle--dip-)
+- [Weitere Prinzipien](#4-weitere-prinzipien)
+  - [Analyse GRASP: Geringe Kopplung](#41-analyse-grasp--geringe-kopplung)
+  - [Analyse GRASP: Hohe Kohäsion](#42-analyse-grasp--hohe-kohäsion)
+  - [Don't repeat yourself (DRY)](#43-dont-repeat-yourself--dry-)
+- [Unit Tests](#5-unit-tests)
+  - [10 Unit Tests](#51-10-unit-tests)
+  - [ATRIP: Automatic](#52-atrip--automatic)
+  - [ATRIP: Thorough](#53-atrip--thorough)
+  - [ATRIP: Professional](#54-atrip--professional)
+  - [Code Coverage](#55-code-coverage)
+  - [Fakes und Mocks](#56-fakes-und-mocks)
+- [Domain Driven Design](#6-domain-driven-design)
+  - [Ubiquitous Language](#61-ubiquitous-language)
+  - [Entities](#62-entities)
+  - [Value Objects](#63-value-objects)
+  - [Repositories](#64-repositories)
+  - [Aggregates](#65-aggregates)
+- [Refactoring](#7-refactoring)
+  - [Code Smells](#71-code-smells)
+  - [2 Refactorings](#72-2-refactorings)
+- [Entwurfsmuster](#8-entwurfsmuster)
+  - [Entwurfsmuster: Name](#81-entwurfsmuster--name)
+  - [Entwurfsmuster: Name](#82-entwurfsmuster--name)
+
 ## 1. Einführung
 
-### Übersicht über die Applikation
+### 1.1. Übersicht über die Applikation
 
 AutoChef ist eine Anwendung zur einfachen und effizienten Verwaltung und Erstellung von
 Essensplänen, sowie dazugehöriger Einkaufslisten. Zugrunde liegt dabei eine Datenbank an Rezepten.
@@ -51,7 +88,7 @@ Einkaufliste für den Wocheneinkauf zu erstellen.
 
 _[Was macht die Applikation, Wie funktioniert sie? Welches Problem löst sie/welchen Zweck hat sie?]_
 
-### Wie startet man die Applikation?
+### 1.2. Wie startet man die Applikation?
 
 Bei AutoChef handelt es sich um eine CLI-Anwendung, geschrieben in Java 19. Zum Starten wird daher
 lediglich ein Desktop-Rechner mit **Java 19 aufwärts** benötigt. Die Anwendung kann dann über ein
@@ -59,7 +96,7 @@ Konsolenfenster mit dem Befehl `java -jar AutoChef.jar` gestartet werden.
 
 _[Wie startet man die Applikation? Welche Voraussetzungen werden benötigt? Schritt-für-Schritt-Anleitung]_
 
-### Wie testet man die Applikation?
+### 1.3. Wie testet man die Applikation?
 
 Nach dem Start der Anwendung wird der Nutzer durch einen intuitiven Dialog-Prozess begrüßt und
 geleitet. Der Nutzer interagiert dabei mit der Anwendung mittels des Konsolenfensters. Über dieses
@@ -81,7 +118,7 @@ _[Wie testet man die Applikation? Welche Voraussetzungen werden benötigt? Schri
 
 ## 2. Clean Architecture
 
-### Was ist Clean Architecture?
+### 2.1. Was ist Clean Architecture?
 
 Clean Architecture ist eine Architektur- und Designphilosophie, die darauf abzielt, komplexe
 Softwaresysteme in leicht verständliche, wartbare und erweiterbare Komponenten zu unterteilen. Es
@@ -106,9 +143,7 @@ Zusammenfassend lässt sich sagen, dass Clean Architecture eine Methode ist, um 
 Softwaresysteme in einfachere, leichter zu wartende Komponenten aufzuteilen, indem eine klare
 Abhängigkeitshierarchie zwischen den Komponenten eingeführt wird.
 
-_[allgemeine Beschreibung der Clean Architecture in eigenen Worten]_
-
-### Analyse der Dependency Rule
+### 2.2. Analyse der Dependency Rule
 
 #### Positiv-Beispiel: Dependency Rule
 
@@ -134,7 +169,7 @@ Konfigurationsdetails. Aus diesem Grund ist sie der Infrastrukturschicht zuzuord
 Dadurch verletzt die `ChefkochRecipeFetcher`-Klasse die Dependency Rule, da eine Abhängigkeit von der Applikationsschicht in die Infrastrukturschicht besteht. Die `ChefkochRecipeFetcher`-Klasse sollte stattdessen von einem Interface abhängen, das in der Domänenschicht definiert ist und von einer Implementierung in einer äußeren Schicht bereitgestellt wird, um die Abhängigkeiten korrekt von außen nach innen zu richten.
 Von der Klasse abhängig ist lediglich der `DialogService`, welcher sich auf selbiger Schicht befindet.
 
-### Analyse der Schichten
+### 2.3. Analyse der Schichten
 
 #### Schicht: Domain Code
 
@@ -186,7 +221,7 @@ haben. All diese Aspekte begründen, warum der Dialog-Service im Application Cod
 
 ## 3. SOLID
 
-### Analyse Single-Responsibility-Principle (SRP)
+### 3.1. Analyse Single-Responsibility-Principle (SRP)
 
 #### Positiv-Beispiel
 
@@ -235,7 +270,7 @@ Dabei könnte `startMealPlanGeneration` mit einem `GenerationService` interagier
 Der `GenerationService` wäre dann für die eigentliche Generierung des Essensplans verantwortlich,
 während die `startMealPlanGeneration` lediglich eine verwaltende Rolle einnehmen würde.
 
-### Analyse Open-Closed-Principle (OCP)
+### 3.2. Analyse Open-Closed-Principle (OCP)
 
 #### Positiv-Beispiel
 
@@ -292,22 +327,21 @@ des Interfaces. Gleichzeitig müssten keine aufwändigen Code-Modifikationen an 
 oder dem Interface vorgenommen werden, damit beide Module miteinander interagieren können. Dadurch
 wäre das OCP erfüllt.
 
-### Analyse Liskov-Substitution- (LSP), Interface-Segreggation- (ISP), Dependency-Inversion-Principle (DIP)
+### 3.3. Analyse Dependency-Inversion-Principle (DIP)
 
-_[jeweils eine Klasse als positives und negatives Beispiel für entweder LSP oder ISP oder DIP); jeweils UML der Klasse und Begründung, warum man hier das Prinzip erfüllt/nicht erfüllt wird]_ \
-_[Anm.: es darf nur ein Prinzip ausgewählt werden; es darf NICHT z.B. ein positives Beispiel für LSP und ein negatives Beispiel für ISP genommen werden]_
+Da zur Einhaltung der Dependency Rule der Clean Architecture-Methode oft das DIP genutzt wird, können hier selbige Beispiel wie aus [Kapitel 2.2](#22-analyse-der-dependency-rule) genutzt werden.
 
 #### Positiv-Beispiel
 
-![Liskov positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/liskov-pos.iuml)
+![Dependency-Inversion-Principle positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/dependency-inversion-pos.iuml)
 
 #### Negativ-Beispiel
 
-![Liskov negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/liskov-neg.iuml)
+![Dependency-Inversion-Principle negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/dependency-inversion-neg.iuml)
 
 ## 4. Weitere Prinzipien
 
-### Analyse GRASP: Geringe Kopplung
+### 4.1. Analyse GRASP: Geringe Kopplung
 
 _[jeweils eine bis jetzt noch nicht behandelte Klasse als positives und negatives Beispiel geringer Kopplung; jeweils UML Diagramm mit zusammenspielenden Klassen, Aufgabenbeschreibung und Begründung für die Umsetzung der geringen Kopplung bzw. Beschreibung, wie die Kopplung aufgelöst werden kann]_
 
@@ -319,12 +353,12 @@ _[jeweils eine bis jetzt noch nicht behandelte Klasse als positives und negative
 
 ![Kopplung negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/coupling-neg.iuml)
 
-### Analyse GRASP: Hohe Kohäsion
+### 4.2. Analyse GRASP: Hohe Kohäsion
 
-\*[eine Klasse als positives Beispiel hoher Kohäsion; UML Diagramm und Begründung, warum die Kohäsion hoch ist]
+_[eine Klasse als positives Beispiel hoher Kohäsion; UML Diagramm und Begründung, warum die Kohäsion hoch ist]_
 ![Kohäsion Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/cohesion.iuml)
 
-### Don’t Repeat Yourself (DRY)\*
+### 4.3. Don’t Repeat Yourself (DRY)
 
 Commit-SHA:
 d89dcb3 ([Link](https://github.com/ncryptedV1/AutoChef/commit/d89dcb38a0e45759dd3e689593870d1e9ed0da96))
@@ -392,7 +426,7 @@ genutzt wird: in der `getDays` Methode. Dadurch können Fehler vermieden werden,
 
 ## 5. Unit Tests
 
-### 10 Unit Tests
+### 5.1. 10 Unit Tests
 
 | Unit Test                                         | Beschreibung                                                                                                                                     |
 |---------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -407,7 +441,7 @@ genutzt wird: in der `getDays` Methode. Dadurch können Fehler vermieden werden,
 | _TestMeal#testGetGroceryList_                     | testet, ob die `getGroceryList` Methode der `Meal` Klasse eine korrekt aggregierte Zutatenliste zurückgibt                                       |
 | _TestGroceryList#testAddItem_                     | testet, ob die `addItem` Methode der `GroceryList` Klasse korrekt eine Itme zur GroceryList hinzufügt                                            |
 
-### ATRIP: Automatic
+### 5.2. ATRIP: Automatic
 
 Die Tests wurden mittels Testautomatisierung realisiert. Dabei wurde JUnit 5 verwendet, um
 automatisierte Tests zu schreiben. Über die IDE IntelliJ IDEA können die Test simpel über einen
@@ -415,7 +449,7 @@ Knopfdruck ausgeführt werden. Im Anschluss laufen alle Tests automatisch. Das E
 Testautomatisierung zeigt, ob ein individueller Test erfolgreich (bestanden) oder nicht
 erfolgreich (fehlgeschlagen) war.
 
-### ATRIP: Thorough
+### 5.3. ATRIP: Thorough
 
 #### positives Beispiel
 
@@ -557,7 +591,7 @@ Rezepten werden im Anschluss an eine weitere Methode weitergegeben.
 Da die Tests für diese Methode vollständig fehlen, werden dementsprechend auch alle Pfade nicht
 getestet. Dementsprechend kann nicht herausgefunden werden, wo sich logische Fehler befinden.
 
-### ATRIP: Professional
+### 5.4. ATRIP: Professional
 
 #### positives Beispiel
 
@@ -614,7 +648,7 @@ nicht getestet werden. Des Weiteren enthält diese Methode keine komplexe Logik,
 erfordern würde. Es handelt sich hier um einen Test, "der nur wegen des Tests geschrieben wurde".
 Außerdem ist der Dokumentationswert der Methode nicht vorhanden.
 
-### Code Coverage
+### 5.5. Code Coverage
 
 Die folgende Tabelle zeigt die summierten Werte der verschiedenen Arten von Testabdeckung des
 Projektes. Eine aufgeschlüsselte Version der Testabdeckung ist im folgenden Bild zu sehen. Die
@@ -646,7 +680,7 @@ Unabhängig dessen begründet sich die Code-Coverage wie folgt:
 - Line-Coverage: Die Line-Coverage ist durch die Method-Coverage bedingt und ist deshalb vor allem
   aus demselbigen Grund niedriger.
 
-### Fakes und Mocks
+### 5.6. Fakes und Mocks
 
 In diesem Projekt wurden vor allem Mock-Objekte eingesetzt. Sie wurden genutzt, um benötigte
 Nebenklassen zu mocken. Nachfolgend sind zwei demonstrative Beispiel für den Einsatz von
@@ -699,7 +733,7 @@ _[Analyse und Begründung des Einsatzes von 2 Fake/Mock-Objekten; zusätzlich je
 
 ## 6. Domain Driven Design
 
-### Ubiquitous Language
+### 6.1. Ubiquitous Language
 
 | Bezeichnung  | Bedeutung                     | Begründung                                                                                                                          |
 |--------------|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
@@ -708,7 +742,7 @@ _[Analyse und Begründung des Einsatzes von 2 Fake/Mock-Objekten; zusätzlich je
 | Grocery list | Lebensmittelliste             | Für Gerichte werden eine Menge von Lebensmittel benötigt. Die Lebensmittelliste fasst all diese zusammen.                           |
 | Meal plan    | Essensplan                    | Ein Essensplan beschreibt eine Sammlung von Gerichten für einen bestimmten Zeitraum.                                                |
 
-### Entities
+### 6.2. Entities
 
 zugehörige Klasse(n): `Recipe`
 
@@ -732,7 +766,7 @@ Der Einsatz dieser Entity begründet sich dadurch, dass es notwendig war, ein Re
 können. Rezepte werden gespeichert und haben somit einen Lebenszyklus. Das erzwingt laut Domain
 Driven Design Richtlinien die Erstellung einer Entity.
 
-### Value Objects
+### 6.3. Value Objects
 
 zugehörige Klasse(n): `Ingredient`
 
@@ -752,7 +786,7 @@ lediglich zur Repräsentation von Informationen. Aus diesem Grund ist es auch ni
 Informationen einer `Ingredient`-Instanz anzupassen - sie sind konstant. All diese Punkte begründen,
 warum sich hier für ein Value Object anstelle einer Entity oder Ähnlichem entschieden wurde.
 
-### Repositories
+### 6.4. Repositories
 
 zugehörige Klasse(n): `RecipeFileRepository`
 
@@ -780,7 +814,7 @@ Repository eingesetzt. Mit Nutzung des Interfaces, kann sichergestellt werden, d
 getrennt bleiben. Zusätzlich ermöglicht der Einsatz eines Repositories, Veränderungen an der
 Persistenzverwaltung vorzunehmen, ob auf die Domänenlogik eingreifen zu müsssen.
 
-### Aggregates
+### 6.5. Aggregates
 
 zugehörige Klasse(n): `Meal`
 
@@ -807,7 +841,7 @@ nicht im Umfang der Anwendung inbegriffen ist, ist ein Transfer zu einer Entity 
 
 ## 7. Refactoring
 
-### Code Smells
+### 7.1. Code Smells
 
 #### Code Smell 1
 
@@ -999,7 +1033,7 @@ ist nun dafür verantwortlich, Testobjekte und -daten zu generieren und über Me
 zurückzugeben. Dabei sind mehrere Methoden im Mock-Service entstanden, was die Komplexität des
 Code-Smells zeigt.
 
-### 2 Refactorings
+### 7.2. 2 Refactorings
 
 [//]: # (Refactoring: Extract Method)
 
@@ -1057,10 +1091,10 @@ aufgetreten wären.
 
 _[2 unterschiedliche Entwurfsmuster aus der Vorlesung (oder nach Absprache auch andere) jeweils sinnvoll einsetzen, begründen und UML-Diagramm]_
 
-#### Entwurfsmuster: [Name]
+#### 8.1. Entwurfsmuster: [Name]
 
 ![Entwurfstmuster 1 Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/design-pattern-1.iuml)
 
-#### Entwurfsmuster: [Name]
+#### 8.2. Entwurfsmuster: [Name]
 
 ![Entwurfstmuster 2 Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/design-pattern-1.iuml)
