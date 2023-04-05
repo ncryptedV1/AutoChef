@@ -2,7 +2,7 @@ package domain.util;
 
 import de.cunc.autochef.domain.util.io.OutputService;
 
-public class ConsoleOutputReaderFake implements OutputService {
+public class OutputServiceFake implements OutputService {
 
   @Override
   public void info(String msg) {

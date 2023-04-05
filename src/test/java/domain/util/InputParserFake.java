@@ -4,7 +4,7 @@ import de.cunc.autochef.domain.util.io.InputParser;
 import java.time.LocalDate;
 import java.util.function.Function;
 
-public class ConsoleInputParserFake implements InputParser {
+public class InputParserFake implements InputParser {
 
   @Override
   public Integer getInteger(Integer lowerBound, Integer upperBound, String question) {

@@ -5,10 +5,10 @@ import java.util.function.Function;
 
 public interface InputParser {
   
-  public Integer getInteger(Integer lowerBound, Integer upperBound, String question);
+  Integer getInteger(Integer lowerBound, Integer upperBound, String question);
   
-  public LocalDate getDate(LocalDate after, LocalDate before, String question);
+  LocalDate getDate(LocalDate after, LocalDate before, String question);
   
-  public String getString(Function<String, String> validator, String question);
+  String getString(Function<String, String> validator, String question);
 
 }

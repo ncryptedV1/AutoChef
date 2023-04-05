@@ -1,7 +1,6 @@
 package de.cunc.autochef.domain.repository;
 
 import de.cunc.autochef.domain.entity.Recipe;
-import de.cunc.autochef.domain.util.io.ConsoleOutputService;
 import de.cunc.autochef.domain.util.io.OutputService;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,12 +16,12 @@ import java.util.stream.Stream;
 public class RecipeFileRepository implements RecipeRepository {
 
   private final File recipesFolder;
-  OutputService outputService;
+  private final OutputService outputService;
 
-  public RecipeFileRepository(File recipesFolder) {
+  public RecipeFileRepository(File recipesFolder, OutputService outputService) {
     this.recipesFolder = recipesFolder;
-    outputService = new ConsoleOutputService();
-    
+    this.outputService = outputService;
+
     try {
       if (recipesFolder.mkdirs()) {
         outputService.info(

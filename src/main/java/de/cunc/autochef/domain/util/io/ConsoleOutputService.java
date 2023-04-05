@@ -8,15 +8,18 @@ import java.util.logging.Logger;
 
 public class ConsoleOutputService implements OutputService {
 
-  private static final Logger logger;
+  private final Logger logger;
 
   static {
     try (InputStream inputStream = AutoChef.class.getResourceAsStream("/logging.properties")) {
       LogManager.getLogManager().readConfiguration(inputStream);
-      logger = Logger.getLogger("AutoChef");
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  public ConsoleOutputService(String name) {
+    logger = Logger.getLogger(name);
   }
 
   public void info(String msg) {

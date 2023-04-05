@@ -5,8 +5,8 @@ import de.cunc.autochef.domain.repository.RecipeRepository;
 import de.cunc.autochef.domain.service.DialogService;
 import de.cunc.autochef.domain.util.io.InputParser;
 import de.cunc.autochef.domain.util.io.OutputService;
-import domain.util.ConsoleInputParserFake;
-import domain.util.ConsoleOutputReaderFake;
+import domain.util.InputParserFake;
+import domain.util.OutputServiceFake;
 import java.io.File;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,10 +20,10 @@ public class TestDialogService {
   @BeforeEach
   public void setUpClass() {
     File persistenceFolder = new File("recipes-test");
-    RecipeRepository recipeFileRepository = new RecipeFileRepository(persistenceFolder);
-    OutputService outputService = new ConsoleOutputReaderFake();
-    InputParser inputParser = new ConsoleInputParserFake();
-    
+    OutputService outputService = new OutputServiceFake();
+    InputParser inputParser = new InputParserFake();
+    RecipeRepository recipeFileRepository = new RecipeFileRepository(persistenceFolder, outputService);
+
     dialogService = new DialogService(recipeFileRepository, outputService, inputParser);
   }
   

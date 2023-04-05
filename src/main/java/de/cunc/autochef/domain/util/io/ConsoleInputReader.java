@@ -2,7 +2,7 @@ package de.cunc.autochef.domain.util.io;
 
 import java.util.Scanner;
 
-public class ConsoleInputReader implements InputReader{
+public class ConsoleInputReader implements InputReader {
 
   private static final Scanner consoleInputScanner =
       System.console() == null ? new Scanner(System.in) : null;

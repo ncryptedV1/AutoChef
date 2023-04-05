@@ -9,6 +9,7 @@ import de.cunc.autochef.domain.aggregate.GroceryList;
 import de.cunc.autochef.domain.entity.Recipe;
 import de.cunc.autochef.domain.repository.RecipeFileRepository;
 import de.cunc.autochef.domain.valueobject.RecipeStep;
+import domain.util.OutputServiceFake;
 import java.io.File;
 import java.util.List;
 import org.junit.jupiter.api.AfterAll;
@@ -27,7 +28,8 @@ public class TestRecipeFileRepository {
   @BeforeAll
   public static void setUpClass() {
     persistenceFolder = new File("recipes-test");
-    recipeFileRepository = new RecipeFileRepository(persistenceFolder);
+    recipeFileRepository = new RecipeFileRepository(persistenceFolder,
+        new OutputServiceFake());
   }
 
   @AfterAll
