@@ -363,8 +363,12 @@ _[jeweils eine bis jetzt noch nicht behandelte Klasse als positives und negative
 
 ### 4.2. Analyse GRASP: Hohe Kohäsion
 
-_[eine Klasse als positives Beispiel hoher Kohäsion; UML Diagramm und Begründung, warum die Kohäsion hoch ist]_
+- gewählte Klasse: `Recipe`
+
 ![Kohäsion Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/cohesion.iuml)
+
+Die Klasse `Recipe` repräsentiert ein Rezept und besteht aus einem Namen, einer Einkaufsliste (`GroceryList`) und einer Liste von Rezeptschritten (`RecipeStep`).
+Sie weist hohe Kohäsion auf, da sie eng verwandte Attribute und Methoden enthält, die speziell für die Repräsentation eines Rezepts erforderlich sind. Alle Attribute sind eng miteinander verbunden und arbeiten zusammen, um ein konsistentes Rezeptmodell bereitzustellen. Die Klasse hat keine zusätzlichen Verantwortlichkeiten, die nicht direkt mit der Darstellung eines Rezepts zusammenhängen.
 
 ### 4.3. Don’t Repeat Yourself (DRY)
 
