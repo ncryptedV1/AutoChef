@@ -51,10 +51,12 @@ public class ConsoleInputParser implements UserInputParser{
 
   private <T> T getInputWithType(Function<String, T> transformFunction, String question) {
     ConsoleOutputService outputService = new ConsoleOutputService();
+    InputReader inputReader = new ConsoleInputReader();
+        
     T choice = null;
     while (choice == null) {
       outputService.rawOut(question);
-      String userInput = ConsoleInputReader.readLine();
+      String userInput = inputReader.readLine();
       try {
         choice = transformFunction.apply(userInput);
       } catch (IllegalArgumentException ex) {
