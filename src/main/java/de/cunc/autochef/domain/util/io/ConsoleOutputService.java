@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-public class ConsoleOutputService implements UserOutputInterface{
+public class ConsoleOutputService implements OutputService {
 
   private static final Logger logger;
 

@@ -8,7 +8,7 @@ import de.cunc.autochef.domain.util.Formats;
 import de.cunc.autochef.domain.util.io.DialogInputParser;
 import de.cunc.autochef.domain.util.io.ConsoleOutputService;
 import de.cunc.autochef.domain.util.io.InputParser;
-import de.cunc.autochef.domain.util.io.UserOutputInterface;
+import de.cunc.autochef.domain.util.io.OutputService;
 import de.cunc.autochef.domain.util.web.ChefkochRecipeFetcher;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
@@ -23,10 +23,10 @@ public class DialogService {
   private static final Random random = new Random();
   private DialogState currentState;
   private final RecipeRepository recipeRepository;
-  UserOutputInterface outputService;
+  OutputService outputService;
   InputParser inputParser;
 
-  public DialogService(RecipeRepository recipeRepository, UserOutputInterface outputService, InputParser inputParser) {
+  public DialogService(RecipeRepository recipeRepository, OutputService outputService, InputParser inputParser) {
     this.recipeRepository = recipeRepository;
     this.outputService = outputService;
     this.inputParser = inputParser;
@@ -168,7 +168,7 @@ public class DialogService {
   }
 
   private static int offerOptions(List<String> options) {
-    UserOutputInterface outputService = new ConsoleOutputService();
+    OutputService outputService = new ConsoleOutputService();
     InputParser inputParser = new DialogInputParser();
     
     for (int idx = 0; idx < options.size(); idx++) {

@@ -1,9 +1,6 @@
 package de.cunc.autochef.domain.util.io;
 
-import java.time.LocalDate;
-import java.util.function.Function;
-
-public interface UserOutputInterface {
+public interface OutputService {
   
   public void info(String msg);
 

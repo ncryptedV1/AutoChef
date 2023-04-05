@@ -2,7 +2,7 @@ package de.cunc.autochef.domain.repository;
 
 import de.cunc.autochef.domain.entity.Recipe;
 import de.cunc.autochef.domain.util.io.ConsoleOutputService;
-import de.cunc.autochef.domain.util.io.UserOutputInterface;
+import de.cunc.autochef.domain.util.io.OutputService;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 public class RecipeFileRepository implements RecipeRepository {
 
   private final File recipesFolder;
-  UserOutputInterface outputService;
+  OutputService outputService;
 
   public RecipeFileRepository(File recipesFolder) {
     this.recipesFolder = recipesFolder;

@@ -6,13 +6,13 @@ import de.cunc.autochef.domain.util.io.DialogInputParser;
 import de.cunc.autochef.domain.util.io.ConsoleOutputService;
 import de.cunc.autochef.domain.service.DialogService;
 import de.cunc.autochef.domain.util.io.InputParser;
-import de.cunc.autochef.domain.util.io.UserOutputInterface;
+import de.cunc.autochef.domain.util.io.OutputService;
 import java.io.File;
 
 public class AutoChef {
 
   public static void main(String[] args) {
-    UserOutputInterface outputService = new ConsoleOutputService();
+    OutputService outputService = new ConsoleOutputService();
     InputParser inputParser = new DialogInputParser();
 
     outputService.info("Starte...");
