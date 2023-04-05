@@ -83,28 +83,28 @@ _[(1 Klasse, die die Dependency Rule einhält und eine Klasse, die die Dependenc
 
 ![Schicht 1 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/layer-1.iuml)
 
-Die `Recipe`-Klasse ist eine Entity im Sinne der Clean-Architecture, da sie die Entität eines Rezeptes abbildet. Ein Rezept besteht aus folgenden Attributen:
+Die `Recipe`-Klasse ist eine Entity im Sinne der Clean-Architecture, da sie die Entity eines Rezeptes abbildet. Ein Rezept besteht aus folgenden Attributen:
 - `name: String`: Name des Rezeptes
 - `groceryList: GroceryList` : Liste an Zutaten, die für das Rezept benötigt werden
 - `recipeSteps: List<RecipeStep>`: Liste an Zubereitungsschritten, die im Laufe des Rezeptes abgearbeitet werden müssen
 
 Ein Rezept wird eineindeutig über eine ID indetifiziert. Die ID umfasst den Namen in Kleinschrift. Außerdem existieren für die Attribute und die ID jeweils Getter-Methoden und ein Konstruktor.
 
-Damit liegt die Aufgabe der `Recipe`-Entität darin, ein Rezept semantisch im Code zu repräsentieren. Da das Konzept eines Rezept essenziell für die Domäne von Essensplänen ist, wurde es als Teil des Kernes der Anwendung aufgenommen. `Recipe` ist deshalb Teil der Schicht "Domain Code", da der Domänencode ebenjene Entities bzw den Kern der Anwendung enthalten sollte. Außerdem ändert sich die Modellierung eines Rezeptes selten, was ebenso dafür spricht, es in die Schicht "Domain Code" einzuordnen. 
+Damit liegt die Aufgabe der `Recipe`-Entity darin, ein Rezept semantisch im Code zu repräsentieren. Da das Konzept eines Rezept essenziell für die Domäne von Essensplänen ist, wurde es als Teil des Kernes der Anwendung aufgenommen. `Recipe` ist deshalb Teil der Schicht "Domain Code", da der Domänencode ebenjene Entities bzw den Kern der Anwendung enthalten sollte. Außerdem ändert sich die Modellierung eines Rezeptes selten, was ebenso dafür spricht, es in die Schicht "Domain Code" einzuordnen. 
 
-#### Schicht: Application Code
+#### Schicht: Application-Code
 
 - gewählte Klasse(n): `DialogService` mit `DialogState` 
 
 ![Schicht 2 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/layer-2.iuml)
 
-Die Schicht des Applications Codes umfasst mehrere Klassen. Dabei soll die Klasse `DialogService` im Fokus stehen. 
+Die Schicht des Application-Codes umfasst mehrere Klassen. Dabei soll die Klasse `DialogService` im Fokus stehen. 
 
 Im Kern ist der Dialog-Service für die Ablauflogik der Anwendung verantwortlich. Er verwaltet die Datenpersistenz über die Klassen `RecipeRepository` und `RecipeFileRepository`, ist aber gleichzeitig auch für die Nutzung von Benutzereingaben über die Klassen `ConsoleInputReader`, `ConsoleInputParser` und `ConsoleOutputService` verantwortlich. Damit ist er die Schnittstelle zwischen den einzelnen Verantwortungsbereichen der Anwendung.
 
 Im Allgemeinen startet er den Dialog mit dem Benutzer, organisiert die Generierung von Essensplänen und gibt dem Benutzer die Möglichkeit Rezepte hinzuzufügen. In diesem Sinne nimmt er die Rolle eines "Controllers" ein. Für andere Anwendungen wie etwa eine Web-Anwendung würde eine andere Funktionalität erwartet werden. Der Dialog-Service ist speziell für den Anwendungsfall einer CLI-Anwendung definiert und nutzbar. 
 
-Ebenso bedeutet das, dass Änderungen an dem DialogService keinen Einfluss auf den Domänen-Code haben. All diese Aspekte begründen, warum der Dialog-Service im Application Code angesidelt ist. 
+Ebenso bedeutet das, dass Änderungen an dem DialogService keinen Einfluss auf den Domänen-Code haben. All diese Aspekte begründen, warum der Dialog-Service im Application-Code angesidelt ist. 
 
 ## 3. SOLID
 
@@ -552,7 +552,7 @@ zugehörige Klasse(n): `Recipe`
 
 ![Entity Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/entity.iuml)
 
-Die `Recipe` Entity beschreibt ein semantisches Rezept. Wie das UML-Diagram zeigt, besteht ein Rezept aus einem Name, einer Liste von Zutaten (GroceryList) und einer Liste von Schritten zur Zubereitung (RecipeStep). Ein Rezept wird eineindeutig über eine ID indetifiziert. In diesem Fall besteht die ID aus dem Namen in Kleinschrift. Haben also zwei Rezepte den selben Namen, werden sie als gleich angesehen. Weiterhin hat die `Recipe` Klasse mehrere Getter-Methoden für die einzelnen Attribute und die ID als auch einen Konstruktor.
+Die `Recipe`-Entity beschreibt ein semantisches Rezept. Wie das UML-Diagram zeigt, besteht ein Rezept aus einem Name, einer Liste von Zutaten (GroceryList) und einer Liste von Schritten zur Zubereitung (RecipeStep). Ein Rezept wird eineindeutig über eine ID indetifiziert. In diesem Fall besteht die ID aus dem Namen in Kleinschrift. Haben also zwei Rezepte den selben Namen, werden sie als gleich angesehen. Weiterhin hat die `Recipe` Klasse mehrere Getter-Methoden für die einzelnen Attribute und die ID als auch einen Konstruktor.
 
 Bei der Erstellung einer `Recipe`-Instanz mittels des Konstruktors wird die Richtigkeit der Attribute überprüft:
 - Der Name muss mindestens ein Zeichen abgesehen von White-Space beinhalten.
