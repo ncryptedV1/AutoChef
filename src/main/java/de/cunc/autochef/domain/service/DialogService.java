@@ -165,15 +165,11 @@ public class DialogService {
     return currentState;
   }
 
-  private static int offerOptions(String... options) {
+  private int offerOptions(String... options) {
     return offerOptions(Arrays.asList(options));
   }
 
-  private static int offerOptions(List<String> options) {
-    OutputService outputService = new ConsoleOutputService();
-    InputReader inputReader = new ConsoleInputReader();
-    InputParser inputParser = new DialogInputParser(inputReader);
-    
+  private int offerOptions(List<String> options) {
     for (int idx = 0; idx < options.size(); idx++) {
       outputService.rawOut("[" + (idx + 1) + "] " + options.get(idx));
     }
