@@ -7,6 +7,7 @@ import de.cunc.autochef.domain.repository.RecipeRepository;
 import de.cunc.autochef.domain.util.Formats;
 import de.cunc.autochef.domain.util.io.ConsoleInputParser;
 import de.cunc.autochef.domain.util.io.ConsoleOutputService;
+import de.cunc.autochef.domain.util.io.UserInputParser;
 import de.cunc.autochef.domain.util.io.UserOutputInterface;
 import de.cunc.autochef.domain.util.web.ChefkochRecipeFetcher;
 import java.awt.Toolkit;
@@ -23,6 +24,7 @@ public class DialogService {
   private DialogState currentState;
   private final RecipeRepository recipeRepository;
   UserOutputInterface outputService;
+  UserInputParser inputParser;
 
   public DialogService(RecipeRepository recipeRepository) {
     this.recipeRepository = recipeRepository;
@@ -76,7 +78,7 @@ public class DialogService {
 
     outputService.rawOut(
         "Hier kannst du sehr einfach ein Rezept von Chefkoch in deine Bibliothek mit aufnehmen.");
-    String url = ConsoleInputParser.getString(userInput -> {
+    String url = inputParser.getString(userInput -> {
           if (!userInput.matches("https://www.chefkoch.de/rezepte/\\d+/.*\\.html")) {
             throw new IllegalArgumentException("Das ist kein Link auf ein Chefkoch-Rezept!");
           }
@@ -95,11 +97,11 @@ public class DialogService {
     currentState = DialogState.MEAL_PLAN_GENERATION;
 
     outputService.rawOut("Wir generieren jetzt zusammen einen Mahlzeiten-Plan. :D");
-    LocalDate startDate = ConsoleInputParser.getDate(null, null,
+    LocalDate startDate = inputParser.getDate(null, null,
         "Wann soll der Plan beginnen? (DD.MM.YYYY)");
-    LocalDate endDate = ConsoleInputParser.getDate(startDate, null,
+    LocalDate endDate = inputParser.getDate(startDate, null,
         "Bis wann soll der Plan gehen (exklusiv)? (DD.MM.YYYY)");
-    int people = ConsoleInputParser.getInteger(1, 99,
+    int people = inputParser.getInteger(1, 99,
         "Für wie viele Leute soll der Plan generiert werden?");
     int days = startDate.until(endDate).getDays();
     outputService.rawOut("Ok, ich generiere einen Plan für " + days + " Tage...");
@@ -165,12 +167,13 @@ public class DialogService {
   }
 
   private static int offerOptions(List<String> options) {
-    ConsoleOutputService outputService = new ConsoleOutputService();
+    UserOutputInterface outputService = new ConsoleOutputService();
+    UserInputParser inputParser = new ConsoleInputParser();
     
     for (int idx = 0; idx < options.size(); idx++) {
       outputService.rawOut("[" + (idx + 1) + "] " + options.get(idx));
     }
-    return ConsoleInputParser.getInteger(1, options.size(), "Auswahl:");
+    return inputParser.getInteger(1, options.size(), "Auswahl:");
   }
 
   public enum DialogState {

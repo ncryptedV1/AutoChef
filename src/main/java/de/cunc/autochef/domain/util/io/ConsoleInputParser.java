@@ -5,9 +5,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.function.Function;
 
-public class ConsoleInputParser {
+public class ConsoleInputParser implements UserInputParser{
 
-  public static Integer getInteger(Integer lowerBound, Integer upperBound, String question) {
+  public Integer getInteger(Integer lowerBound, Integer upperBound, String question) {
     return getInputWithType(userInput -> {
       try {
         int choice = Integer.parseInt(userInput);
@@ -26,7 +26,7 @@ public class ConsoleInputParser {
     }, question);
   }
 
-  public static LocalDate getDate(LocalDate after, LocalDate before, String question) {
+  public LocalDate getDate(LocalDate after, LocalDate before, String question) {
     return getInputWithType(userInput -> {
       try {
         LocalDate date = LocalDate.parse(userInput, Formats.DATE_FORMAT);
@@ -45,11 +45,11 @@ public class ConsoleInputParser {
     }, question);
   }
 
-  public static String getString(Function<String, String> validator, String question) {
+  public String getString(Function<String, String> validator, String question) {
     return getInputWithType(validator, question);
   }
 
-  private static <T> T getInputWithType(Function<String, T> transformFunction, String question) {
+  private <T> T getInputWithType(Function<String, T> transformFunction, String question) {
     ConsoleOutputService outputService = new ConsoleOutputService();
     T choice = null;
     while (choice == null) {
