@@ -394,7 +394,7 @@ Diese Klasse ist dafür zuständig, Rezeptinformationen von der Chefkoch-Website
 ![Kopplung negatives Beispiel verbessert UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/coupling-neg-better.iuml)
 
 #### Positiv-Beispiel 2
-Da eine Klasse gefordert wurde, die nicht bereits in einem vorigen Kapitel behandelt wurde und dies beim vorherigen Negativ-Beispiel mit `ChefkochRecipeFetcher` nicht der Fall ist, wird ein weiteres Positiv-Beispiel aufgeführt.
+Da eine Klasse gefordert wurde, die nicht bereits in einem vorigen Kapitel behandelt wurde und dies beim vorherigen Negativ-Beispiel mit `ChefkochRecipeFetcher` nicht der Fall ist und kein weiteres Negativ-Beispiel existiert, wird ein weiteres Positiv-Beispiel aufgeführt.
 
 - gewählte Klasse: `RecipeRepository`
 
@@ -1149,7 +1149,7 @@ aufgetreten wären.
 
 #### 8.1. Entwurfsmuster: Facade
 
-# gewählte Klasse: `ConsoleOutputService`
+- gewählte Klasse: `ConsoleOutputService`
 
 ![Entwurfstmuster Facade Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/design-pattern-facade.iuml)
 
