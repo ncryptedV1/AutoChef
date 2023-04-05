@@ -375,7 +375,7 @@ Abstraktion zu verwenden.
 
 - gewählte Klasse: `DialogInputParser`
 
-![Kopplung positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/coupling-pos.iuml)
+![Kopplung positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/coupling-pos-1.iuml)
 
 Diese Klasse ist für das Parsen der Benutzereingaben zuständig. Sie ist abhängig von `InputReader`
 und `OutputService`, wobei es sich in beiden Fällen um Interfaces handelt. Damit hält die
