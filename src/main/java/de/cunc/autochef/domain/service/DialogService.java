@@ -5,9 +5,9 @@ import de.cunc.autochef.domain.aggregate.MealPlan;
 import de.cunc.autochef.domain.entity.Recipe;
 import de.cunc.autochef.domain.repository.RecipeRepository;
 import de.cunc.autochef.domain.util.Formats;
-import de.cunc.autochef.domain.util.io.ConsoleInputParser;
+import de.cunc.autochef.domain.util.io.DialogInputParser;
 import de.cunc.autochef.domain.util.io.ConsoleOutputService;
-import de.cunc.autochef.domain.util.io.UserInputParser;
+import de.cunc.autochef.domain.util.io.InputParser;
 import de.cunc.autochef.domain.util.io.UserOutputInterface;
 import de.cunc.autochef.domain.util.web.ChefkochRecipeFetcher;
 import java.awt.Toolkit;
@@ -24,9 +24,9 @@ public class DialogService {
   private DialogState currentState;
   private final RecipeRepository recipeRepository;
   UserOutputInterface outputService;
-  UserInputParser inputParser;
+  InputParser inputParser;
 
-  public DialogService(RecipeRepository recipeRepository, UserOutputInterface outputService, UserInputParser inputParser) {
+  public DialogService(RecipeRepository recipeRepository, UserOutputInterface outputService, InputParser inputParser) {
     this.recipeRepository = recipeRepository;
     this.outputService = outputService;
     this.inputParser = inputParser;
@@ -169,7 +169,7 @@ public class DialogService {
 
   private static int offerOptions(List<String> options) {
     UserOutputInterface outputService = new ConsoleOutputService();
-    UserInputParser inputParser = new ConsoleInputParser();
+    InputParser inputParser = new DialogInputParser();
     
     for (int idx = 0; idx < options.size(); idx++) {
       outputService.rawOut("[" + (idx + 1) + "] " + options.get(idx));

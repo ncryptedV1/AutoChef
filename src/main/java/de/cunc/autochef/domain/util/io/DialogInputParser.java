@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.function.Function;
 
-public class ConsoleInputParser implements UserInputParser{
+public class DialogInputParser implements InputParser {
 
   public Integer getInteger(Integer lowerBound, Integer upperBound, String question) {
     return getInputWithType(userInput -> {

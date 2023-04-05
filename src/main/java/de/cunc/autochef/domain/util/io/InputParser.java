@@ -3,7 +3,7 @@ package de.cunc.autochef.domain.util.io;
 import java.time.LocalDate;
 import java.util.function.Function;
 
-public interface UserInputParser {
+public interface InputParser {
   
   public Integer getInteger(Integer lowerBound, Integer upperBound, String question);
   
