@@ -2,33 +2,39 @@
 
 left to right direction
 
-class AutoChef {
-  + main(args: String[])
+package "Infrastructure" {
+  class AutoChef {
+    + main(args: String[])
+  }
+
+  class RecipeFileRepository {
+    - recipesFolder: File
+    + RecipeFileRepository(recipesFolder: File)
+    + saveRecipe(recipe: Recipe)
+    + deleteRecipe(recipe: Recipe): boolean
+    + getRecipes(): List<Recipe>
+    + getRecipe(id: String): Recipe
+  }
+
+  package "Application" {
+    class DialogService {
+      - recipeRepository: RecipeRepository
+      + DialogService(recipeRepository: RecipeRepository)
+    }
+
+    package "Domain" {
+      interface RecipeRepository {
+        + saveRecipe(recipe: Recipe)
+        + deleteRecipe(recipe: Recipe): boolean
+        + getRecipes(): List<Recipe>
+        + getRecipe(id: String): Recipe
+      }
+    }
+  }
 }
 
-class DialogService {
-  - recipeRepository: RecipeRepository
-  + DialogService(recipeRepository: RecipeRepository)
-}
-
-interface RecipeRepository {
-  + saveRecipe(recipe: Recipe)
-  + deleteRecipe(recipe: Recipe): boolean
-  + getRecipes(): List<Recipe>
-  + getRecipe(id: String): Recipe
-}
-
-class RecipeFileRepository {
-  - recipesFolder: File
-  + RecipeFileRepository(recipesFolder: File)
-  + saveRecipe(recipe: Recipe)
-  + deleteRecipe(recipe: Recipe): boolean
-  + getRecipes(): List<Recipe>
-  + getRecipe(id: String): Recipe
-}
-
-AutoChef -> RecipeFileRepository
 AutoChef -> DialogService
+AutoChef -> RecipeFileRepository
 DialogService -> RecipeRepository
 RecipeRepository <|.. RecipeFileRepository
 
