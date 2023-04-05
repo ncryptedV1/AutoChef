@@ -148,7 +148,7 @@ Abhängigkeitshierarchie zwischen den Komponenten eingeführt wird.
 
 #### Positiv-Beispiel: Dependency Rule
 
-- gewählte Klasse(n): `DialogService`
+- gewählte Klasse: `DialogService`
 
 ![Dependency Rule positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/dependency-rule-pos.iuml)
 
@@ -168,7 +168,7 @@ die Dependency Rule eingehalten, da eine Abhängigkeit von außen nach innen bes
 
 #### Negativ-Beispiel: Dependency Rule
 
-- gewählte Klasse(n): `ChefkochRecipeFetcher`
+- gewählte Klasse: `ChefkochRecipeFetcher`
 
 ![Dependency Rule negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/dependency-rule-neg.iuml)
 
@@ -187,7 +187,7 @@ befindet.
 
 #### Schicht: Domain Code
 
-- gewählte Klasse(n): `Recipe`
+- gewählte Klasse: `Recipe`
 
 ![Schicht 1 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/layer-1.iuml)
 
@@ -211,7 +211,7 @@ einzuordnen.
 
 #### Schicht: Application Code
 
-- gewählte Klasse(n): `DialogService` mit `DialogState`
+- gewählte Klassen: `DialogService` mit `DialogState`
 
 ![Schicht 2 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/layer-2.iuml)
 
@@ -288,7 +288,7 @@ während die `startMealPlanGeneration` lediglich eine verwaltende Rolle einnehme
 
 #### Positiv-Beispiel
 
-gewählte Klasse(n): `RecipeFileRepository` mit Interface `RecipeRepository`
+gewählte Klassen: `RecipeFileRepository` mit Interface `RecipeRepository`
 
 ![Open-Closed positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/open-closed-pos.iuml)
 
@@ -314,7 +314,7 @@ wird, ergibt dieser Ansatz Sinn.
 
 #### Negativ-Beispiel
 
-gewählte Klasse(n): `ChefkochRecipeFetcher`
+gewählte Klasse: `ChefkochRecipeFetcher`
 
 vorher:
 
@@ -344,11 +344,11 @@ wäre das OCP erfüllt.
 ### 3.3. Analyse Dependency-Inversion-Principle (DIP)
 
 Da zur Einhaltung der Dependency Rule der Clean Architecture-Methode oft das DIP genutzt wird,
-können hier selbige Beispiel wie aus [Kapitel 2.2](#22-analyse-der-dependency-rule) genutzt werden.
+können hier selbige Beispiele wie aus [Kapitel 2.2](#22-analyse-der-dependency-rule) genutzt werden.
 
 #### Positiv-Beispiel
 
-- gewählte Klasse(n): `DialogService`
+- gewählte Klasse: `DialogService`
 
 ![Dependency-Inversion-Principle positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/dependency-inversion-pos.iuml)
 
@@ -358,7 +358,7 @@ von einer konkreten Implementierung (der Klasse `RecipeFileRepository`).
 
 #### Negativ-Beispiel
 
-- gewählte Klasse(n): `ChefkochRecipeFetcher`
+- gewählte Klasse: `ChefkochRecipeFetcher`
 
 ![Dependency-Inversion-Principle negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/dependency-inversion-neg.iuml)
 
