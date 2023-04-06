@@ -2,15 +2,12 @@ package de.cunc.autochef.domain.service;
 
 import de.cunc.autochef.domain.aggregate.Meal;
 import de.cunc.autochef.domain.aggregate.MealPlan;
+import de.cunc.autochef.domain.aggregate.MealPlanBuilder;
 import de.cunc.autochef.domain.entity.Recipe;
 import de.cunc.autochef.domain.repository.RecipeRepository;
 import de.cunc.autochef.domain.util.Formats;
-import de.cunc.autochef.domain.util.io.ConsoleInputReader;
-import de.cunc.autochef.domain.util.io.DialogInputParser;
-import de.cunc.autochef.domain.util.io.ConsoleOutputService;
-import de.cunc.autochef.domain.util.io.InputParser;
-import de.cunc.autochef.domain.util.io.InputReader;
-import de.cunc.autochef.domain.util.io.OutputService;
+import de.cunc.autochef.domain.service.io.InputParser;
+import de.cunc.autochef.domain.service.io.OutputService;
 import de.cunc.autochef.domain.util.web.ChefkochRecipeFetcher;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
@@ -109,15 +106,16 @@ public class DialogService {
     int days = startDate.until(endDate).getDays();
     outputService.rawOut("Ok, ich generiere einen Plan für " + days + " Tage...");
 
+    MealPlanBuilder mealPlanBuilder = new MealPlanBuilder();
+    mealPlanBuilder.setStartDate(startDate).setEndDate(endDate);
+
     List<Recipe> recipes = recipeRepository.getRecipes();
-    List<Meal> meals = new ArrayList<>();
     for (int i = 0; i < days; i++) {
-      meals.add(new Meal(recipes.get(random.nextInt(recipes.size())), people));
+      mealPlanBuilder.addMeal(startDate.plusDays(i),
+          new Meal(recipes.get(random.nextInt(recipes.size())), people));
     }
 
-    MealPlan mealPlan = new MealPlan(meals, startDate, endDate);
-
-    startPostMealPlanGeneration(mealPlan, recipes);
+    startPostMealPlanGeneration(mealPlanBuilder.build(), recipes);
   }
 
   private void startPostMealPlanGeneration(MealPlan mealPlan, List<Recipe> allRecipes) {

@@ -1,6 +1,6 @@
 package domain.util;
 
-import de.cunc.autochef.domain.util.io.InputParser;
+import de.cunc.autochef.domain.service.io.InputParser;
 import java.time.LocalDate;
 import java.util.Random;
 import java.util.function.Function;
