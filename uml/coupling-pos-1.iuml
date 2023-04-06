@@ -1,0 +1,32 @@
+@startuml
+
+interface InputReader {
+  +readLine(): String
+}
+
+interface OutputService {
+  +info(msg: String): void
+  +warning(msg: String): void
+  +severe(msg: String): void
+  +rawOut(msg: Object): void
+  +rawErr(msg: Object): void
+}
+
+interface InputParser {
+  +getInteger(lowerBound: Integer, upperBound: Integer, question: String): Integer
+  +getDate(after: LocalDate, before: LocalDate, question: String): LocalDate
+  +getString(validator: Function<String, String>, question: String): String
+}
+
+class DialogInputParser {
+  -inputReader: InputReader
+  -outputService: OutputService
+  +DialogInputParser(inputReader: InputReader, outputService: OutputService)
+  +getInputWithType(transformFunction: Function<String, T>, question: String): T
+}
+
+InputParser <|.. DialogInputParser
+DialogInputParser --> InputReader
+DialogInputParser --> OutputService
+
+@enduml

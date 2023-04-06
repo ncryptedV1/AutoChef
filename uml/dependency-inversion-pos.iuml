@@ -3,10 +3,6 @@
 left to right direction
 
 package "Infrastructure" {
-  class AutoChef {
-    + main(args: String[])
-  }
-
   class RecipeFileRepository {
     - recipesFolder: File
     + RecipeFileRepository(recipesFolder: File)
@@ -33,8 +29,6 @@ package "Infrastructure" {
   }
 }
 
-AutoChef -> DialogService
-AutoChef -> RecipeFileRepository
 DialogService -> RecipeRepository
 RecipeRepository <|.. RecipeFileRepository
 

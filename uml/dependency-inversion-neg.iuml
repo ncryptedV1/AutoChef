@@ -15,17 +15,11 @@ package "Infrastructure" {
       - extractRecipeSteps(content: String)
     }
 
-    class DialogService {
-      - recipeRepository: RecipeRepository
-      + DialogService(recipeRepository: RecipeRepository)
-    }
-
     package "Domain" {
     }
   }
 }
 
-DialogService -> ChefkochRecipeFetcher
 ChefkochRecipeFetcher -> WebsiteFetcher
 
 @enduml
