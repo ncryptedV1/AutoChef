@@ -740,54 +740,23 @@ Unabhängig dessen begründet sich die Code-Coverage wie folgt:
 
 ### 5.6. Fakes und Mocks
 
-In diesem Projekt wurden vor allem Mock-Objekte eingesetzt. Sie wurden genutzt, um benötigte
-Nebenklassen zu mocken. Nachfolgend sind zwei demonstrative Beispiel für den Einsatz von
-Mock-Objekten mit dazugehörigen UML Diagrammen zu sehen.
+In diesem Projekt wurden vor allem Mock-Objekte eingesetzt. Sie wurden genutzt, um benötigte Nebenklassen zu mocken. Jedoch wurden auch einige Fake Objekte an Stellen genutzt, an denen die Funktionalitäten von Mock-Objekten nicht ausreichten.
 
-Beispiel aus: `TestGroceryList#testConstructorVarArgs`
-
-```java
-  @Test
-public void testConstructorVarArgs(){
-    // arrange
-    GroceryItem item1=mock(GroceryItem.class);
-    GroceryItem item2=mock(GroceryItem.class);
-
-    // act
-    GroceryList list=new GroceryList(item1,item2);
-
-    // assert
-    assertNotNull(list);
-    }
-```
+#### Fake-Objekt 1: `OutputServiceFake`
 
 ![Fakes und Mocks Beispiel 1 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/fake-mock-1.iuml)
 
-_[TODO: Analyse und Begründung für Einsatz]
+Die `OutputServiceFake`-Klasse ist ein Fake-Objekt, das die Ausgabe an die Konsole imitiert. Dieses Projekt nutzt Ein- und Ausgabefunktionen für die Interaktion mit dem Benutzer. Da beide Funktionalitäten jedoch automatisierten Unit-Tests im Wege stehen, musste ein Weg gefunden werden sie zu umgehen. Dazu wurden Fake-Objekte eingeführt. 
 
-Beispiel aus: `TestMealPlan#setUp`
+Möglich ist das durch die Nutzung eines `OutputService`-Interfaces, das die Konsolenausgabe abstrahiert. So ist es möglich, dass Code der inneren Schichten abstrakt mit Code der äußeren Schichten im Sinne der Clean-Architecture interagieren kann. Das `OutputService` bietet einige Funktionalitäten, um Konsolenausgaben auf verschiedenen Art und Weisen auszugeben, wie im UML-Diagram ersichtlich ist. Da für die automatisierten Tests zunächst keine Konsolenausgaben benötigt werden, wurden die eigentlichen Implementierungen in der `OutputServiceFake`-Klasse leer gelassen. 
 
-```java
-  @BeforeEach
-public void setUp(){
-    start=LocalDate.now();
-    end=start.plusDays(5);
-    int totalMeals=start.until(end).getDays();
-
-    List<Meal> meals=new ArrayList<>();
-    for(int i=0;i<totalMeals; i++){
-    meals.add(mock(Meal.class));
-    }
-
-    mealPlan=new MealPlan(meals,start,end);
-    }
-```
+#### Fake-Objekt 1: `RecipeFileRepositoryFake`
 
 ![Fakes und Mocks Beispiel 2 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/fake-mock-2.iuml)
 
-_[TODO: Analyse und Begründung für Einsatz]
+[//]: # (Ein zweiter Aspekt der ein Fake-Objekt nutzt, ist die Persistenzverwaltung der Anwendung. Im Laufe der Interaktion mit dem Nutzer, werden Rezepte aus einem Dateispeicher gelesen. Den eigentlichen Zugriff auf die Datei übernimmt die `RecipeFileRepositoryFake`-Klasse. FÜr automatisierte Unit-Tests Ein Dateizugriff  )
 
-_[Analyse und Begründung des Einsatzes von 2 Fake/Mock-Objekten; zusätzlich jeweils UML Diagramm der Klasse]_
+_[TODO: Analyse und Begründung für Einsatz]
 
 ## 6. Domain Driven Design
 
