@@ -750,13 +750,15 @@ Die `OutputServiceFake`-Klasse ist ein Fake-Objekt, das die Ausgabe an die Konso
 
 Möglich ist das durch die Nutzung eines `OutputService`-Interfaces, das die Konsolenausgabe abstrahiert. So ist es möglich, dass Code der inneren Schichten abstrakt mit Code der äußeren Schichten im Sinne der Clean-Architecture interagieren kann. Das `OutputService` bietet einige Funktionalitäten, um Konsolenausgaben auf verschiedenen Art und Weisen auszugeben, wie im UML-Diagram ersichtlich ist. Da für die automatisierten Tests zunächst keine Konsolenausgaben benötigt werden, wurden die eigentlichen Implementierungen in der `OutputServiceFake`-Klasse leer gelassen. 
 
-#### Fake-Objekt 1: `RecipeFileRepositoryFake`
+#### Fake-Objekt 1: `ConsoleInputReaderFake`
 
 ![Fakes und Mocks Beispiel 2 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/fake-mock-2.iuml)
 
-[//]: # (Ein zweiter Aspekt der ein Fake-Objekt nutzt, ist die Persistenzverwaltung der Anwendung. Im Laufe der Interaktion mit dem Nutzer, werden Rezepte aus einem Dateispeicher gelesen. Den eigentlichen Zugriff auf die Datei übernimmt die `RecipeFileRepositoryFake`-Klasse. FÜr automatisierte Unit-Tests Ein Dateizugriff  )
+Ein zweiter Aspekt der ein Fake-Objekt nutzt, ist die Eingaben von Daten durch den Nutzer. Speziell ist damit die Funktionalität der `ConsoleInputReader`-Klasse gemeint. Diese Klasse wird lediglich als Teil der `DialogInputParser`-Klasse genutzt. Dort werden Daten des Benutzers über die Konsole durch die `ConsoleInputReader`-Klasse eingelesen. Im zweiten Schritt analysiert und validiert die `DialogInputParser`-Klasse die Eingabe um sie weiter verwenden zu können. 
 
-_[TODO: Analyse und Begründung für Einsatz]
+Die Benutzung der Konsole ist jedoch hinderlich, wenn automatisierte Tests genutzt werden. Um die Funktionalitäten der `DialogInputParser`-Klasse testen zu können, muss also ein Fake für die `ConsoleInputReader`-Klasse genutzt werden. Die `ConsoleInputReaderFake`-Klasse hat genau diese Verantwortung. Genauso wie die `ConsoleInputReader`-Klasse, greift der Fake auf ein Interface namens `InputReader` zu. Dieses Interface bietet als einzige Funktionlität eine `readLine`-Methode, die Inhalte des Benutzers einliest. 
+
+Der Fake soll auf eine Art und Weise funktionieren, dass er Daten, die hineingegeben werden genauso wieder zurückgegeben werden. Da die `readLine`-Methode laut Interface aber keine Parameter erwartet, wurde ein zusätzlicher Konstruktor hinzugefügt. Wie im UML ersichtlich, nimmt der Konstruktor einen String auf, der in der `content`-Variable. Intern wird der Inhalt dieser Variable lediglich zurückgegeben. So ist es möglich einen Fake zu verwenden und gleichzeitig effektiv zu testen.
 
 ## 6. Domain Driven Design
 

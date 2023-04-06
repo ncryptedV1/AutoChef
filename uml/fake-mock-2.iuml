@@ -2,21 +2,16 @@
 
 left to right direction
 
-interface RecipeRepository {
-  + saveRecipe(recipe: Recipe)
-  + deleteRecipe(recipe: Recipe): boolean
-  + getRecipes(): List<Recipe>
-  + getRecipe(id: String): Recipe
+interface InputReader {
+  + readLine(): String
 }
       
-class RecipeFileRepositoryFake {
-  + RecipeFileRepository(recipesFolder: File)
-  + saveRecipe(recipe: Recipe)
-  + deleteRecipe(recipe: Recipe): boolean
-  + getRecipes(): List<Recipe>
-  + getRecipe(id: String): Recipe
+class ConsoleInputReaderFake {
+  - content: String
+  + ConsoleInputReaderFake(content: String)
+  + readLine(): String
 }
 
-RecipeRepository <|.. RecipeFileRepositoryFake
+InputReader <|.. ConsoleInputReaderFake
 
 @enduml
