@@ -674,7 +674,7 @@ Test-Methode: `TestUnit#getValue`
 ```
 
 Diese Testmethode testet die `getValue` Getter-Methode der `Unit` Klasse. Dabei wird ein `Unit`
-ValueObject angelegt mit einem initialen Wert. Das Ergebnis der `getValue` wird verglichen mit dem
+Value Object angelegt mit einem initialen Wert. Das Ergebnis der `getValue` wird verglichen mit dem
 initialen Wert. Beide Werten sollten gleich sein.
 
 Diese Klasse ist ein Negativbeispiel, da sie einen unnötigen Test darstellt. Getter-Methoden sollten
