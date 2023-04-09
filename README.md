@@ -1112,8 +1112,8 @@ Die `ConsoleOutputService`-Klasse kapselt die Details der `Logger`-Konfiguration
 
 ![Entwurfstmuster Builder Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/design-pattern-builder.iuml)
 
-Der `MealPlanBuilder` ist ein Beispiel für das Entwurfsmuster Builder, da er eine einfache Schnittstelle bietet, um komplexe Objekte schrittweise aufzubauen. Mithilfe von Methoden wie `setStartDate()`, `setEndDate()` und `addMeal()` kann der Verwender des `MealPlanBuilder` einen Mahlzeiten-Plan definieren, ohne dabei die genaue Implementierung des `MealPlan` kennen zu müssen.
+Der `MealPlanBuilder` ist ein Beispiel für das Entwurfsmuster Builder, da er eine einfache Schnittstelle bietet, um komplexe Objekte schrittweise aufzubauen. Mithilfe von Methoden wie `setStartDate`, `setEndDate` und `addMeal` kann der Verwender des `MealPlanBuilder` einen Mahlzeiten-Plan definieren, ohne dabei die genaue Implementierung des `MealPlan` kennen zu müssen.
 
-Die `build()` Methode ist das Herzstück des Builders und erzeugt das fertige Objekt. Dabei wird die Konsistenz des Objekts sichergestellt und gegebenenfalls eine `IllegalStateException` geworfen, wenn zum Beispiel ein Start- oder Enddatum fehlt oder nicht alle Mahlzeiten definiert sind.
+Die `build`-Methode ist das Herzstück des Builders und erzeugt das fertige Objekt. Dabei wird die Konsistenz des Objekts sichergestellt und gegebenenfalls eine `IllegalStateException` geworfen, wenn zum Beispiel ein Start- oder Enddatum fehlt oder nicht alle Mahlzeiten definiert sind.
 
-Der Builder ist ein nützliches Muster, wenn die Erstellung von Objekten viele Parameter erfordert oder komplex ist. Indem er den Verwendet von der Komplexität des Aufbaus des Objekts abschirmt, ermöglicht er eine klare und einfache API und stellt sicher, dass die erstellten Objekte korrekt initialisiert sind.
+Der Builder ist ein nützliches Muster, wenn die Erstellung von Objekten viele Parameter erfordert oder komplex ist. Indem er den Verwender von der Komplexität des Aufbaus des Objekts abschirmt, ermöglicht er eine klare und einfache API und stellt sicher, dass die erstellten Objekte korrekt initialisiert sind.
