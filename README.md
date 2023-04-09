@@ -8,31 +8,6 @@ Martrikelnummer: XXX
 
 Abgabedatum: 28. Mai 2023
 
-## Allgemeine Anmerkungen
-
-- es darf nicht auf andere Kapitel als Leistungsnachweis verwiesen werden (z.B. in der Form “XY
-  wurde schon in Kapitel 2 behandelt, daher hier keine Ausführung”)
-- alles muss in UTF-8 codiert sein (Text und Code)
-- sollten mündliche Aussagen den schriftlichen Aufgaben widersprechen, gelten die schriftlichen
-  Aufgaben (ggf. an Anpassung der schriftlichen Aufgaben erinnern!)
-- alles muss ins Repository (Code, Ausarbeitung und alles was damit zusammenhängt)
-- die Beispiele sollten wenn möglich vom aktuellen Stand genommen werden
-    - finden sich dort keine entsprechenden Beispiele, dürfen auch ältere Commits unter Verweis auf
-      den Commit verwendet werden
-    - Ausnahme: beim Kapitel “Refactoring” darf von vorne herein aus allen Ständen frei gewählt
-      werden (mit Verweis auf den entsprechenden Commit)
-- falls verlangte Negativ-Beispiele nicht vorhanden sind, müssen entsprechend mehr Positiv-Beispiele
-  gebracht werden
-    - Achtung: werden im Code entsprechende Negativ-Beispiele gefunden, gibt es keine Punkte für die
-      zusätzlichen Positiv-Beispiele
-    - Beispiel: “Nennen Sie jeweils eine Klasse, die das SRP einhält bzw. verletzt.”
-    - -> Antwort: Es gibt keine Klasse, die SRP verletzt, daher hier 2 Klassen, die SRP
-      einhalten: [Klasse 1], [Klasse 2]
-    - -> Bewertung: falls im Code tatsächlich keine Klasse das SRP verletzt: volle Punktzahl ODER
-      falls im Code mind. eine Klasse SRP verletzt: halbe Punktzahl
-- verlangte Positiv-Beispiele müssen gebracht werden
-- Code-Beispiel = Code in das Dokument kopieren
-
 ## Inhaltsverzeichnis
 
 - [Einführung](#1-einführung)
@@ -68,8 +43,8 @@ Abgabedatum: 28. Mai 2023
     - [Code Smells](#71-code-smells)
     - [2 Refactorings](#72-2-refactorings)
 - [Entwurfsmuster](#8-entwurfsmuster)
-    - [Entwurfsmuster: Name](#81-entwurfsmuster-name)
-    - [Entwurfsmuster: Name](#82-entwurfsmuster-name)
+    - [Entwurfsmuster: Facade](#81-entwurfsmuster-facade)
+    - [Entwurfsmuster: Builder](#82-entwurfsmuster-builder)
 
 ## 1. Einführung
 
