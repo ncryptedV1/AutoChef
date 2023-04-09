@@ -1,0 +1,12 @@
+@startuml
+
+left to right direction
+
+class Ingredient {
+  - name: String
+  + Ingredient(name: String)
+  + getValue(): String
+  + getId(): String 
+}
+
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+
+left to right direction
+
+'class MealPlan {
+'  - meals: List<Meal>
+'  - start: LocalDate
+'  - end: LocalDate
+'  + getMeals(): List<Meal>
+'  + getStart(): LocalDate
+'  + getEnd(): LocalDate
+'  + getDays(): int
+'  + getGroceryList(): GroceryList
+'}
+
+class Meal {
+  - recipe: Recipe
+  - adjustedNumberOfPeople:  int
+  + Meal(recipe: Recipe, adjustedNumberOfPeople: int)
+  + getRecipe(): Recipe
+  + setRecipe(recipe: Recipe): void
+  + getAdjustedNumberOfPeople(): int
+  + getGroceryList(): GroceryList
+}
+
+'class GroceryList {
+'  - items: List<GroceryItem>
+'  + addItem(GroceryItem entry): void
+'  + getItems(): List<GroceryItem>
+'}
+'
+'MealPlan <- GroceryList
+'MealPlan <- Meal
+'Meal <- GroceryList
+
+@enduml

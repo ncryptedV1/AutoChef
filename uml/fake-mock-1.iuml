@@ -1,0 +1,22 @@
+@startuml
+
+left to right direction
+
+interface OutputService {
+  + info(msg: String): void
+  + warning(msg: String): void
+  + severe(msg: String): void
+  + rawOut(msg: Object): void
+}
+
+class OutputServiceFake {
+  + rawErr(msg: ObjString): void
+  + warning(msg: String): void
+  + severe(msg: String): void
+  + rawOut(msg: Object): void
+  + rawErr(msg: Object): void 
+}
+
+OutputService <|.. OutputServiceFake
+
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+
+left to right direction
+
+interface InputReader {
+  + readLine(): String
+}
+      
+class ConsoleInputReaderFake {
+  - content: String
+  + ConsoleInputReaderFake(content: String)
+  + readLine(): String
+}
+
+InputReader <|.. ConsoleInputReaderFake
+
+@enduml
