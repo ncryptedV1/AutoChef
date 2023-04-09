@@ -1,0 +1,21 @@
+@startuml
+
+left to right direction
+
+class AutoChef {
+  + main(args: String[])
+}
+
+class ConsoleOutputService {
+  - logger: Logger
+  + info(msg: String): void
+  + warning(msg: String): void
+  + severe(msg: String): void
+  + rawOut(msg: Object): void
+  + rawErr(msg: Object): void
+}
+  
+  
+AutoChef -> ConsoleOutputService
+
+@enduml

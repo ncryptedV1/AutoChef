@@ -1,0 +1,38 @@
+@startuml
+
+left to right direction
+
+class ChefkochRecipeFetcher {
+  +getRecipe(url: String): Recipe
+  -extractRecipeName(content: String): String
+  -extractIngredients(content: String): GroceryList
+  -extractRecipeSteps(content: String): List<RecipeStep>
+}
+
+interface WebsiteFetcher {
+  +getWebsiteBody(urlString: String): String
+}
+
+class BufferedWebsiteFetcher {
+  +getWebsiteBody(urlString: String): String
+}
+
+class Recipe {
+  // fields and methods
+}
+
+class GroceryList {
+  // fields and methods
+}
+
+class RecipeStep {
+  // fields and methods
+}
+
+WebsiteFetcher <-- ChefkochRecipeFetcher
+WebsiteFetcher <|.. BufferedWebsiteFetcher
+Recipe <-- ChefkochRecipeFetcher
+GroceryList <-- ChefkochRecipeFetcher
+RecipeStep <-- ChefkochRecipeFetcher
+
+@enduml

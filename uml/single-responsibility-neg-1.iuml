@@ -1,0 +1,19 @@
+@startuml
+
+left to right direction
+
+class DialogService {
+  - currentState: DialogState
+  - recipeRepository: RecipeRepository
+  + DialogService(recipeRepository: RecipeRepository)
+  + startDialog(): void
+  + startMain(): void
+  + showRecipes(): void
+  + addRecipe(): void
+  + startMealPlanGeneration(): void
+  + startPostMealPlanGeneration(MealPlan mealPlan, List<Recipe> allRecipes): void
+  + getCurrentState(): DialogState
+  + offerOptions(options: List<String>): int
+}
+
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+
+class Recipe {
+  // fields and methods
+}
+
+class RecipeFileRepository {
+    -recipesFolder: File
+    +RecipeFileRepository(recipesFolder: File)
+    +saveRecipe(recipe: Recipe): void
+    +deleteRecipe(recipe: Recipe): boolean
+    +getRecipes(): List<Recipe>
+    +getRecipe(id: String): Recipe
+}
+
+interface RecipeRepository {
+    +saveRecipe(recipe: Recipe): void
+    +deleteRecipe(recipe: Recipe): boolean
+    +getRecipes(): List<Recipe>
+    +getRecipe(id: String): Recipe
+}
+
+RecipeFileRepository ..|> RecipeRepository
+RecipeRepository -> Recipe
+
+@enduml

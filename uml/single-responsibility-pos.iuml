@@ -1,0 +1,12 @@
+@startuml
+
+left to right direction
+
+class Quantity {
+  - value: double
+  + Quantity(value: double)
+  + getValue(): double
+  + multiple(factor: double): Quantity
+}
+
+@enduml

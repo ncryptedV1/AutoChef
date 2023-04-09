@@ -1,0 +1,25 @@
+@startuml
+
+left to right direction
+
+package "Infrastructure" {
+  class WebsiteFetcher {
+    + getWebsiteBody(urlString: String)
+  }
+
+  package "Application" {
+    class ChefkochRecipeFetcher {
+      + getRecipe(url: String)
+      - extractRecipeName(content: String)
+      - extractIngredients(content: String)
+      - extractRecipeSteps(content: String)
+    }
+
+    package "Domain" {
+    }
+  }
+}
+
+ChefkochRecipeFetcher -> WebsiteFetcher
+
+@enduml

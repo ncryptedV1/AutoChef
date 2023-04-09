@@ -1,0 +1,27 @@
+@startuml
+
+class MealPlanBuilder {
+  - mealMap: Map<LocalDate, Meal>
+  - startDate: LocalDate
+  - endDate: LocalDate
+  + setStartDate(startDate: LocalDate): MealPlanBuilder
+  + setEndDate(endDate: LocalDate): MealPlanBuilder
+  + addMeal(date: LocalDate, meal: Meal): MealPlanBuilder
+  + build(): MealPlan
+}
+
+class MealPlan {
+  - meals: List<Meal>
+  - start: LocalDate
+  - end: LocalDate
+  + getMeals(): List<Meal>
+  + getStart(): LocalDate
+  + getEnd(): LocalDate
+  + getDays(): int
+  + getGroceryList(): GroceryList
+  + toString(): String
+}
+
+MealPlanBuilder --> MealPlan
+
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+
+left to right direction
+
+class Meal {
+  - Recipe recipe: Recipe
+  - adjustedNumberOfPeople: int
+  + Meal(recipe: Recipe, adjustedNumberOfPeople: int)
+  + setRecipe(recipe: Recipe): void
+  + getRecipe(): Recipe
+  + getAdjustedNumberOfPeople(): int
+  + getGroceryList(): GroceryList
+}
+@enduml

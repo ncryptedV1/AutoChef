@@ -1,0 +1,16 @@
+@startuml
+
+left to right direction
+
+class Recipe {
+  - name: String
+  - groceryList: GroceryList
+  - recipeSteps: List<RecipeStep>
+  + Recipe(name: String)
+  + getName(): String
+  + getRecipeSteps(): List<RecipeStep>
+  + getGroceryList(): GroceryList 
+  + getId(): String 
+}
+
+@enduml

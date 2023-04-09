@@ -1,0 +1,48 @@
+@startuml
+
+left to right direction
+
+class DialogService {
+  - currentState: DialogState
+  - recipeRepository: RecipeRepository
+  + DialogService(recipeRepository: RecipeRepository)
+  + startDialog(): void
+  + startMain(): void
+  + showRecipes(): void
+  + addRecipe(): void
+  + startMealPlanGeneration(): void
+  + startPostMealPlanGeneration(MealPlan mealPlan, List<Recipe> allRecipes): void
+  + getCurrentState(): DialogState
+  + offerOptions(options: List<String>): int
+}
+
+enum DialogState {
+  - MAIN
+  - SHOW_RECIPES
+  - ADD_RECIPE 
+  - MEAL_PLAN_GENERATION
+  - POST_MEAL_PLAN_GENERATION
+}
+
+'interface RecipeRepository {
+'  + saveRecipe(recipe: Recipe): void
+'  + deleteRecipe(recipe: Recipe): boolean
+'  + getRecipes(): List<Recipe>
+'  + getRecipe(id: String): Recipe
+'}
+'
+'class RecipeFileRepository {
+'  - recipesFolder: File
+'  + RecipeFileRepository(recipesFolder: File)
+'  + saveRecipe(recipe: Recipe): void
+'  + deleteRecipe(recipe: Recipe): boolean
+'  + getRecipes(): List<Recipe>
+'  + getRecipe(id: String): Recipe
+'}
+
+
+DialogState <- DialogService 
+'RecipeFileRepository <- DialogService 
+'RecipeRepository <|.. RecipeFileRepository
+
+@enduml

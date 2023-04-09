@@ -1,0 +1,27 @@
+@startuml
+class Recipe {
+  - name: String
+  - groceryList: GroceryList
+  - recipeSteps: List<RecipeStep>
+  + Recipe(name: String, groceryList: GroceryList, recipeSteps: List<RecipeStep>)
+  + Recipe(name: String, groceryList: GroceryList, recipeSteps: RecipeStep...)
+  + getName(): String
+  + getRecipeSteps(): List<RecipeStep>
+  + getGroceryList(): GroceryList
+  + getId(): String
+  + toString(): String
+  + equals(Object o): boolean
+  + hashCode(): int
+}
+
+class GroceryList {
+  // fields and methods
+}
+
+class RecipeStep {
+  // fields and methods
+}
+
+Recipe "1" --> "1" GroceryList
+Recipe "0..*" --> "1" RecipeStep
+@enduml
