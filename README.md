@@ -755,7 +755,7 @@ zugehörige Klasse(n): `Recipe`
 
 Die `Recipe` Entity beschreibt ein semantisches Rezept. Wie das UML-Diagram zeigt, besteht ein
 Rezept aus einem Name, einer Liste von Zutaten (GroceryList) und einer Liste von Schritten zur
-Zubereitung (RecipeStep). Ein Rezept wird eineindeutig über eine ID indetifiziert. In diesem Fall
+Zubereitung (RecipeStep). Ein Rezept wird eineindeutig über eine ID identifiziert. In diesem Fall
 besteht die ID aus dem Namen in Kleinschrift. Haben also zwei Rezepte den selben Namen, werden sie
 als gleich angesehen. Weiterhin hat die `Recipe` Klasse mehrere Getter-Methoden für die einzelnen
 Attribute und die ID als auch einen Konstruktor.
@@ -783,7 +783,7 @@ Namen (`getValue`) und für die ID (`getID`). Letztere, ist dabei jedoch nicht z
 Identifizierung im Sinne einer Entity anzusehen, sondern wird lediglich zum einfacheren Vergleich
 zweier `Ingredient`-Instanzen verwendet. Die ID setzt sich aus dem Namen in Kleinschrift zusammen.
 Zusätzlich existiert ein Konstruktor zur Erzeugung einer Ingredient-Instanz, bei der die Richtigkeit
-des Namens überprüft wird. Ähnlich wie bei der `Recipe`-Klassen, muss ein Namen mindestens ein
+des Namens überprüft wird. Ähnlich wie bei der `Recipe`-Klasse, muss ein Namen mindestens ein
 Zeichen enthalten, das keinem White-Space Zeichen entspricht.
 
 Ein `Ingredient` hat keinen Lebenszyklus und auch keine relevante Logik implementiert. Es dient
@@ -797,14 +797,14 @@ zugehörige Klasse(n): `RecipeFileRepository`
 
 ![Repository Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/repository.iuml)
 
+Repositories dienen als Vermittler zwischen Datenmodell und Domänenlogik. Sie werden genutzt, um
+Daten zu speichern oder sie abzurufen aus ebendiesem Speicher. In diesem Projekt wurde ein
+Repository `RecipeFileRepository` genutzt, um die Persistenz von Rezepten zu verwalten.
+Das `RecipeFileRepository` besitzt als einziges Attribut eine Instanz der `File`-Klasse
+namens `recipesFolder`, die angibt, wo im Dateisystem Rezepte gespeichert werden sollten.
+Zusätzlich existieren Methoden zur Persistenzverwaltung, die von dem Interface `RecipeRepository`
+implementiert werden:
 - `saveRecipe`: speichert ein gegebenes Rezept in einer Datei im Dateiort `recipesFolder` ab
-  Repositories dienen als Vermittler zwischen Datenmodell und Domänenlogik. Sie werden genutzt, um
-  Daten zu speichern oder sie abzurufen aus ebendiesen Speicher. In diesem Projekt wurde ein
-  Repository `RecipeFileRepository` genutzt, um die Persistenz von Rezepten zu verwalten.
-  Das `RecipeFileRepository` besitzt als einziges Attribut eine Instanz der `File`-Klasse
-  namens `recipesFolder`, die angibt, wo im Dateisystem Rezepte gespeichert werden sollten.
-  Zusätzlich existieren Methoden zur Persistenzverwaltung, die von dem Interface `RecipeRepository`
-  implementiert werden:
 - `deleteRecipe`: löscht ein gegebenes Rezept im Dateiort `recipesFolder`
 - `getRecipe`: liest ein anhand der ID definiertes Rezept im Dateiort `recipesFolder` ein
 - `getRecipes`: liest alle vorhandenen Rezepte im Dateiort `recipesFolder` ein
@@ -817,7 +817,7 @@ es kann keine Instanz angelegt werden.
 Um die Persistenzverwaltung gründlich und sauber von der Domänenlogik zu trennen, wurde dieses
 Repository eingesetzt. Mit Nutzung des Interfaces, kann sichergestellt werden, dass beide Elemente
 getrennt bleiben. Zusätzlich ermöglicht der Einsatz eines Repositories, Veränderungen an der
-Persistenzverwaltung vorzunehmen, ob auf die Domänenlogik eingreifen zu müsssen.
+Persistenzverwaltung vorzunehmen, ohne auf die Domänenlogik eingreifen zu müsssen.
 
 ### 6.5. Aggregates
 
@@ -825,11 +825,11 @@ zugehörige Klasse(n): `Meal`
 
 ![Aggregate Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/aggregate.iuml)
 
-In diesem Projekt wurde die `Meal`-Klasse als Aggregate ausgewählt.Die `Meal`-Klasse fasst logsiches
+In diesem Projekt wurde die `Meal`-Klasse als Aggregate ausgewählt. Die `Meal`-Klasse fasst logisches
 Verhalten verschiedener Elemente zusammen. Es definiert sich durch ein Rezept `recipe` und einem
 Integer `adjustedNumberOfPeople`, das darstellt, auf wie viele Personen die Zutatenmenge des
 Rezeptes angepasst werden soll. Der Konstruktor enthält keine weitere Logik zur Überprüfung der
-Attribute. Des Weiteren exisiteren folge Methoden:
+Attribute. Des Weiteren existieren folgende Methoden:
 
 - `getRecipe`: eine Getter-Methode für `recipe`
 - `setRecipe`: eine Setter-Methode für `recipe`
