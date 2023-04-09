@@ -53,24 +53,30 @@ Abgabedatum: 28. Mai 2023
 AutoChef ist eine Anwendung zur einfachen und effizienten Verwaltung und Erstellung von
 Essensplänen, sowie dazugehöriger Einkaufslisten. Zugrunde liegt dabei eine Datenbank an Rezepten.
 Diese ist beliebig erweiterbar durch eine [Chefkoch](chefkoch.de)-Integration. Diese ermöglicht es,
-einen Link zu einem Rezept auf Chefkoch an die Anwendung zu übergeben, woraufhin diese das
-entsprechende Rezept herunterlädt und persistiert. Diese Datenbank an Rezepten, sowie jeweilige
+einen Link zu einem Rezept auf Chefkoch an die Anwendung zu übergeben, woraufhin das
+entsprechende Rezept heruntergeladen und persistiert wird. Die Datenbank an Rezepten, sowie jeweilige
 Rezept-Details, können jederzeit eingesehen werden. Hauptfunktion ist jedoch die Generierung von
 Essensplänen. Dafür kann der Nutzer einen Zeitraum, sowie die Anzahl an Personen je Mahlzeit angeben
-und die Anwendung generiert anhand der Rezept-Datenbank, einen zufälligen Essensplan. Für diesen
+und die Anwendung generiert anhand der Rezept-Datenbank einen zufälligen Essensplan. Für diesen
 Essensplan wird ebenfalls eine Einkaufsliste generiert, die an die Anzahl an Personen angepasst ist.
-Mit diesen Funktionalitäten ist es einfach möglich, seine Woche kulinarisch zu planen und die
+Mit diesen Funktionalitäten ist es einfach möglich, eine Woche kulinarisch zu planen und die
 Einkaufliste für den Wocheneinkauf zu erstellen.
-
-_[Was macht die Applikation, Wie funktioniert sie? Welches Problem löst sie/welchen Zweck hat sie?]_
 
 ### 1.2. Wie startet man die Applikation?
 
 Bei AutoChef handelt es sich um eine CLI-Anwendung, geschrieben in Java 19. Zum Starten wird daher
-lediglich ein Desktop-Rechner mit **Java 19 aufwärts** benötigt. Die Anwendung kann dann über ein
-Konsolenfenster mit dem Befehl `java -jar AutoChef.jar` gestartet werden.
+lediglich ein Desktop-Rechner mit **Java 19 aufwärts** benötigt. Um die Anwendung starten zu können, 
+muss zunächst das GitHub-Repository geclont werden:
 
-_[Wie startet man die Applikation? Welche Voraussetzungen werden benötigt? Schritt-für-Schritt-Anleitung]_
+```bash
+git clone https://github.com/ncryptedV1/AutoChef
+```
+Die Anwendung kann dann im nächsten Schritt über ein Konsolenfenster mit dem folgenden Befehl gestartet werden:
+
+```bash
+cd AutoChef/
+java -jar AutoChef.jar
+```
 
 ### 1.3. Wie testet man die Applikation?
 
@@ -78,10 +84,10 @@ Nach dem Start der Anwendung wird der Nutzer durch einen intuitiven Dialog-Proze
 geleitet. Der Nutzer interagiert dabei mit der Anwendung mittels des Konsolenfensters. Über dieses
 werden sowohl Informationen ausgegeben, als auch Eingaben vom Nutzer eingeholt. Der Dialog-Prozess
 ist so gestaltet, dass der Nutzer in der Regel mehrere nummerierte Optionen zur Auswahl hat und nur
-die Nummer der gewünschten Option eingeben und mit Enter absenden muss. Für den Import von Rezepten
-muss der Nutzer sich zuvor ein Rezept von Chefkoch aussuchen und im entsprechenden
-Dialog-Prozess-Schritt den dazugehörigen Link einfügen. Zu Beginn der Nutzung ist die
-Rezept-Datenbank noch leer, weshalb es sich anbietet anfangs ein paar Rezepte zu importieren. Erst
+die Nummer der gewünschten Option eingeben und mit `Enter` absenden muss. Für den Import von Rezepten
+muss sich der Nutzer zuvor ein Rezept von Chefkoch.de aussuchen und den dazugehörigen Link im 
+entsprechenden Dialog-Prozess-Schritt einfügen. Zu Beginn der Nutzung ist die
+Rezept-Datenbank noch leer, weshalb es sich anbietet anfangs einige Rezepte zu importieren. Erst
 danach können die Funktionen der Rezept-Anzeige und Essensplan-Generierung sinnvoll genutzt werden.
 
 Hinweis: Zur Persistierung der Rezepte erstellt die Anwendung im aktuellen Arbeitsverzeichnis (des
@@ -89,8 +95,6 @@ Konsolenfensters) einen `recipes`-Ordner. Falls der Nutzer keine Rechte hat im a
 Arbeitsverzeichnis Ordner & Dateien zu erstellen, sowie in diese zu schreiben, kann das Programm
 nicht ordnungsgemäß arbeiten und terminiert. Versuche in dem Fall die Anwendung mit erhöhten
 Berechtigungen zu starten oder in einem Arbeitsverzeichnis mit Schreibzugriff auszuführen.
-
-_[Wie testet man die Applikation? Welche Voraussetzungen werden benötigt? Schritt-für-Schritt-Anleitung]_
 
 ## 2. Clean Architecture
 
