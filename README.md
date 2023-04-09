@@ -1104,7 +1104,7 @@ In diesem Fall verbirgt die `ConsoleOutputService`-Klasse die Komplexität der `
 - `rawOut(Object msg)`: zum direkten Ausgeben von Nachrichten auf der Standardausgabe (stdout).
 - `rawErr(Object msg)`: zum direkten Ausgeben von Fehlermeldungen auf der Standardfehlerausgabe (stderr).
 
-Die `ConsoleOutputService`-Klasse kapselt die Details der `Logger`-Initialisierung sowie die `Logger`-Konfiguration im statischen Block. Dies ermöglicht den Nutzern, die Logging-Funktionalität einfach zu verwenden, ohne sich um die zugrunde liegenden Details kümmern zu müssen.
+Die `ConsoleOutputService`-Klasse kapselt die Details der `Logger`-Konfiguration im statischen Block und -Initialisierung. Dies ermöglicht den Nutzern, die Logging-Funktionalität einfach zu verwenden, ohne sich um die zugrunde liegenden Details kümmern zu müssen.
 
 #### 8.2. Entwurfsmuster: Builder
 
