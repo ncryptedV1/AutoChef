@@ -222,12 +222,12 @@ gewählte Klasse: `Quantity`
 
 ![Single Responsibility positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/single-responsibility-pos.iuml)
 
-Die `Quantity`-Klasse bildet eine "Menge" oder "Anzahl" ab. Es ist relevant für die Menge von
+Die `Quantity`-Klasse bildet eine "Menge" oder "Anzahl" ab. Das ist relevant für die Menge von
 Zutaten in einem Rezept. Die Klasse ist maßgeblich definiert durch ihr einziges Attribute `value`,
 das eine Menge als `double` repräsentiert. Zusätzlich dazu kann über die Methode `multiply`
 eine `Quantity`-Instanz mit einem Wert multipliziert werden, was wieder eine neue `Quantity`-Instanz
 zurückgibt. `Quantity` ist vor allem relevant im Kontext von `GroceryItem`, da dort beschrieben
-wird, wie viel von einem `Ingredient` benötigt wird.
+wird, wie viel von einer `Ingredient`-Instanz benötigt wird.
 
 Die Verantwortung der Klasse liegt demnach darin, semantisch eine "Menge" abzubilden. Daneben
 besitzt sie keine weiteren Verantwortlichkeiten.
@@ -246,7 +246,7 @@ der Dialog-Service jedwede Logik für den Ablauf der Anwendung:
 - es startet den Dialog mit dem Benutzer
 - organisiert die Generierung von Essensplänen und
 - gibt dem Benutzer die Möglichkeit Rezepte hinzuzufügen.
-  Der Dialog-Service ist speziell für den Anwendungsfall einer CLI-Anwendung definiert.
+Der Dialog-Service ist speziell für den Anwendungsfall einer CLI-Anwendung definiert.
 
 Der Dialog-Service hat jedoch mehrere Verantwortlichkeiten und bricht damit das SRP:
 
@@ -267,7 +267,7 @@ während die `startMealPlanGeneration` lediglich eine verwaltende Rolle einnehme
 
 #### Positiv-Beispiel
 
-gewählte Klassen: `RecipeFileRepository` mit Interface `RecipeRepository`
+gewählte Klasse: `RecipeFileRepository` mit Interface `RecipeRepository`
 
 ![Open-Closed positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/open-closed-pos.iuml)
 
@@ -277,9 +277,9 @@ Die `RecipeFileRepository`-Klasse implementiert diese Methoden für den Fall von
 Dateien.
 
 Da hier ein Interface verwendet wird, ist es leicht möglich neue Funktionalität hinzuzufügen. Dazu
-muss lediglich eine neuer Methodekopf im Interface definiert werden. Die dazugehörige Methode muss
+muss lediglich ein neuer Methodekopf im Interface definiert werden. Die dazugehörige Methode muss
 in allen Klassen, die das Interface implementieren, hinzugefügt werden. Damit ist die "Open"
-Eigenschaft des OCP erfüllt. Auf der anderen Seite sollte Code "closed" gegenüber Modifikationen
+Eigenschaft des OCP erfüllt. Auf der anderen Seite sollte Code "closed" (geschlossen) gegenüber Modifikationen
 sein. Das ist ebenso durch die Verwendung eines Interfaces erfüllt. Das Interface bestimmt die
 Funktionalitäten der Klasse.
 
@@ -368,7 +368,7 @@ Klasse verbessert.
 
 ![Kopplung negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/coupling-neg.iuml)
 
-Diese Klasse ist dafür zuständig, Rezeptinformationen von der Chefkoch-Website abzurufen und sie in eine Rezept-Instanz umzuwandeln. Sie ist von `WebsiteFetcher`, `Recipe`, `GroceryList` und `RecipeStep` abhängig. Durch die Abhängigkeit von `WebsiteFetcher` weist die Klasse `ChefkochRecipeFetcher` eine hohe Kopplung auf, da sie direkt die statische Methode getWebsiteBody() aufruft. Dies könnte gelöst werden, indem man eine Schnittstelle für das Abrufen von Webseiten erstellt und diese Schnittstelle von der `ChefkochRecipeFetcher`-Klasse verwendet. Auf diese Weise könnten verschiedene Implementierungen zum Abrufen von Webseiten ausgetauscht werden, was die Kopplung verringert.
+Diese Klasse ist dafür zuständig, Rezeptinformationen von der Chefkoch-Website abzurufen und sie in eine Rezept-Instanz umzuwandeln. Sie ist von `WebsiteFetcher`, `Recipe`, `GroceryList` und `RecipeStep` abhängig. Durch die Abhängigkeit von `WebsiteFetcher` weist die Klasse `ChefkochRecipeFetcher` eine hohe Kopplung auf, da sie direkt die statische Methode `getWebsiteBody` aufruft. Dies könnte gelöst werden, indem man eine Schnittstelle für das Abrufen von Webseiten erstellt und diese Schnittstelle von der `ChefkochRecipeFetcher`-Klasse verwendet. Auf diese Weise könnten verschiedene Implementierungen zum Abrufen von Webseiten ausgetauscht werden, was die Kopplung verringert.
 
 ![Kopplung negatives Beispiel verbessert UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/coupling-neg-better.iuml)
 
@@ -379,7 +379,7 @@ Da eine Klasse gefordert wurde, die nicht bereits in einem vorigen Kapitel behan
 
 ![Kopplung positives Beispiel 2 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/coupling-pos-2.iuml)
 
-Die `RecipeRepository` Klasse ist ein Interface, das die Methoden für den Zugriff auf Rezept-Entitäten definiert. Sie ist lediglich von `Recipe` abhängig. Daher ist es ein weiteres Beispiel für geringe Kopplung. Es definiert lediglich die benötigten Methoden für den Zugriff auf Rezept-Entitäten, ohne sich auf eine spezifische Implementierung festzulegen. Die Implementierung von `RecipeRepository` (z.B. `RecipeFileRepository`) kann dann von der Anwendungsentwicklung abhängig gemacht werden, ohne die gesamte Anwendung zu beeinflussen. 
+Die `RecipeRepository` Klasse ist ein Interface, das die Methoden für den Zugriff auf Rezept-Entities definiert. Sie ist lediglich von `Recipe` abhängig. Daher ist es ein weiteres Beispiel für geringe Kopplung. Es definiert lediglich die benötigten Methoden für den Zugriff auf Rezept-Entities, ohne sich auf eine spezifische Implementierung festzulegen. Die Implementierung von `RecipeRepository` (z.B. `RecipeFileRepository`) kann dann von der Anwendungsentwicklung abhängig gemacht werden, ohne die gesamte Anwendung zu beeinflussen. 
 
 ### 4.2. Analyse GRASP: Hohe Kohäsion
 
@@ -404,56 +404,56 @@ vorher:
 
 ```java
   public MealPlan(List<Meal> meals,LocalDate start,LocalDate end){
-    int days=start.until(end).getDays();
+    int days = start.until(end).getDays();
     if(meals.size()!=days){
-    throw new IllegalArgumentException(
-    "Mahlzeiten-Plan spannt "+days+" Tage, es wurden allerdings nur "+meals.size()
-    +" Mahlzeiten übergeben");
+      throw new IllegalArgumentException(
+        "Mahlzeiten-Plan spannt "+days+" Tage, es wurden allerdings nur "+meals.size()
+        +" Mahlzeiten übergeben");
     }
 
     this.meals=meals;
     this.start=start;
     this.end=end;
-    }
+  }
 
 // ...
 
-public int getDays(){
+  public int getDays(){
     return start.until(getEnd()).getDays();
-    }
+  }
 ```
 
 nachher:
 
 ```java
   public MealPlan(List<Meal> meals,LocalDate start,LocalDate end){
-    this.start=start;
-    this.end=end;
+    this.start = start;
+    this.end = end;
 
     int days=getDays();
     if(meals.size()!=days){
-    throw new IllegalArgumentException(
-    "Mahlzeiten-Plan spannt "+days+" Tage, es wurden allerdings nur "+meals.size()
-    +" Mahlzeiten übergeben");
+      throw new IllegalArgumentException(
+        "Mahlzeiten-Plan spannt "+days+" Tage, es wurden allerdings nur "+meals.size()
+        +" Mahlzeiten übergeben");
     }
 
     this.meals=meals;
-    }
+  }
 
 // ...
 
-public int getDays(){
+  public int getDays(){
     return start.until(getEnd()).getDays();
-    }
+  }
 ```
 
 Die oben gezeigte Änderung ist ein kleines Beispiel zur Reduktion von Code-Duplikationen. Die
-Methode `getDays` ware bereits vor dem Commit vorhanden. Sie dient dazu, die Anzahl an Tagen
+Methode `getDays` war bereits vor dem Commit vorhanden. Sie dient dazu, die Anzahl an Tagen
 zwischen `start` und `end` zu berechnen. Vor dem Commit, wurde jedoch dieselbe Logik im Konstruktor
 in der 2. Zeile verwendet:
 
 ```java
-int days=start.until(end).getDays();
+int days = start.until(end).getDays();
 ```
 
 Der Commit sorgte dafür, dass dieser Code durch einen Aufruf der `getDays` Methode ersetzt wurde.
