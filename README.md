@@ -857,47 +857,47 @@ vorher:
 
 ```java
   public MealPlan(List<Meal> meals,LocalDate start,LocalDate end){
-    int days=start.until(end).getDays();
+    int days = start.until(end).getDays();
     if(meals.size()!=days){
-    throw new IllegalArgumentException(
-    "Mahlzeiten-Plan spannt "+days+" Tage, es wurden allerdings nur "+meals.size()
-    +" Mahlzeiten übergeben");
+      throw new IllegalArgumentException(
+        "Mahlzeiten-Plan spannt "+days+" Tage, es wurden allerdings nur "+meals.size()
+        +" Mahlzeiten übergeben");
     }
 
     this.meals=meals;
     this.start=start;
     this.end=end;
-    }
+  }
 
-// ...
+  // ...
 
-public int getDays(){
+  public int getDays(){
     return start.until(getEnd()).getDays();
-    }
+  }
 ```
 
 nachher:
 
 ```java
   public MealPlan(List<Meal> meals,LocalDate start,LocalDate end){
-    this.start=start;
-    this.end=end;
+    this.start = start;
+    this.end = end;
 
-    int days=getDays();
+    int days = getDays();
     if(meals.size()!=days){
-    throw new IllegalArgumentException(
-    "Mahlzeiten-Plan spannt "+days+" Tage, es wurden allerdings nur "+meals.size()
-    +" Mahlzeiten übergeben");
+      throw new IllegalArgumentException(
+        "Mahlzeiten-Plan spannt "+days+" Tage, es wurden allerdings nur "+meals.size()
+        +" Mahlzeiten übergeben");
     }
 
     this.meals=meals;
-    }
+  }
 
-// ...
+  // ...
 
-public int getDays(){
+  public int getDays(){
     return start.until(getEnd()).getDays();
-    }
+  }
 ```
 
 Dieser Code Smell umfasst eine Code Duplication in der `MealPlan`-Klasse. Relevant ist hierbei vor
@@ -907,7 +907,7 @@ allem Zeile 2. Hier wird die folgende Berechnung ausgeführt:
 int days = start.until(end).getDays();
 ```
 
-`days` gibt dabei die Anzahl an Tagen zwischen `start` udn `end` an. Was dabei aber auffällt, ist,
+`days` gibt dabei die Anzahl an Tagen zwischen `start` und `end` an. Was dabei aber auffällt, ist,
 dass diese Logik bereits zu anderen Zwecken in der `getDays`-Methode vorhanden ist. Diese Methode
 wird verwendet, um auch von außen Zugriff auf die Anzahl der Tage zu haben. Damit kann hier eine
 kleine Dopplung vorgefunden werden. Diese wurde nun, wie im zweiten Code-Beispiel ersichtlich,
@@ -923,58 +923,58 @@ Code Smell 2: Large Method
 vorher:
 
 ```java
-  public static void main(String[]args){
-    logger.info("Starting...");
+public static void main(String[] args){
+  logger.info("Starting...");
 
-    // setup groceries
-    GroceryItem item1=new GroceryItem(new Ingredient("Banane"),new Quantity(1),Unit.GRAM);
-    GroceryItem item2=
-    new GroceryItem(new Ingredient("Pineapple"),new Quantity(0.2),Unit.KILOGRAM);
-    GroceryItem item3=
-    new GroceryItem(new Ingredient("Orange juice"),new Quantity(0.1),Unit.LITER);
-    GroceryItem item4=new GroceryItem(new Ingredient("Apple"),new Quantity(1),Unit.PIECE);
-    GroceryItem item5=
-    new GroceryItem(new Ingredient("Nutella"),new Quantity(2),Unit.TABLESPOON);
+  // setup groceries
+  GroceryItem item1=new GroceryItem(new Ingredient("Banane"),new Quantity(1),Unit.GRAM);
+  GroceryItem item2=
+  new GroceryItem(new Ingredient("Pineapple"),new Quantity(0.2),Unit.KILOGRAM);
+  GroceryItem item3=
+  new GroceryItem(new Ingredient("Orange juice"),new Quantity(0.1),Unit.LITER);
+  GroceryItem item4=new GroceryItem(new Ingredient("Apple"),new Quantity(1),Unit.PIECE);
+  GroceryItem item5=
+  new GroceryItem(new Ingredient("Nutella"),new Quantity(2),Unit.TABLESPOON);
 
-    // setup recipe steps
-    RecipeStep recipeStep1=
-    new RecipeStep(1,"Cut some banana, apple and pineapple as the basis for this salad.",
-    item1,item2,item3);
-    RecipeStep recipeStep2=new RecipeStep(2,"Add orange juice to make it more juicy.",item4);
-    RecipeStep recipeStep3=
-    new RecipeStep(3,"Add a bit of Nutella for making it look beautiful.",item5);
+  // setup recipe steps
+  RecipeStep recipeStep1=
+  new RecipeStep(1,"Cut some banana, apple and pineapple as the basis for this salad.",
+  item1,item2,item3);
+  RecipeStep recipeStep2=new RecipeStep(2,"Add orange juice to make it more juicy.",item4);
+  RecipeStep recipeStep3=
+  new RecipeStep(3,"Add a bit of Nutella for making it look beautiful.",item5);
 
-    // setup recipe for
-    Recipe recipe1=new Recipe("Sugar-free fruit salad",recipeStep1,recipeStep2,recipeStep3);
+  // setup recipe for
+  Recipe recipe1=new Recipe("Sugar-free fruit salad",recipeStep1,recipeStep2,recipeStep3);
 
-    // setup meal
-    Meal meal1=new Meal(recipe1,2);
-    // setup meal plan
-    List<Meal> mealList=Arrays.asList(meal1);
-    LocalDate startDate=LocalDate.of(2023,2,20);
-    LocalDate endDate=LocalDate.of(2023,2,26);
-    MealPlan mealPlan=new MealPlan(mealList,startDate,endDate);
+  // setup meal
+  Meal meal1=new Meal(recipe1,2);
+  // setup meal plan
+  List<Meal> mealList=Arrays.asList(meal1);
+  LocalDate startDate=LocalDate.of(2023,2,20);
+  LocalDate endDate=LocalDate.of(2023,2,26);
+  MealPlan mealPlan=new MealPlan(mealList,startDate,endDate);
 
-    logger.info(mealPlan.toString());
-    }
+  logger.info(mealPlan.toString());
+}
 ```
 
 nachher:
 
 ```java
-  public static void main(String[]args){
-    logger.info("Starting...");
+public static void main(String[]args){
+  logger.info("Starting...");
 
-    // generate mock data
-    List<GroceryItem> groceryItems=MockService.generateGroceryItems();
-    List<RecipeStep> recipeSteps=MockService.generateRecipeSteps(groceryItems);
-    Recipe recipe=MockService.generateRecipe(recipeSteps);
-    Meal meal=MockService.generateMeal(recipe);
-    List<Meal> meals=Arrays.asList(meal);
-    MealPlan mealPlan=MockService.generateMealPlan(meals);
+  // generate mock data
+  List<GroceryItem> groceryItems=MockService.generateGroceryItems();
+  List<RecipeStep> recipeSteps=MockService.generateRecipeSteps(groceryItems);
+  Recipe recipe=MockService.generateRecipe(recipeSteps);
+  Meal meal=MockService.generateMeal(recipe);
+  List<Meal> meals=Arrays.asList(meal);
+  MealPlan mealPlan=MockService.generateMealPlan(meals);
 
-    logger.info(mealPlan.toString());
-    }
+  logger.info(mealPlan.toString());
+}
 ```
 
 ```java
@@ -1029,9 +1029,7 @@ public class MockService {
 ```
 
 Der zweite Code Smell befasst sich mit der Auslagerung der `MockService`-Klasse, die im aktuellen
-Stand nicht mehr vorhanden ist. In diesem Fall ist der Code Smell eine _Large Method_: die `main`
--Methode. Sie umfasst die Erstellung einiger Objekte, damit die Anwendung mit Testdaten getestet
-werden konnte. Da es sich hier um vergleichsweise viele Objekte handelt, ist die Methode groß.
+Stand nicht mehr vorhanden ist. In diesem Fall ist der Code Smell eine _Large Method_: die `main`-Methode. Sie umfasst die Erstellung einiger Objekte, damit die Anwendung mit Testdaten getestet werden konnte. Da es sich hier um vergleichsweise viele Objekte handelt, ist die Methode groß.
 
 Um das zu beheben, wurde die vorhandene Logik extrahiert in eine `MockService`-Klasse. Diese Klasse
 ist nun dafür verantwortlich, Testobjekte und -daten zu generieren und über Methodenaufrufe
@@ -1039,10 +1037,6 @@ zurückzugeben. Dabei sind mehrere Methoden im Mock-Service entstanden, was die 
 Code-Smells zeigt.
 
 ### 7.2. 2 Refactorings
-
-[//]: # (Refactoring: Extract Method)
-
-[//]: # ([Commit]&#40;https://github.com/ncryptedV1/AutoChef/commit/8a66d9a6405c9ca4cf710490ae06eb810ea87978#diff-a914343e6af07030cd7b3b51d56fc5e0f541d6bd350ee0ef11324a9bc5aae66f&#41;)
 
 #### Refactoring 1
 
@@ -1061,7 +1055,7 @@ Das in den UML-Diagrammen gezeigte Refactoring ist das _Extract Class_-Refactori
 wurde um die `ConsoleOutputService`-Klasse zu erschaffen. Der Commit und das erste UML-Diagramm
 zeigen, dass die `AutoChef`-Klasse mit der `main`-Methode zunächst auch für die Konsolenausgabe
 verantwortlich war. Um das aber sauber voneinander zu trennen, und die Komplexität der `main`
--Methode so einfach wie möglich zu halten, wurde die Logik der Consolenausgabe in eine separate
+-Methode so einfach wie möglich zu halten, wurde die Logik der Konsolenausgabe in eine separate
 Klasse ausgelagert. Die neu geschaffene Klasse `ConsoleOutputService` umfasst neben der Logik, die
 vorher in der `main`-Methode existierte, auch noch weitere Funktionalitäten. Das zeigt auch das
 zweite UML-Diagramm. Zu sehen ist hier die `ConsoleOutputService`-Klasse mit ihren verschiedenen
