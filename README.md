@@ -465,18 +465,18 @@ genutzt wird: in der `getDays` Methode. Dadurch können Fehler vermieden werden,
 
 ### 5.1. 10 Unit Tests
 
-| Unit Test                                         | Beschreibung                                                                                                                                     |
-|---------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| _TestUnit#testHashCodeTrue_                       | testet, ob die `hashCode` Funktion der `Unit` Klasse, für zwei Objekte, den selben Hashcode korrekt zurückgibt zurückgibt                        |
-| _TestUnit#testEqualsResSame_                      | testet, ob die `equals` Methode der `Unit` Klasse zwei Unit Instanzen mit dem selben `value` als korrekt gleich vergleicht                       |
-| _TestQuantity#testConstructorException_           | testet, ob der Konstruktur der `Quantity` Klasse fehlschlägt, sobald negative (invalide) Werte übergeben werden                                  |
-| _TestQuantity#testMultiply_                       | testet, ob die `multiply` Methode der `Quantity` Klasse den Wert korrekt multipliziert                                                           |
-| _TestGroceryItem#testEqualsResSelf_               | testet, ob die `equals` Methode der `GroceryItem` Klasse zwei Objekte mit dem selben `value` als gleich ansieht                                  |
-| _TestWebsiteFetcher#testGetWebsiteBodyInvalidUrl_ | testet, ob die `testGetWebsiteBodyInvalidUrl` Methode der `WebsiteFetcher` Klasse eine Exception wirft bei einer invaliden URL                   |
-| _TestChefkochRecipeFetcher#testGetRecipe_         | testet, ob die `testGetRecipe` Methode der `ChefkochRecipeFetcher` Klasse die richtigen Inhalte für ein Chefkoch-Rezept aus dem Internet liefert |
-| _TestRecipe#testConstructorHappyPath_             | testet, ob der Konstrutor der `Recipe` Klasse nicht `null` zurückgibt                                                                            |
-| _TestMeal#testGetGroceryList_                     | testet, ob die `getGroceryList` Methode der `Meal` Klasse eine korrekt aggregierte Zutatenliste zurückgibt                                       |
-| _TestGroceryList#testAddItem_                     | testet, ob die `addItem` Methode der `GroceryList` Klasse korrekt eine Itme zur GroceryList hinzufügt                                            |
+| Unit Test                                         | Beschreibung                                                                                                                                |
+|---------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| _TestUnit#testHashCodeTrue_                       | testet, ob die `hashCode` Funktion der `Unit` Klasse, für zwei Objekte, den selben Hashcode korrekt zurückgibt                              |
+| _TestUnit#testEqualsResSame_                      | testet, ob die `equals` Methode der `Unit` Klasse zwei Instanzen mit dem selben `value` als korrekt gleich vergleicht                       |
+| _TestQuantity#testConstructorException_           | testet, ob der Konstruktur der `Quantity` Klasse fehlschlägt, sobald negative (invalide) Werte übergeben werden                             |
+| _TestQuantity#testMultiply_                       | testet, ob die `multiply` Methode der `Quantity` Klasse den Wert korrekt multipliziert                                                      |
+| _TestGroceryItem#testEqualsResSelf_               | testet, ob die `equals` Methode der `GroceryItem` Klasse zwei Objekte mit dem selben `value` als gleich ansieht                             |
+| _TestWebsiteFetcher#testGetWebsiteBodyInvalidUrl_ | testet, ob die `getWebsiteBodyInvalidUrl` Methode der `WebsiteFetcher` Klasse eine Exception wirft bei einer invaliden URL                  |
+| _TestChefkochRecipeFetcher#testGetRecipe_         | testet, ob die `getRecipe` Methode der `ChefkochRecipeFetcher` Klasse die richtigen Inhalte für ein Chefkoch-Rezept aus dem Internet liefert |
+| _TestRecipe#testConstructorHappyPath_             | testet, ob der Konstrutor der `Recipe` Klasse nicht `null` zurückgibt                                                                       |
+| _TestMeal#testGetGroceryList_                     | testet, ob die `getGroceryList` Methode der `Meal` Klasse eine korrekt aggregierte Zutatenliste zurückgibt                                  |
+| _TestGroceryList#testAddItem_                     | testet, ob die `addItem` Methode der `GroceryList` Klasse korrekt ein `GroceryItem` zur GroceryList hinzufügt                               |
 
 ### 5.2. ATRIP: Automatic
 
@@ -503,9 +503,9 @@ Test-Klasse: `TestIngredient`
 
     // assert
     assertTrue(res);
-    }
+  }
 
-@Test
+  @Test
   void testEqualsResSame(){
       // arrange
       String value="banana";
@@ -517,9 +517,9 @@ Test-Klasse: `TestIngredient`
 
       // assert
       assertTrue(res);
-      }
+    }
 
-@Test
+  @Test
   void testEqualsDifferent(){
       // arrange
       Ingredient ingredient1=new Ingredient("banana");
@@ -530,9 +530,9 @@ Test-Klasse: `TestIngredient`
 
       // assert
       assertFalse(res);
-      }
+    }
 
-@Test
+  @Test
   void testEqualsNull(){
       // arrange
       Ingredient ingredient1=mock(Ingredient.class);
@@ -542,9 +542,9 @@ Test-Klasse: `TestIngredient`
 
     // assert
     assertFalse(res);
-    }
+  }
 
-@Test
+  @Test
   void testHashCodeTrue(){
       // arrange
       String value="banana";
@@ -557,9 +557,9 @@ Test-Klasse: `TestIngredient`
 
       // assert
       assertEquals(code1,code2);
-      }
+    }
 
-@Test
+  @Test
   void testHashCodeFalse(){
       // arrange
       Ingredient ingredient1=new Ingredient("banana");
@@ -571,7 +571,7 @@ Test-Klasse: `TestIngredient`
 
       // assert
       assertNotEquals(code1,code2);
-      }
+    }
 ```
 
 Diese Testklasse mit den dargestellten Methoden ist ein Positivbeispiel für "thorough testing". All
@@ -594,39 +594,36 @@ zu testende Methode: `DialogService#startMealPlanGeneration`
 
 ```java
   private void startMealPlanGeneration(){
-    currentState=DialogState.MEAL_PLAN_GENERATION;
+    currentState = DialogState.MEAL_PLAN_GENERATION;
 
-    ConsoleOutputService.rawOut("Wir generieren jetzt zusammen einen Mahlzeiten-Plan. :D");
-    LocalDate startDate=ConsoleInputParser.getDate(null,null,
-    "Wann soll der Plan beginnen? (DD.MM.YYYY)");
-    LocalDate endDate=ConsoleInputParser.getDate(startDate,null,
-    "Bis wann soll der Plan gehen (exklusiv)? (DD.MM.YYYY)");
-    int people=ConsoleInputParser.getInteger(1,99,
-    "Für wie viele Leute soll der Plan generiert werden?");
-    int days=startDate.until(endDate).getDays();
-    ConsoleOutputService.rawOut("Ok, ich generiere einen Plan für "+days+" Tage...");
+    outputService.rawOut("Wir generieren jetzt zusammen einen Mahlzeiten-Plan. :D");
+    LocalDate startDate = inputParser.getDate(null, null,
+      "Wann soll der Plan beginnen? (DD.MM.YYYY)");
+    LocalDate endDate = inputParser.getDate(startDate, null,
+      "Bis wann soll der Plan gehen (exklusiv)? (DD.MM.YYYY)");
+    int people = inputParser.getInteger(1, 99,
+      "Für wie viele Leute soll der Plan generiert werden?");
+    int days = startDate.until(endDate).getDays();
+    outputService.rawOut("Ok, ich generiere einen Plan für " + days + " Tage...");
 
-    List<Recipe> recipes=recipeRepository.getRecipes();
-    List<Meal> meals=new ArrayList<>();
-    for(int i=0;i<days; i++){
-    meals.add(new Meal(recipes.get(random.nextInt(recipes.size())),people));
+    MealPlanBuilder mealPlanBuilder = new MealPlanBuilder();
+    mealPlanBuilder.setStartDate(startDate).setEndDate(endDate);
+
+    List<Recipe> recipes = recipeRepository.getRecipes();
+    for (int i = 0; i < days; i++) {
+      mealPlanBuilder.addMeal(startDate.plusDays(i),
+      new Meal(recipes.get(random.nextInt(recipes.size())), people));
     }
 
-    MealPlan mealPlan=new MealPlan(meals,startDate,endDate);
-
-    startPostMealPlanGeneration(mealPlan,recipes);
-    }
+    startPostMealPlanGeneration(mealPlanBuilder.build(), recipes);
+  }
 ```
 
 Die hier gezeigt Methode `DialogService#startMealPlanGeneration` wurde nicht getestet, obwohl es
-möglich wäre dies zu tun. Damit stellt sie ein Negativbeispiel für die "thorough testing" dar. Der
-gezeigt Code startet die Generierung einer Essensplans. Dazu werden verschiedene Nutzereingaben
-abgefordert, z.B. Start und Enddatum, Anzahl der Personen. Im Anschluss werden die Rezepte geladen
-und mit einer zufälligen Teilmenge wird der Essensplan erstellt. Der Essensplan und die liste an
-Rezepten werden im Anschluss an eine weitere Methode weitergegeben.
+möglich wäre dies zu tun. Damit stellt sie ein Negativbeispiel für die "thorough testing" Eigenschaft dar. Der gezeigt Code startet die Generierung eines Essensplans. Dazu werden verschiedene Nutzereingaben abgefordert, z.B. Start- und Enddatum, Anzahl der Personen. Im Anschluss werden die Rezepte geladen und mit einer zufälligen Teilmenge wird der Essensplan erstellt. Der Essensplan und die Liste an Rezepten werden im Anschluss an eine weitere Methode übergegeben.
 
 Da die Tests für diese Methode vollständig fehlen, werden dementsprechend auch alle Pfade nicht
-getestet. Dementsprechend kann nicht herausgefunden werden, wo sich logische Fehler befinden.
+getestet. Deshalb kann nicht herausgefunden werden, wo sich logische Fehler befinden.
 
 ### 5.4. ATRIP: Professional
 
@@ -649,13 +646,13 @@ Diese Testmethode testet die `getWebsiteBody` Methode der `WebsiteFetcher` Klass
 String, der eine invalide URL darstellt, in die zu testende Funktion übergeben. Anschließend wird
 die `getWebsiteBody` Methode aufgerufen und überprüft, ob die richtige Exception geworfen wird.
 
-Diese Testmethode ist ein Positivbeispiel für professionelle Testklassen aus mehreren Gründen:
+Diese Testmethode ist ein Positivbeispiel für professionelle Testmethoden aus mehreren Gründen:
 
 1. Der Name der Testmethode beschreibt gut, was genau getestet wird. In diesem Fall
    die `getWebsiteBody` Methode bei Eingabe einer invaliden URL.
 2. Die zugehörige Klasse wurde nur zu Testzwecken angelegt.
-3. Im Gegensatz zu Getter- oder Setter-Methoden existiert Logik, die getestetet werden sollte. Ein
-   Test ist dementsprechend notwendig
+3. Im Gegensatz zu Getter- oder Setter-Methoden existiert Logik, die getestet werden sollte. Ein
+   Test ist dementsprechend notwendig.
 
 #### negatives Beispiel
 
@@ -664,23 +661,23 @@ Test-Methode: `TestUnit#getValue`
 ```java
   @Test
   void testGetValue(){
-      // arrange
-      String expected="piece";
-      Unit unit=new Unit(expected);
+    // arrange
+    String expected="piece";
+    Unit unit=new Unit(expected);
 
-      // act
-      String res=unit.getValue();
+    // act
+    String res=unit.getValue();
 
-      // assert
-      assertEquals(expected,res);
-      }
+    // assert
+    assertEquals(expected,res);
+  }
 ```
 
 Diese Testmethode testet die `getValue` Getter-Methode der `Unit` Klasse. Dabei wird ein `Unit`
 ValueObject angelegt mit einem initialen Wert. Das Ergebnis der `getValue` wird verglichen mit dem
 initialen Wert. Beide Werten sollten gleich sein.
 
-Diese Klasse ist ein Negativbeispiel, da sie einen unnötigen Test darstellt. Getter Methoden sollten
+Diese Klasse ist ein Negativbeispiel, da sie einen unnötigen Test darstellt. Getter-Methoden sollten
 nicht getestet werden. Des Weiteren enthält diese Methode keine komplexe Logik, die ein Testen
 erfordern würde. Es handelt sich hier um einen Test, "der nur wegen des Tests geschrieben wurde".
 Außerdem ist der Dokumentationswert der Methode nicht vorhanden.
@@ -733,11 +730,11 @@ Möglich ist das durch die Nutzung eines `OutputService`-Interfaces, das die Kon
 
 ![Fakes und Mocks Beispiel 2 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/fake-mock-2.iuml)
 
-Ein zweiter Aspekt der ein Fake-Objekt nutzt, ist die Eingaben von Daten durch den Nutzer. Speziell ist damit die Funktionalität der `ConsoleInputReader`-Klasse gemeint. Diese Klasse wird lediglich als Teil der `DialogInputParser`-Klasse genutzt. Dort werden Daten des Benutzers über die Konsole durch die `ConsoleInputReader`-Klasse eingelesen. Im zweiten Schritt analysiert und validiert die `DialogInputParser`-Klasse die Eingabe um sie weiter verwenden zu können. 
+Ein zweiter Aspekt, der ein Fake-Objekt nutzt, ist die Eingaben von Daten durch den Nutzer. Speziell ist damit die Funktionalität der `ConsoleInputReader`-Klasse gemeint. Diese Klasse wird lediglich als Teil der `DialogInputParser`-Klasse genutzt. Dort werden Daten des Benutzers über die Konsole durch die `ConsoleInputReader`-Klasse eingelesen. Im zweiten Schritt analysiert und validiert die `DialogInputParser`-Klasse die Eingabe um sie weiter verwenden zu können. 
 
 Die Benutzung der Konsole ist jedoch hinderlich, wenn automatisierte Tests genutzt werden. Um die Funktionalitäten der `DialogInputParser`-Klasse testen zu können, muss also ein Fake für die `ConsoleInputReader`-Klasse genutzt werden. Die `ConsoleInputReaderFake`-Klasse hat genau diese Verantwortung. Genauso wie die `ConsoleInputReader`-Klasse, greift der Fake auf ein Interface namens `InputReader` zu. Dieses Interface bietet als einzige Funktionlität eine `readLine`-Methode, die Inhalte des Benutzers einliest. 
 
-Der Fake soll auf eine Art und Weise funktionieren, dass er Daten, die hineingegeben werden genauso wieder zurückgegeben werden. Da die `readLine`-Methode laut Interface aber keine Parameter erwartet, wurde ein zusätzlicher Konstruktor hinzugefügt. Wie im UML ersichtlich, nimmt der Konstruktor einen String auf, der in der `content`-Variable. Intern wird der Inhalt dieser Variable lediglich zurückgegeben. So ist es möglich einen Fake zu verwenden und gleichzeitig effektiv zu testen.
+Der Fake soll auf eine Art und Weise funktionieren, dass er Daten, die hineingegeben werden genauso wieder zurückgegeben werden. Da die `readLine`-Methode laut Interface aber keine Parameter erwartet, wurde ein zusätzlicher Konstruktor hinzugefügt. Wie im UML ersichtlich, nimmt der Konstruktor einen String auf, der in der `content`-Variable gespeichert wird. Intern wird der Inhalt dieser Variable lediglich zurückgegeben. So ist es möglich einen Fake zu verwenden und gleichzeitig effektiv zu testen.
 
 ## 6. Domain Driven Design
 
