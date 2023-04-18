@@ -129,7 +129,7 @@ Abhängigkeitshierarchie zwischen den Komponenten eingeführt wird.
 
 - gewählte Klasse: `DialogService`
 
-![Dependency Rule positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/dependency-rule-pos.iuml)
+![Dependency Rule positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/dependency-rule-pos.iuml)
 
 `DialogService` ist abhängig von `RecipeRepository` (Interface).
 `DialogService` hat keine Abhängigkeiten zu Implementierungen, nur zu Interfaces und anderen
@@ -149,7 +149,7 @@ die Dependency Rule eingehalten, da eine Abhängigkeit von außen nach innen bes
 
 - gewählte Klasse: `ChefkochRecipeFetcher`
 
-![Dependency Rule negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/dependency-rule-neg.iuml)
+![Dependency Rule negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/dependency-rule-neg.iuml)
 
 `ChefkochRecipeFetcher` ist abhängig von `WebsiteFetcher`.
 `WebsiteFetcher` ist eine Util-Klasse, die für das Abrufen von Webseiten-Inhalten zuständig ist und
@@ -168,7 +168,7 @@ befindet.
 
 - gewählte Klasse: `Recipe`
 
-![Schicht 1 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/layer-1.iuml)
+![Schicht 1 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/layer-1.iuml)
 
 Die `Recipe`-Klasse ist eine Entity im Sinne der Clean-Architecture, da sie die Idee eines
 Rezeptes abbildet. Ein Rezept besteht aus folgenden Attributen:
@@ -192,7 +192,7 @@ einzuordnen.
 
 - gewählte Klassen: `DialogService` mit `DialogState`
 
-![Schicht 2 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/layer-2.iuml)
+![Schicht 2 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/layer-2.iuml)
 
 Die Schicht des Application-Codes umfasst mehrere Klassen. Dabei soll die Klasse `DialogService` im
 Fokus stehen.
@@ -220,7 +220,7 @@ haben. All diese Aspekte begründen, warum der Dialog-Service im Application Cod
 
 gewählte Klasse: `Quantity`
 
-![Single Responsibility positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/single-responsibility-pos.iuml)
+![Single Responsibility positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/single-responsibility-pos.iuml)
 
 Die `Quantity`-Klasse bildet eine "Menge" oder "Anzahl" ab. Das ist relevant für die Menge von
 Zutaten in einem Rezept. Die Klasse ist maßgeblich definiert durch ihr einziges Attribute `value`,
@@ -236,7 +236,7 @@ besitzt sie keine weiteren Verantwortlichkeiten.
 
 gewählte Klasse: `DialogService`
 
-![Single Responsibility negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/single-responsibility-neg-1.iuml)
+![Single Responsibility negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/single-responsibility-neg-1.iuml)
 
 Ein Negativbeispiel für das SRP ist der Dialog-Service - im Speziellen die `startMealPlanGeneration`
 -Methode. Die Klasse nimmt die Rolle eines "Controllers" ein, da sie die Persistenz von Daten und
@@ -257,7 +257,7 @@ Der Dialog-Service hat jedoch mehrere Verantwortlichkeiten und bricht damit das 
 Gerade die zweite Verantwortlichkeit - die Generierung eines Essenplans - kann in einen separaten
 Service ausgelagert werden:
 
-![Single Responsibility negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/single-responsibility-negc.iuml)
+![Single Responsibility negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/single-responsibility-negc.iuml)
 
 Dabei könnte `startMealPlanGeneration` mit einem `GenerationService` interagieren.
 Der `GenerationService` wäre dann für die eigentliche Generierung des Essensplans verantwortlich,
@@ -269,7 +269,7 @@ während die `startMealPlanGeneration` lediglich eine verwaltende Rolle einnehme
 
 gewählte Klasse: `RecipeFileRepository` mit Interface `RecipeRepository`
 
-![Open-Closed positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/open-closed-pos.iuml)
+![Open-Closed positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/open-closed-pos.iuml)
 
 Die `RecipeFileRepository`-Klasse ist ein Repository, dass das Interface `RecipeRepository`
 implementiert. Das Interface beschreibt, welche Schnittstelle zum Speichern von Daten benötigt wird.
@@ -297,11 +297,11 @@ gewählte Klasse: `ChefkochRecipeFetcher`
 
 vorher:
 
-![Open-Closed negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/open-closed-neg-1.iuml)
+![Open-Closed negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/open-closed-neg-1.iuml)
 
 nachher:
 
-![Open-Closed negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/open-closed-neg-2.iuml)
+![Open-Closed negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/open-closed-neg-2.iuml)
 
 Die `ChefkochRecipeFetcher`-Klasse ist ein Beispiel davon, wie das OCP verletzt werden kann. Diese
 Klasse dient dazu, Daten aus einer Chefkoch-Website zu extrahieren. Dazu werden verschiedene
@@ -329,7 +329,7 @@ können hier selbige Beispiele wie aus [Kapitel 2.2](#22-analyse-der-dependency-
 
 - gewählte Klasse: `DialogService`
 
-![Dependency-Inversion-Principle positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/dependency-inversion-pos.iuml)
+![Dependency-Inversion-Principle positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/dependency-inversion-pos.iuml)
 
 Wie im obigen UML ersichtlich, wurde das DIP im `DialogService` eingehalten. Die
 Klasse `DialogService` hängt von einer Abstraktion (dem Interface `RecipeRepository`) ab und nicht
@@ -339,7 +339,7 @@ von einer konkreten Implementierung (der Klasse `RecipeFileRepository`).
 
 - gewählte Klasse: `ChefkochRecipeFetcher`
 
-![Dependency-Inversion-Principle negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/dependency-inversion-neg.iuml)
+![Dependency-Inversion-Principle negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/dependency-inversion-neg.iuml)
 
 Das DIP wird in der Klasse `ChefkochRecipeFetcher` verletzt. Die Klasse `ChefkochRecipeFetcher`
 verwendet direkt die Klasse `WebsiteFetcher`, um den Inhalt einer Webseite abzurufen. Hier wäre es
@@ -354,7 +354,7 @@ Abstraktion zu verwenden.
 
 - gewählte Klasse: `DialogInputParser`
 
-![Kopplung positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/coupling-pos-1.iuml)
+![Kopplung positives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/coupling-pos-1.iuml)
 
 Diese Klasse ist für das Parsen der Benutzereingaben zuständig. Sie ist abhängig von `InputReader`
 und `OutputService`, wobei es sich in beiden Fällen um Interfaces handelt. Damit hält die
@@ -366,18 +366,18 @@ Klasse verbessert.
 
 - gewählte Klasse: `ChefkochRecipeFetcher`
 
-![Kopplung negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/coupling-neg.iuml)
+![Kopplung negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/coupling-neg.iuml)
 
 Diese Klasse ist dafür zuständig, Rezeptinformationen von der Chefkoch-Website abzurufen und sie in eine Rezept-Instanz umzuwandeln. Sie ist von `WebsiteFetcher`, `Recipe`, `GroceryList` und `RecipeStep` abhängig. Durch die Abhängigkeit von `WebsiteFetcher` weist die Klasse `ChefkochRecipeFetcher` eine hohe Kopplung auf, da sie direkt die statische Methode `getWebsiteBody` aufruft. Dies könnte gelöst werden, indem man eine Schnittstelle für das Abrufen von Webseiten erstellt und diese Schnittstelle von der `ChefkochRecipeFetcher`-Klasse verwendet. Auf diese Weise könnten verschiedene Implementierungen zum Abrufen von Webseiten ausgetauscht werden, was die Kopplung verringert.
 
-![Kopplung negatives Beispiel verbessert UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/coupling-neg-better.iuml)
+![Kopplung negatives Beispiel verbessert UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/coupling-neg-better.iuml)
 
 #### Positiv-Beispiel 2
 Da eine Klasse gefordert wurde, die nicht bereits in einem vorigen Kapitel behandelt wurde und dies beim vorherigen Negativ-Beispiel mit `ChefkochRecipeFetcher` nicht der Fall ist und kein weiteres Negativ-Beispiel existiert, wird ein weiteres Positiv-Beispiel aufgeführt.
 
 - gewählte Klasse: `RecipeRepository`
 
-![Kopplung positives Beispiel 2 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/coupling-pos-2.iuml)
+![Kopplung positives Beispiel 2 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/coupling-pos-2.iuml)
 
 Die `RecipeRepository` Klasse ist ein Interface, das die Methoden für den Zugriff auf Rezept-Entities definiert. Sie ist lediglich von `Recipe` abhängig. Daher ist es ein weiteres Beispiel für geringe Kopplung. Es definiert lediglich die benötigten Methoden für den Zugriff auf Rezept-Entities, ohne sich auf eine spezifische Implementierung festzulegen. Die Implementierung von `RecipeRepository` (z.B. `RecipeFileRepository`) kann dann von der Anwendungsentwicklung abhängig gemacht werden, ohne die gesamte Anwendung zu beeinflussen. 
 
@@ -385,7 +385,7 @@ Die `RecipeRepository` Klasse ist ein Interface, das die Methoden für den Zugri
 
 - gewählte Klasse: `Recipe`
 
-![Kohäsion Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/cohesion.iuml)
+![Kohäsion Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/cohesion.iuml)
 
 Die Klasse `Recipe` repräsentiert ein Rezept und besteht aus einem Namen, einer
 Einkaufsliste (`GroceryList`) und einer Liste von Rezeptschritten (`RecipeStep`).
@@ -720,7 +720,7 @@ In diesem Projekt wurden vor allem Mock-Objekte eingesetzt. Sie wurden genutzt, 
 
 #### Fake-Objekt 1: `OutputServiceFake`
 
-![Fakes und Mocks Beispiel 1 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/fake-mock-1.iuml)
+![Fakes und Mocks Beispiel 1 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/fake-mock-1.iuml)
 
 Die `OutputServiceFake`-Klasse ist ein Fake-Objekt, das die Ausgabe an die Konsole imitiert. Dieses Projekt nutzt Ein- und Ausgabefunktionen für die Interaktion mit dem Benutzer. Da beide Funktionalitäten jedoch automatisierten Unit-Tests im Wege stehen, musste ein Weg gefunden werden sie zu umgehen. Dazu wurden Fake-Objekte eingeführt. 
 
@@ -728,7 +728,7 @@ Möglich ist das durch die Nutzung eines `OutputService`-Interfaces, das die Kon
 
 #### Fake-Objekt 1: `ConsoleInputReaderFake`
 
-![Fakes und Mocks Beispiel 2 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/fake-mock-2.iuml)
+![Fakes und Mocks Beispiel 2 UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/fake-mock-2.iuml)
 
 Ein zweiter Aspekt, der ein Fake-Objekt nutzt, ist die Eingaben von Daten durch den Nutzer. Speziell ist damit die Funktionalität der `ConsoleInputReader`-Klasse gemeint. Diese Klasse wird lediglich als Teil der `DialogInputParser`-Klasse genutzt. Dort werden Daten des Benutzers über die Konsole durch die `ConsoleInputReader`-Klasse eingelesen. Im zweiten Schritt analysiert und validiert die `DialogInputParser`-Klasse die Eingabe um sie weiter verwenden zu können. 
 
@@ -751,7 +751,7 @@ Der Fake soll auf eine Art und Weise funktionieren, dass er Daten, die hineingeg
 
 zugehörige Klasse(n): `Recipe`
 
-![Entity Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/entity.iuml)
+![Entity Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/entity.iuml)
 
 Die `Recipe` Entity beschreibt ein semantisches Rezept. Wie das UML-Diagram zeigt, besteht ein
 Rezept aus einem Name, einer Liste von Zutaten (GroceryList) und einer Liste von Schritten zur
@@ -775,7 +775,7 @@ Driven Design Richtlinien die Erstellung einer Entity.
 
 zugehörige Klasse(n): `Ingredient`
 
-![Entity Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/value-object.iuml)
+![Entity Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/value-object.iuml)
 
 Das `Ingredient` Value Object beschreibt eine Zutat für ein Gericht. Es besitzt als einziges
 Attribute einen Namen, der es definiert. Neben dem Namen besitzt es zwei Getter-Methoden für den
@@ -795,7 +795,7 @@ warum sich hier für ein Value Object anstelle einer Entity oder Ähnlichem ents
 
 zugehörige Klasse(n): `RecipeFileRepository`
 
-![Repository Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/repository.iuml)
+![Repository Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/repository.iuml)
 
 Repositories dienen als Vermittler zwischen Datenmodell und Domänenlogik. Sie werden genutzt, um
 Daten zu speichern oder sie abzurufen aus ebendiesem Speicher. In diesem Projekt wurde ein
@@ -823,7 +823,7 @@ Persistenzverwaltung vorzunehmen, ohne auf die Domänenlogik eingreifen zu müss
 
 zugehörige Klasse(n): `Meal`
 
-![Aggregate Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/aggregate.iuml)
+![Aggregate Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/aggregate.iuml)
 
 In diesem Projekt wurde die `Meal`-Klasse als Aggregate ausgewählt. Die `Meal`-Klasse fasst logisches
 Verhalten verschiedener Elemente zusammen. Es definiert sich durch ein Rezept `recipe` und einem
@@ -1045,11 +1045,11 @@ Refactoring 2: Extract Class (ConsoleOutputService)
 
 vorher:
 
-![Refactoring Beispiel 1 Pre UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/refactoring-1-pre.iuml)
+![Refactoring Beispiel 1 Pre UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/refactoring-1-pre.iuml)
 
 nachher:
 
-![Refactoring Beispiel 1 Post UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/refactoring-1-post.iuml)
+![Refactoring Beispiel 1 Post UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/refactoring-1-post.iuml)
 
 Das in den UML-Diagrammen gezeigte Refactoring ist das _Extract Class_-Refactoring, das genutzt
 wurde um die `ConsoleOutputService`-Klasse zu erschaffen. Der Commit und das erste UML-Diagramm
@@ -1069,11 +1069,11 @@ Refactoring 2: Rename Method
 
 vorher:
 
-![Refactoring Beispiel 2 Pre UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/refactoring-2-pre.iuml)
+![Refactoring Beispiel 2 Pre UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/refactoring-2-pre.iuml)
 
 nachher:
 
-![Refactoring Beispiel 2 Post UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/refactoring-2-post.iuml)
+![Refactoring Beispiel 2 Post UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/refactoring-2-post.iuml)
 
 Dieses Refactoring umfasst das Umbenennen einer Methode (_Rename Method_) um mehr Klarheit im
 Quellcode zu schaffen. Es handelt sich dabei um die Methode `getIngredients`
@@ -1092,7 +1092,7 @@ aufgetreten wären.
 
 - gewählte Klasse: `ConsoleOutputService`
 
-![Entwurfstmuster Facade Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/design-pattern-facade.iuml)
+![Entwurfstmuster Facade Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/design-pattern-facade.iuml)
 
 Die obige Klasse `ConsoleOutputService` stellt eine Facade für die `Logger`-Klasse dar, weil sie eine vereinfachte und einheitliche Schnittstelle für das Logging-System bereitstellt. Die Hauptziele einer Facade sind die Vereinfachung der Schnittstelle und die Entkopplung von Subsystemen.
 
@@ -1110,7 +1110,7 @@ Die `ConsoleOutputService`-Klasse kapselt die Details der `Logger`-Konfiguration
 
 - gewählte Klasse: `MealPlanBuilder`
 
-![Entwurfstmuster Builder Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/docs/uml/design-pattern-builder.iuml)
+![Entwurfstmuster Builder Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/design-pattern-builder.iuml)
 
 Der `MealPlanBuilder` ist ein Beispiel für das Entwurfsmuster Builder, da er eine einfache Schnittstelle bietet, um komplexe Objekte schrittweise aufzubauen. Mithilfe von Methoden wie `setStartDate`, `setEndDate` und `addMeal` kann der Verwender des `MealPlanBuilder` einen Mahlzeiten-Plan definieren, ohne dabei die genaue Implementierung des `MealPlan` kennen zu müssen.
 
