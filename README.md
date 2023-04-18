@@ -257,7 +257,7 @@ Der Dialog-Service hat jedoch mehrere Verantwortlichkeiten und bricht damit das 
 Gerade die zweite Verantwortlichkeit - die Generierung eines Essenplans - kann in einen separaten
 Service ausgelagert werden:
 
-![Single Responsibility negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/single-responsibility-negc.iuml)
+![Single Responsibility negatives Beispiel UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ncryptedV1/AutoChef/main/uml/single-responsibility-neg-2.iuml)
 
 Dabei könnte `startMealPlanGeneration` mit einem `GenerationService` interagieren.
 Der `GenerationService` wäre dann für die eigentliche Generierung des Essensplans verantwortlich,
