@@ -4,7 +4,7 @@ Name: Schirmer, Oliver \
 Martrikelnummer: XXX
 
 Name: Müller, Luca \
-Martrikelnummer: 3695320
+Martrikelnummer: XXX
 
 Abgabedatum: 28. Mai 2023
 
@@ -66,16 +66,15 @@ Einkaufliste für den Wocheneinkauf zu erstellen.
 
 Bei AutoChef handelt es sich um eine CLI-Anwendung, geschrieben in Java 19. Zum Starten wird daher
 lediglich ein Desktop-Rechner mit **Java 19 aufwärts** benötigt. Um die Anwendung starten zu können, 
-muss zunächst das GitHub-Repository geclont werden:
+muss zunächst die *AutoChef-<version>.jar* des gewünschten Releases heruntergeladen werden, welche auf
+der [Release-Seite](https://github.com/ncryptedV1/AutoChef/releases) unter den jeweiligen *Assets*
+des Release gefunden werden können. Alternativ kann das Repository auch geklont werden und die Anwendung
+selbständig mittels Maven kompiliert werden.
 
-```bash
-git clone https://github.com/ncryptedV1/AutoChef
-```
 Die Anwendung kann dann im nächsten Schritt über ein Konsolenfenster mit dem folgenden Befehl gestartet werden:
 
 ```bash
-cd AutoChef/
-java -jar AutoChef.jar
+java -jar AutoChef-<version>.jar
 ```
 
 ### 1.3. Wie testet man die Applikation?
