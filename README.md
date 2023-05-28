@@ -66,7 +66,7 @@ Einkaufliste für den Wocheneinkauf zu erstellen.
 
 Bei AutoChef handelt es sich um eine CLI-Anwendung, geschrieben in Java 19. Zum Starten wird daher
 lediglich ein Desktop-Rechner mit **Java 19 aufwärts** benötigt. Um die Anwendung starten zu können, 
-muss zunächst die *AutoChef-<version>.jar* des gewünschten Releases heruntergeladen werden, welche auf
+muss zunächst die *AutoChef-\<version\>.jar* des gewünschten Releases heruntergeladen werden, welche auf
 der [Release-Seite](https://github.com/ncryptedV1/AutoChef/releases) unter den jeweiligen *Assets*
 des Release gefunden werden können. Alternativ kann das Repository auch geklont werden und die Anwendung
 selbständig mittels Maven kompiliert werden.
